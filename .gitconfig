@@ -1,0 +1,6 @@
+[color]
+	ui = true
+[alias]
+	ck = checkout
+	cm = commit
+	ls = status

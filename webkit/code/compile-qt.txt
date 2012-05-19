@@ -1,0 +1,2 @@
+./configure -debug -nomake example
+./Tools/Scripts/build-webkit --qt --debug

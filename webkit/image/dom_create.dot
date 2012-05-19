@@ -1,0 +1,12 @@
+digraph g {
+	node [
+		shape = "record"
+	]
+	"WebCore::DocumentLoader::commitData"-> "WebCore::DocumentWriter::setEncoding"
+	"WebCore::DocumentWriter::setEncoding"->"WebCore::FrameLoader::willSetEncoding"
+	"WebCore::FrameLoader::willSetEncoding"->"WebCore::FrameLoader::receivedFirstData"
+	"WebCore::FrameLoader::receivedFirstData"->"WebCore::DocumentWriter::begin"
+	"WebCore::DocumentWriter::begin"->"WebCore::DocumentWriter::createDocument"
+	"WebCore::DocumentWriter::createDocument"->"WebCore::DOMImplementation::createDocument"
+	"WebCore::DOMImplementation::createDocument"->"WebCore::HTMLDocument::create"
+}

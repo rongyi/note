@@ -1,0 +1,11 @@
+digraph G {
+		node [
+			shape = "record"
+		]
+        HTMLDocument [
+				label = "{HTMLDocument|+ DocumentParser \*createParser()\l|}"
+		]
+		HTMLDocumentParser [
+				label = "{HTMLDocumentParser|+ HTMLTreeBuilder\* m_treeBuilder\l+ HTMLTokenizer\* m_tokenizer\l|}"
+		]
+}

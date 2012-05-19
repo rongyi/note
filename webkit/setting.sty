@@ -1,0 +1,39 @@
+\documentclass[a4paper,dvipdfm]{article}
+%------------------------------------------------------------------------------------------------------
+%\usepackage[symbol]{footmisc}这个宏包的作用是更改脚注的一些排版方式选项有： perpage stable side multiple para symbol ragged marginal flushmargin hang
+%\usepackage{abstract}%这个红包的作用是双栏排版时，让摘要不这样，使用onecolabstract环境即可
+\usepackage{booktabs}%for \toprule \midrule \bottomrule
+\usepackage{fix2col}%修补在双栏排版时无法保证浮动体的排印顺序
+\usepackage{fontspec,xltxtra,xunicode}    % 这里使用 xetex 相应的宏包
+\usepackage{indentfirst} 					%缩进章节或者section里的第一段
+\usepackage{url}
+\usepackage{natbib} %cite URL
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage[left=1.8cm,right=1.8cm,top=2cm,bottom=1.5cm]{geometry}
+%\usepackage[left=0.1in, right=0.1in,  top=0.1in, bottom=0.1in, papersize={91.44mm, 121.92mm}]{geometry} %this is for kindle ebook
+\usepackage{zhfont}                       % 这里调用 zhfont.sty 
+%\usepackage[left=1.8cm,right=1.8cm,top=2cm,bottom=1.5cm]{geometry}
+%\setzhmainfont{Microsoft JhengHei}
+\setmainfont{Georgia}
+\zhspacing
+
+%以下是把论文中的一些参数中文化，比如摘要、参考文献等
+\XeTeXlinebreaklocale “zh”
+\XeTeXlinebreakskip = 0pt plus 1pt
+\renewcommand\arraystretch{1.5}
+\renewcommand{\contentsname}{目录}
+\renewcommand{\listfigurename}{插图目录}
+\renewcommand{\listtablename}{表格目录}
+\renewcommand{\refname}{参考文献}
+\renewcommand{\abstractname}{摘要}
+
+
+\usepackage{tipa}
+\usepackage{textcomp}
+
+
+
+
+
+\pagestyle{empty}

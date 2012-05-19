@@ -1,0 +1,9 @@
+digraph g {
+	node [
+		shape = "record"
+	]
+	"WebCore::FrameLoader::receivedFirstData"->"WebCore::DocumentWriter::begin"
+	"WebCore::DocumentWriter::begin"->"WebCore::Frame::setDocument"
+	"WebCore::Frame::setDocument"->"WebCore::Document::attach"
+	"WebCore::Document::attach"->"WebCore::Document::setRenderer"
+}

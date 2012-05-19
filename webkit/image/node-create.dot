@@ -1,0 +1,12 @@
+digraph G {
+        node [
+                shape = "record"
+        ]
+	"WebCore::HTMLDocumentParser::pumpTokenizerIfPossible"->"WebCore::HTMLDocumentParser::pumpTokenizer"
+	"WebCore::HTMLDocumentParser::pumpTokenizer"->"WebCore::HTMLTreeBuilder::constructTreeFromToken"
+	"WebCore::HTMLTreeBuilder::constructTreeFromToken"->"WebCore::HTMLTreeBuilder::constructTreeFromAtomicToken"
+	"WebCore::HTMLTreeBuilder::constructTreeFromAtomicToken"->"WebCore::HTMLTreeBuilder::processToken"
+	"WebCore::HTMLTreeBuilder::processToken"->"WebCore::HTMLTreeBuilder::processStartTag"
+	"WebCore::HTMLTreeBuilder::processStartTag"->"WebCore::HTMLConstructionSite::insertHTMLHtmlStartTagBeforeHTML"
+	"WebCore::HTMLConstructionSite::insertHTMLHtmlStartTagBeforeHTML"->"WebCore::HTMLHtmlElement::create"
+}
