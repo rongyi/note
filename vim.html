@@ -102,6 +102,11 @@
 <li><a href="#sec-1">1 简介</a></li>
 <li><a href="#sec-2">2 移动</a></li>
 <li><a href="#sec-3">3 编辑上下文</a></li>
+<li><a href="#sec-4">4 复制粘贴</a></li>
+<li><a href="#sec-5">5 查找/替换/删除</a></li>
+<li><a href="#sec-6">6 宏与脚本</a></li>
+<li><a href="#sec-7">7 保存</a></li>
+<li><a href="#sec-8">8 结语</a></li>
 </ul>
 </div>
 </div>
@@ -236,10 +241,110 @@
 
 
 <p>
-编辑过程中发生的事情除了查找替换也就这么多了。
+我平时用到的就这么多了。
 </p>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> 复制粘贴</h2>
+<div class="outline-text-2" id="text-4">
+
+<p>  前面已经有提到过 <i>yy</i> <i>p</i> <i>P</i> 。这里补充的是对复制的内容的选择和将内容写到vim寄存器中的方法。
+  在Normal模式下按 <i>v</i> 键会进入之前没有提及的模式，visual模式，这个模式用来选中文本用以删除或是复制。按 <i>v</i> 键后用移动光标的快捷键后会选中按 <i>v</i> 之前光标所在位置到当前光标位置的内容，然后可以用过 <i>y</i> 来复制，或者 <i>d</i> 来删除。如果想分别粘贴不同的内容就需要将不同的内容保存起来了。可以通过vim寄存器来实现，vim默认的10个寄存器，寄存器名为0~9 会按时间顺序保存删除或者是复制的内容，但我记不住哪个里面放什么内容，所以，通常都是显示的将一个内容放入指定的寄存器中，操作也简单，在之前所有复制粘贴操作之前加 /"寄存器名/ 即可。比如 /"ayy/ 复制当前行到寄存器a中， /"ap/ 粘贴a中的内容到光标后。
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> 查找/替换/删除</h2>
+<div class="outline-text-2" id="text-5">
+
+<p>  查找和替换主要有以下几种方法
+</p><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col class="left" /><col class="left" /><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Intent</th><th scope="col" class="left">Vim Key Map</th><th scope="col" class="left"></th><th scope="col" class="left"></th><th scope="col" class="left"></th></tr>
+</thead>
+<tbody>
+<tr><td class="left">从光标当前位置向文件尾方向查找某关键字</td><td class="left">/keyword</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">从管表当前位置向文件头方向查找某关键字</td><td class="left">?keyword</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">查询光标当前位置的单词（往文件尾方向）</td><td class="left">#</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">全文替换每行出现的第一个单词</td><td class="left">:s/one/two/</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">全文替换全部</td><td class="left">:s/one/two/g</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">区间替换 第一行到第20行之间</td><td class="left">:1,20s/one/two/</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">替换内容含有'/'这个字符可以这样方便一些</td><td class="left">:s#/one#/home#g</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">区间替换 当前行至下三行</td><td class="left">:.,+3s/one/two/</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">全文正则删除带关键字的行</td><td class="left">:g/one/d</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">带关键字的行全部搬到文件尾</td><td class="left">:g/one/m$</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">将文本倒序</td><td class="left">:g/^/m0</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">保留带关键字的行，其余删除</td><td class="left">:g!/one/d</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+</tbody>
+</table>
 
 
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> 宏与脚本</h2>
+<div class="outline-text-2" id="text-6">
+
+<p>  宏是对机械化编辑的一种固化，就像脚本是一坨命令一样，宏也是一坨命令，不过是vim命令。
+</p><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption>查找替换</caption>
+<colgroup><col class="left" /><col class="left" /><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Intent</th><th scope="col" class="left">vim key map</th><th scope="col" class="left"></th><th scope="col" class="left"></th><th scope="col" class="left"></th></tr>
+</thead>
+<tbody>
+<tr><td class="left">如何录制宏</td><td class="left">qayourlogichereq a是宏的名字 开始和结束都是q作标记。</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">如何执行宏</td><td class="left">@a</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+</tbody>
+</table>
+
+  个人不推荐宏，当编辑文本行数为10000+时，宏的速度和sed的速度不可同日而语，还是用sed吧。
+
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> 保存</h2>
+<div class="outline-text-2" id="text-7">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption>宏</caption>
+<colgroup><col class="left" /><col class="left" /><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Intent</th><th scope="col" class="left">Vim key map</th><th scope="col" class="left"></th><th scope="col" class="left"></th><th scope="col" class="left"></th></tr>
+</thead>
+<tbody>
+<tr><td class="left">保存</td><td class="left">:w</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">另存为</td><td class="left">:w another.txt</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">追加到某文件尾部</td><td class="left">:w &gt;&gt; another.txt</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">保存文件某一部分</td><td class="left">:1,20w another.txt</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+</tbody>
+</table>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> 结语</h2>
+<div class="outline-text-2" id="text-8">
+
+<p>  六年vim的使用总结，就这么几张表，可是当所有命令组合起来时确实有时候有一种行云流水般的感觉，当然自己也不是什么vim控，比如这篇文章就是在emacs下编辑，虽然emacs用的比较丑。
+</p>
 </div>
 </div>
 </div>
