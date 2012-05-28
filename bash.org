@@ -1,0 +1,61 @@
+#+TITLE:     bash.org
+#+AUTHOR:    ry
+#+EMAIL:     ry@ry-ThinkPad-T400
+#+DATE:      2012-05-28 一
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:   
+#+LINK_HOME: 
+#+XSLT:
+
+* 20%去对付80%的应用
+| 命令                                         | 说明 |   |   |   |
+|----------------------------------------------+------+---+---+---|
+| ls                                           |      |   |   |   |
+| ls -l                                        |      |   |   |   |
+| ls -t                                        |      |   |   |   |
+| pwd                                          |      |   |   |   |
+| rm                                           |      |   |   |   |
+| rm -rf                                       |      |   |   |   |
+| touch                                        |      |   |   |   |
+| mkdir                                        |      |   |   |   |
+| mkdir -p                                     |      |   |   |   |
+| cd                                           |      |   |   |   |
+| locate                                       |      |   |   |   |
+| rpm -ivh                                     |      |   |   |   |
+| rpm -e                                       |      |   |   |   |
+| rpm -qa                                      |      |   |   |   |
+| dpkg -i                                      |      |   |   |   |
+| apt-cache search                             |      |   |   |   |
+| yum install                                  |      |   |   |   |
+| rpmbuild -ba                                 |      |   |   |   |
+| rpmbuild -bp                                 |      |   |   |   |
+| top                                          |      |   |   |   |
+| ps aux                                       |      |   |   |   |
+| pgrep                                        |      |   |   |   |
+| pkill                                        |      |   |   |   |
+| kill                                         |      |   |   |   |
+| cat                                          |      |   |   |   |
+| less                                         |      |   |   |   |
+| more                                         |      |   |   |   |
+| cut                                          |      |   |   |   |
+| nl                                           |      |   |   |   |
+| grep                                         |      |   |   |   |
+| grep -i                                      |      |   |   |   |
+| grep -v                                      |      |   |   |   |
+| grep -H                                      |      |   |   |   |
+| grep -n                                      |      |   |   |   |
+| sed -e                                       |      |   |   |   |
+| sed 's/ab/cd/'                               |      |   |   |   |
+| awk -F '{print $0}'                          |      |   |   |   |
+| find . -name a -o -name b -exec rm -rf {} \; |      |   |   |   |
+| echo '{1..10}'                               |      |   |   |   |
+| seq 1 10                                     |      |   |   |   |
+| rm !$                                        |      |   |   |   |
+|                                              |      |   |   |   |
