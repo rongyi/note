@@ -1,0 +1,38 @@
+#+TITLE:     git.org
+#+AUTHOR:    ry
+#+EMAIL:     ry@ry-ThinkPad-T400
+#+DATE:      2012-05-28 一
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:   
+#+LINK_HOME: 
+#+XSLT:
+
+* 简介
+  Linus发明，发明的初衷是发现世面上没一个他满意的SCM软件，所以他决定造一个。
+  最大的特点是分布式，和分支。
+  
+* 最长用的命令记录
+| 命令                       | 做啥子                              |   |   |   |
+|----------------------------+-------------------------------------+---+---+---|
+| git init                   | 在当前文件夹下初始化一个repo        |   |   |   |
+| git add file.txt           | 将file.txt加入index中               |   |   |   |
+| git commit -m "log"        | 将index提交到记录中去，一次提交完成 |   |   |   |
+| git status                 | 察看work directory                  |   |   |   |
+| git config color.ui true   | 终端彩色输出                        |   |   |   |
+| git config alias.cm commit | cm == commit                        |   |   |   |
+| git config alias.ls status | ls == status                        |   |   |   |
+| git ls-tree                | 对git object的察看                  |   |   |   |
+| git cat-file               | 察看某个git object              |   |   |   |
+| git log                    | 察看log                             |   |   |   |
+| git log -p                 | 仔细察看log，含有diff信息           |   |   |   |
+| git show                   | 察看修改内容                        |   |   |   |
+| git checkout -b            |                                     |   |   |   |
+| git checkout               |                                     |   |   |   |
+| git merge branchNamev      |                                     |   |   |   |
