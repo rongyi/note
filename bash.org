@@ -15,47 +15,56 @@
 #+XSLT:
 
 * 20%去对付80%的应用
-| 命令                                         | 说明 |   |   |   |
-|----------------------------------------------+------+---+---+---|
-| ls                                           |      |   |   |   |
-| ls -l                                        |      |   |   |   |
-| ls -t                                        |      |   |   |   |
-| pwd                                          |      |   |   |   |
-| rm                                           |      |   |   |   |
-| rm -rf                                       |      |   |   |   |
-| touch                                        |      |   |   |   |
-| mkdir                                        |      |   |   |   |
-| mkdir -p                                     |      |   |   |   |
-| cd                                           |      |   |   |   |
-| locate                                       |      |   |   |   |
-| rpm -ivh                                     |      |   |   |   |
-| rpm -e                                       |      |   |   |   |
-| rpm -qa                                      |      |   |   |   |
-| dpkg -i                                      |      |   |   |   |
-| apt-cache search                             |      |   |   |   |
-| yum install                                  |      |   |   |   |
-| rpmbuild -ba                                 |      |   |   |   |
-| rpmbuild -bp                                 |      |   |   |   |
-| top                                          |      |   |   |   |
-| ps aux                                       |      |   |   |   |
-| pgrep                                        |      |   |   |   |
-| pkill                                        |      |   |   |   |
-| kill                                         |      |   |   |   |
-| cat                                          |      |   |   |   |
-| less                                         |      |   |   |   |
-| more                                         |      |   |   |   |
-| cut                                          |      |   |   |   |
-| nl                                           |      |   |   |   |
-| grep                                         |      |   |   |   |
-| grep -i                                      |      |   |   |   |
-| grep -v                                      |      |   |   |   |
-| grep -H                                      |      |   |   |   |
-| grep -n                                      |      |   |   |   |
-| sed -e                                       |      |   |   |   |
-| sed 's/ab/cd/'                               |      |   |   |   |
-| awk -F '{print $0}'                          |      |   |   |   |
-| find . -name a -o -name b -exec rm -rf {} \; |      |   |   |   |
-| echo '{1..10}'                               |      |   |   |   |
-| seq 1 10                                     |      |   |   |   |
-| rm !$                                        |      |   |   |   |
-|                                              |      |   |   |   |
+| 命令                                         | 说明                                 |   |   |   |
+|----------------------------------------------+--------------------------------------+---+---+---|
+| ls                                           |                                      |   |   |   |
+| ls -l                                        |                                      |   |   |   |
+| ls -t                                        | 在凌乱的Download下最有用，按时间排序 |   |   |   |
+| pwd                                          |                                      |   |   |   |
+| rm                                           |                                      |   |   |   |
+| rm -rf                                       |                                      |   |   |   |
+| touch                                        |                                      |   |   |   |
+| mkdir                                        |                                      |   |   |   |
+| mkdir -p                                     |                                      |   |   |   |
+| cd                                           |                                      |   |   |   |
+| locate                                       |                                      |   |   |   |
+| rpm -ivh                                     |                                      |   |   |   |
+| rpm -e                                       |                                      |   |   |   |
+| rpm -qa                                      |                                      |   |   |   |
+| dpkg -i                                      |                                      |   |   |   |
+| apt-cache search                             |                                      |   |   |   |
+| yum install                                  |                                      |   |   |   |
+| rpmbuild -ba                                 |                                      |   |   |   |
+| rpmbuild -bp                                 |                                      |   |   |   |
+| top                                          |                                      |   |   |   |
+| ps aux                                       |                                      |   |   |   |
+| pgrep                                        |                                      |   |   |   |
+| pkill                                        |                                      |   |   |   |
+| kill                                         |                                      |   |   |   |
+| cat                                          |                                      |   |   |   |
+| less                                         |                                      |   |   |   |
+| more                                         |                                      |   |   |   |
+| cut                                          |                                      |   |   |   |
+| nl                                           |                                      |   |   |   |
+| grep                                         |                                      |   |   |   |
+| grep -i                                      |                                      |   |   |   |
+| grep -v                                      |                                      |   |   |   |
+| grep -H                                      |                                      |   |   |   |
+| grep -n                                      |                                      |   |   |   |
+| sed -e                                       |                                      |   |   |   |
+| sed 's/ab/cd/'                               |                                      |   |   |   |
+| awk -F '{print $0}'                          |                                      |   |   |   |
+| find . -name a -o -name b -exec rm -rf {} \; |                                      |   |   |   |
+| echo '{1..10}'                               |                                      |   |   |   |
+| seq 1 10                                     |                                      |   |   |   |
+| rm !$                                        |                                      |   |   |   |
+| df -h                                        |                                      |   |   |   |
+| du -sh                                       |                                      |   |   |   |
+| df -T                                        | 相应目录的挂载点                     |   |   |   |
+| wc -c -l                                     |                                      |   |   |   |
+| tr -d                                        |                                      |   |   |   |
+| tr 'a-z' 'A-Z'                               | 大小写改变                           |   |   |   |
+| sort uniq                                    | 一对好兄弟                           |   |   |   |
+| uniq -c                                      |                                      |   |   |   |
+| find ~ -type f -mtime 0                      | 连位置都记不得的时候，ls -lt也不行了，就用这个 |   |   |   |
+|                                              |                                                |   |   |   |

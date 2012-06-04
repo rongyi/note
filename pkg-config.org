@@ -1,0 +1,47 @@
+#+TITLE:     pkg-config.org
+#+AUTHOR:    ry
+#+EMAIL:     ry@ry-desktop
+#+DATE:      2012-05-31 星期四
+#+DESCRIPTION: 
+#+KEYWORDS: 
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:nil skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:   
+#+LINK_HOME: 
+
+* gcc默认对#include <file.h>的查询路径为：
+  #+begin_src bash
+     /usr/local/include
+     libdir/gcc/target/version/include
+     /usr/target/include
+     /usr/include
+  #+end_src
+* gcc默认对#include "file.h"的查询路径为：
+  #+begin_src bash
+  先是当前路径
+  再是-iquote指定的地方
+  /usr/local/include
+  libdir/gcc/target/version/include
+  /usr/target/include
+  /usr/include
+  #+end_src
+* 用到其他库
+  手动的用-I参数添加头文件寻找路径时还需要-llibrary告诉gcc，link的时候要将头文件宣告的api真正实现的二进制实现动态链接或静态链接。所以这是个很苦逼的事情，因为pkg-config一切都变得轻松，看见网上许多帖子，怎样ln -s或是cp .h到/usr/include何苦呢.
+  #+begin_src bash
+  pkg-config --list-all
+  pkg-config --list-all | grep libyouneed
+  gcc `pkg-config --libs --cflags libyouneed` test.c
+  #example
+  pkg-config --libs --cflags gtk+-2.0
+-pthread -I/usr/local/include/pixman-1 -I/usr/include/gtk-2.0 -I/usr/lib/i386-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/i386-linux-gnu/glib-2.0/include -I/usr/include/freetype2 -I/usr/include/libpng12  -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lglib-2.0 
+  #+end_src
+
+* pkg-config工作原理
+  这个命令会在 /usr/lib/pkgconfig, /usr/share/pkgconfig, /usr/local/lib/pkgconfig and  /usr/local/share/pkg‐config这几个地方搜索.pc文件，pc文件里面包含了这个lib的位置信息，所以没什么神秘的，一切都是一层套一层，最后在开源软件发布的时候，不出意外你都会在源码目录看见.pc文件。注意的是，如果你安装软件的位置比较特殊，你需要指定PKG_CONFIG_PATH变量。比如
+  #+begin_src bash
+  PKG_CONFIG_PATH=$PKG_CONFIG_PATH:~/pkgconfig
+  #+end_src

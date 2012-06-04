@@ -1,0 +1,29 @@
+#+TITLE:     gcc.org
+#+AUTHOR:    ry
+#+EMAIL:     ry@ry-desktop
+#+DATE:      2012-06-01 星期五
+#+DESCRIPTION: 
+#+KEYWORDS: 
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:nil skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:   
+#+LINK_HOME: 
+
+* gcc编译的步骤
+  
+  + 预处理
+  + 编译
+  + 汇编
+  + 链接
+
+  一般就是gcc -g `pkg-config --libs --cflags libname` file.c 这样的处理要是想看怎样处理这四个过程可以通过下列参数来完成。
+  #+begin_src bash
+  gcc -E hello.c hello.i
+  gcc -S hello.i -o hello.s
+  gcc -c hello.s -o hello.o
+  gcc hello.o -o hello
+  #+end_src
