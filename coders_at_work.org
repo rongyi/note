@@ -1,0 +1,48 @@
+#+TITLE:     <coders at work> reading note
+#+AUTHOR:    ry
+#+EMAIL:     ry@ry-desktop
+#+DATE:      2012-06-11 星期一
+#+DESCRIPTION: 
+#+KEYWORDS: 
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:nil skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:   
+#+LINK_HOME: 
+
+* jwz
+  看了《代码奔腾》中的他，才知道他后来开夜店是有理由的，很拉风。
+  + 无学历
+  + 自学成才
+  + 鄙视C++
+  + lisper
+  + 调试常用print，因为其不信任gdb，曾经找bug，找到了gdb里面（分支预测总是走某个固定分支）为此还跟RMS有些不和，不过最终，jwz提交的fix还是融进了gdb，
+  + 初中就在CMU跟一帮phd混在一起，Netscap Unix版本作者，两个月用户200万，
+  + 现在偶尔写程序（XScreenSavor）
+* Brad Fitzpatrick
+  + prototypical
+  + Thinking like a scientist, change one thing at a time, Patience and trying to understand the root cause of things.
+  + Communication 很重要
+  + 比你牛的人大有人在多一个不多
+
+* Douglas Crockford
+  + JavaScript权威人物
+  + I think the best way to make JavaScript better would to make it smaller
+  +  *code reading* is important!
+  + 也喜欢开会，不过不是我们理解的开会，他开会是这样，每次开会有个人负责讲他的代码，然后其余人讨论，两周一次，每次1小时
+  + *code reading* should be happening all the time throughout the life of the project
+  + 不使用++操作符，不使用continue，因为前者让人迷惑，后者可以用if 和break来代替。
+  + 对好代码的看法： by good code, I mean it's going to be readable.
+  + 发布版本周期的第六次时必须进行代码检查
+  + 在他眼里说自己是 *专业* 程序员的都要看TAOCP,(压力山大！）
+  + 数学训练不是必需的
+
+
+  
+* Joshua Bloch
+  + <Effective Java>作者，Java SDK collection的设计者
+  + single character variable name is a bad idea
+  + 推荐的书籍： 《design patterns》 《Elements of style》 《Hackers delight》《Mythical Man Month》
