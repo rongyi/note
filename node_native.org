@@ -1,0 +1,179 @@
+#+TITLE:     node native 模块编写笔记
+#+AUTHOR:    ry
+#+EMAIL:     ry@ry-ThinkPad-T400
+#+DATE:      2012-06-16 六
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:   
+#+LINK_HOME: 
+#+XSLT:
+
+* 简介
+  在这里搜索到的只有[[http://cnodejs.org/topic/4f3dc5e19605c56a4b05351f][这篇]] 文章，所以本篇文档的初衷是总结一下自己学习node native模块写法。希望能帮助到大家一些，省去一些搜索时间。
+  二进制模块也是通过require机制进行加载，关于模块加载机制，[[http://www.infoq.com/cn/articles/nodejs-module-mechanism][这是]] 一篇不错的文章。
+  对下面repo的作者表示感谢：
+  
++ https://github.com/nikhilm/jsfoo-pune-2012.git 
++ https://github.com/kkaefer/node-cpp-modules.git 
++ https://github.com/bnoordhuis/node-event-emitter.git 
++ https://github.com/pquerna/node-extension-examples.git 
++ https://github.com/zcbenz/node-gui.git 
++ https://github.com/olalonde/node-notify.git 
++ https://github.com/nikhilm/node-taglib.git 
++ https://github.com/markwillis82/node-threadHandler.git 
++ https://github.com/xk/node-threads-a-gogo.git 
+  
+  当通过require引入一个模块，实则是引入了可以用的对象，在这个对象“上”有一些primitive的值可以用，比如只读的一些constants，一些变量初始值，然后还可以有一些同步function/object。当然最后就是可以异步操作的一些function。所以node的二进制扩展也无外乎这几种状态，下文就从简单到复杂逐一讲解。
+
+
+* Hello World
+  事实上这个Hello World连个hello world都没打而是建个“空壳子”模块，可以通过require引入，但这个对象什么都没有。
+** 代码说明
+  #+begin_src c++
+  #include <v8.h>
+  #include <node.h>
+
+  using namespace v8; 
+
+  extern "C" {
+    static void Init(Handle<Object> target) {
+    }   
+    NODE_MODULE(firststep, Init)
+  }
+  #+end_src
+  
+  #+begin_src python
+import Options
+from os import unlink, symlink, popen
+from os.path import exists 
+from shutil import copy2
+
+
+built = 'build/Release/helloworld.node'
+dest = 'lib/helloworld.node'
+def set_options(opt):
+    opt.tool_options("compiler_cxx")
+
+def configure(conf):
+    conf.check_tool("compiler_cxx")
+    conf.check_tool("node_addon")
+
+def build(bld):
+    obj = bld.new_task_gen("cxx", "shlib", "node_addon")
+    obj.target = "helloworld"
+    obj.source = "src/firststep.cc"
+
+def shutdown():
+  if Options.commands['clean']:
+    if exists('helloworld.node'):
+      unlink('helloworld.node')
+  else:
+    if exists(built):
+      copy2(built, dest)
+  #+end_src
+  
+  之所以将入口函数放在extern "C"中是告诉g++不要对这个函数名“动手脚”，不要最后变成一个“长相奇怪“的函数名。这个“长相奇怪”大家用nm命令看一下就知道了，不过我试过拿掉extern “C”运行也OK，不过谨慎点还是加上吧。 /Init/  函数名是可以任意起的，只不过是被 /NODE_MODULE/ 宏指定为入口地方，参数target对象即是这个模块要返回的对象。也即，编写node native模块就是对target对象进行“包装打扮”。V8给咱送个对象过来，说交给你们了，我们再给这个对象“打扮打扮”再export到JS层。大体就是这么个回事。这个 /Handle/ 大家姑且就权当一个指针吧。只不过这个指针更给力一些——自动管理内存。
+  
+  /NODE_MODULE/ 这个宏在Node.js 版本（下同）0.6.19-release中定义如下：
+  #+begin_src c++
+250 #define NODE_MODULE(modname, regfunc)                                 \
+251   extern "C" {                                                        \
+252     NODE_MODULE_EXPORT node::node_module_struct modname ## _module =  \
+253     {                                                                 \
+254       NODE_STANDARD_MODULE_STUFF,                                     \
+255       regfunc,                                                        \
+256       NODE_STRINGIFY(modname)                                         \
+257     };                                                                \
+258   }
+src/node.h
+  #+end_src
+  有兴趣可以继续跟踪展开。
+  
+** 编译测试
+   代码的结构用tree命令输出如下：
+   #+begin_src bash
+.
+├── lib
+├── src
+│   └── firststep.cc 
+└── wscript
+   #+end_src
+   将原码都放于 *src* 下。编译测试步骤如下：
+   #+begin_src bash
+   node-waf configure build
+   node #进入node repl，在repl中输入
+   require(‘./lib/helloworld'); #如果编译正常，正确的输出应该如下：
+   {} #一个空对象
+   <c-d>返回终端
+   node-waf distclean #删除生成的中间文件。再运行tree命令，此时lib中已包含我们需要的二进制模块
+.
+├── lib
+│   └── helloworld.node
+├── src
+│   └── firststep.cc
+└── wscript
+
+2 directories, 3 files
+
+   #+end_src
+   如果再包装一下，加个package.json,main字段指向lib/helloworld.node就可以直接require文件夹来使用这个native扩展。
+   至此，一个模块的怎么写框架算是有了，下一步就是怎样包装这个返回的target。
+
+* primitive数据类型的添加
+  首先看下V8数据类型家族谱如下图所示：
+  [[./include/images/v8data.png]]
+  #+CAPTION: v8数据类型图谱
+
+  所以primitive数据类型有三种，String/Number/Boolean，下面的代码说明怎样将简单数据类型绑定到target对象上。
+
+  #+begin_src c++
+  #include <math.h>
+  target->Set(String::NewSymbol("pi"),
+                    Number::New(M_PI)); //in math.h
+
+  target->Set(String::NewSymbol("PI"),
+                    Number::New(M_PI),
+                    static_cast<v8::PropertyAttribute>(v8::ReadOnly|v8::DontDelete));
+   NODE_DEFINE_CONSTANT(target, CONSTANTS);
+   target->Set(String::New("Hofsadter"), String::New("I am a strange loop"));
+
+  #+end_src
+
+  /NODE_DEFIN_CONSTANT/ 宏定义在Node.js/src/node.h中，
+
+  #+begin_src c++
+118 #define NODE_DEFINE_CONSTANT(target, constant)                            \
+119   (target)->Set(v8::String::NewSymbol(#constant),                         \
+120                 v8::Integer::New(constant),                               \
+121                 static_cast<v8::PropertyAttribute>(                       \
+122                     v8::ReadOnly|v8::DontDelete))   
+
+  #+end_src
+  第二个参数只能是宏，而且值还只能是Interger，这个就有点蛋疼了，所以，绑定primitive的方法基本还是原始的调用V8语句。Object *Set* 的API见[[http://izs.me/v8-docs/classv8_1_1Object.html#a97717c7b7fdc556c3a7fad14877ca912][这里]]。 第三个参数指定这个值的属性，如'r--'的权限可以像上面事例的 *PI* 定义一样设定第三个参数。具体测试这里就省去了，方法跟测试上面的空壳子是一样的。
+
+* Array的绑定
+  #+begin_src c++
+  Local<Array> resultArray = Array::New(3);
+  for (size_t i = 0; i < 3; ++i) {
+      Local<Value> suffix = Number::New(i);
+      Local<Value> str = String::Concat(String::New("array element"), suffix->ToString());
+
+      resultArray->Set(i, str);
+  }   
+  target->Set(String::New("array_test"), resultArray);
+
+  #+end_src
+
+  
+* 同步function的绑定
+  简单讲就是能提供一个接口供JavaScript使用，当JavaScript需要完成某件事情时直接调用便能有一个同步返回。这种方法的使用多见于计算量大或者与OS交互居多。
+  实现方法如下：
+  #+begin_src c++
+  
+  #+end_src
