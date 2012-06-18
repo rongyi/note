@@ -16,7 +16,9 @@
 
 * 简介
   在这里搜索到的只有[[http://cnodejs.org/topic/4f3dc5e19605c56a4b05351f][这篇]] 文章，所以本篇文档的初衷是总结一下自己学习node native模块写法。希望能帮助到大家一些，省去一些搜索时间。
+  
   二进制模块也是通过require机制进行加载，关于模块加载机制，[[http://www.infoq.com/cn/articles/nodejs-module-mechanism][这是]] 一篇不错的文章。
+  
   对下面repo的作者表示感谢：
   
 + https://github.com/nikhilm/jsfoo-pune-2012.git 
@@ -29,7 +31,7 @@
 + https://github.com/markwillis82/node-threadHandler.git 
 + https://github.com/xk/node-threads-a-gogo.git 
   
-  当通过require引入一个模块，实则是引入了可以用的对象，在这个对象“上”有一些primitive的值可以用，比如只读的一些constants，一些变量初始值，然后还可以有一些同步function/object。当然最后就是可以异步操作的一些function。所以node的二进制扩展也无外乎这几种状态，下文就从简单到复杂逐一讲解。
+  当通过require引入一个模块，实则是引入了可以用的对象，在这个对象“上”有一些primitive的值可以用，比如只读的一些constants，一些变量初始值，然后还可以有一些同步function/object。当然最后就是可以异步操作的一些function乃至Object。所以node的二进制扩展也无外乎这几种状态，下文就从简单到复杂逐一讲解。
 
 
 * Hello World
@@ -44,7 +46,7 @@
   extern "C" {
     static void Init(Handle<Object> target) {
     }   
-    NODE_MODULE(firststep, Init)
+    NODE_MODULE(helloworld, Init)
   }
   #+end_src
   
@@ -78,7 +80,7 @@ def shutdown():
       copy2(built, dest)
   #+end_src
   
-  之所以将入口函数放在extern "C"中是告诉g++不要对这个函数名“动手脚”，不要最后变成一个“长相奇怪“的函数名。这个“长相奇怪”大家用nm命令看一下就知道了，不过我试过拿掉extern “C”运行也OK，不过谨慎点还是加上吧。 /Init/  函数名是可以任意起的，只不过是被 /NODE_MODULE/ 宏指定为入口地方，参数target对象即是这个模块要返回的对象。也即，编写node native模块就是对target对象进行“包装打扮”。V8给咱送个对象过来，说交给你们了，我们再给这个对象“打扮打扮”再export到JS层。大体就是这么个回事。这个 /Handle/ 大家姑且就权当一个指针吧。只不过这个指针更给力一些——自动管理内存。
+  之所以将入口函数放在extern "C"中是告诉g++不要对这个函数名“动手脚”，不要最后变成一个“长相奇怪“的函数名。这个“长相奇怪”大家用nm命令看一下就知道了，不过我试过拿掉extern “C”运行也OK，不过谨慎点还是加上吧。 /Init/  函数名是可以任意起的，只不过是被 /NODE_MODULE/ 宏指定为入口地方，参数target对象即是这个模块要返回的对象。也即，编写node native模块就是对target对象进行“包装打扮”。V8给咱送个对象过来，说交给你们了，我们再给这个对象“打扮打扮”再export到JS层。大体就是这么个回事。这个 /Handle/ 大家姑且就权当一个智能指针吧。自动管理内存了。
   
   /NODE_MODULE/ 这个宏在Node.js 版本（下同）0.6.19-release中定义如下：
   #+begin_src c++
@@ -123,6 +125,7 @@ src/node.h
 
    #+end_src
    如果再包装一下，加个package.json,main字段指向lib/helloworld.node就可以直接require文件夹来使用这个native扩展。
+  
    至此，一个模块的怎么写框架算是有了，下一步就是怎样包装这个返回的target。
 
 * primitive数据类型的添加
@@ -155,6 +158,7 @@ src/node.h
 122                     v8::ReadOnly|v8::DontDelete))   
 
   #+end_src
+  
   第二个参数只能是宏，而且值还只能是Interger，这个就有点蛋疼了，所以，绑定primitive的方法基本还是原始的调用V8语句。Object *Set* 的API见[[http://izs.me/v8-docs/classv8_1_1Object.html#a97717c7b7fdc556c3a7fad14877ca912][这里]]。 第三个参数指定这个值的属性，如'r--'的权限可以像上面事例的 *PI* 定义一样设定第三个参数。具体测试这里就省去了，方法跟测试上面的空壳子是一样的。
 
 * Array的绑定
@@ -173,7 +177,45 @@ src/node.h
   
 * 同步function的绑定
   简单讲就是能提供一个接口供JavaScript使用，当JavaScript需要完成某件事情时直接调用便能有一个同步返回。这种方法的使用多见于计算量大或者与OS交互居多。
-  实现方法如下：
-  #+begin_src c++
   
+  实现步骤主要有两步：
+  
+  + 完成这个function实现的具体逻辑
+  + 将这个function绑定到target上成为返回对象的一个属性。而这个属性是个方法。
+
+  下文分别用代码说明这两个步骤的注意点。
+
+** function的建立
+  #+begin_src c++
+  Handle<Value> fetchConfig(const Arguments &args) {
+	HandleScope scope;
+        //your process logic here
+	return scope.Close(String::New("Here is your string, your majesty"));
+  }
   #+end_src
+  
+   需要注意以下几点：
+   + 函数的返回: 函数的返回是Value指针，同样由Handle来处理GC。
+   + 函数的参数: 参数都长一个样，但是可以根据你在JavaScript中传的值可以进行不同数据类型之间的转换。Arguments [[http://izs.me/v8-docs/classv8_1_1Arguments.html][API]]最常用的有： []重载操作符，Length()和Holder()。Length()用于Ｖalidate，然后用[]取对应JavaScript中传入的参数并转换成相应类型，然后你的处理逻辑...
+   + 函数体: 最开始在栈上创建一个诸多Handle的管理者，名叫[[http://izs.me/v8-docs/classv8_1_1HandleScope.html][HandleScope]] ，这样也方便管理，当收掉这个scope时候scope里的所有Handle都会被GCed。scope.Close()，可带参数，这个参数用于返回给从这个scope回去时的那个scope，一般是global/persistent scope。
+
+** function的绑定
+
+   #+begin_src c++
+   Handle<FunctionTemplate> fetTmpl = FunctionTemplate::New(fetchString);
+   target->Set(String::New("fetchString"), fetTmpl->GetFunction());
+
+   //or use a Node.js marco
+   NODE_SET_METHOD(target, "propertyName", functionName)
+   //which is defined at src/node.h as below:
+   124 #define NODE_SET_METHOD(obj, name, callback)                              \
+   125   obj->Set(v8::String::NewSymbol(name),                                   \
+   126            v8::FunctionTemplate::New(callback)->GetFunction())
+   #+end_src
+
+   从代码中可以看出，绑定function可以很方便的用Node.js宏来实现。FunctionTemplate [[http://izs.me/v8-docs/classv8_1_1FunctionTemplate.html][API]] 中对GetFunction() API的说明是在当前执行上下文中创建一个全局唯一的function *实例* 。
+
+   至此，function的绑定大概如此。
+
+
+   
