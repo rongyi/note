@@ -186,6 +186,7 @@ src/node.h
   下文分别用代码说明这两个步骤的注意点。
 
 ** function的建立
+
   #+begin_src c++
   Handle<Value> fetchConfig(const Arguments &args) {
 	HandleScope scope;
@@ -215,7 +216,58 @@ src/node.h
 
    从代码中可以看出，绑定function可以很方便的用Node.js宏来实现。FunctionTemplate [[http://izs.me/v8-docs/classv8_1_1FunctionTemplate.html][API]] 中对GetFunction() API的说明是在当前执行上下文中创建一个全局唯一的function *实例* 。
 
-   至此，function的绑定大概如此。
+   同步function的绑定大概如此。
+
+* Object的绑定
+  这里的Object是指用new创建Object的方法，因为之前function也是Object。
+  
+  与前一节的function绑定类似，同样用到 /FunctionTemplate/ ，只不过更多的是 /FunctionTemplate/ [[http://izs.me/v8-docs/classv8_1_1FunctionTemplate.html][API]]的 /InstanceTemplate/ 获得一个object template，然后对object template添加“private”字段和get/set method。
+
+  可以通过下面例子加以说明：
+
+  #+begin_src c++
+Handle<Value> IronMan(const Arguments &args) {
+	if (!args.IsConstructCall()) {
+		return ThrowException(Exception::TypeError(String::New("you should use new operator to create a new obj")));
+		
+	}
+    return args.This();
+}
+
+Handle<Value> getAge(const Arguments &args) {
+	HandleScope scope;
+	Handle<Object> This = args.This();
+	int age = This->Get(String::New("age"))->Uint32Value();
+	return scope.Close(Integer::New(age));
+}
+
+Handle<Value> setAge(const Arguments &args) {
+	HandleScope scope;
+	Handle<Object> This = args.This();
+	This->Set(String::New("age"), Integer::New(args[0]->Uint32Value()));
+	return Undefined();
+}
+extern "C" {
+    static void Init(Handle<Object> target) {
+        HandleScope scope;
+		Handle<FunctionTemplate> ironMan = FunctionTemplate::New(IronMan);
+        Handle<ObjectTemplate> toniStark = ironMan->InstanceTemplate();
+		toniStark->SetInternalFieldCount(1);
+        toniStark->Set(String::New("age"), Integer::New(0));
+		NODE_SET_PROTOTYPE_METHOD(ironMan, "getAge", getAge);
+		NODE_SET_PROTOTYPE_METHOD(ironMan, "setAge", setAge);
+        target->Set(String::NewSymbol("IronMan"),
+                    ironMan->GetFunction());
+    }
+    NODE_MODULE(simpleobject, Init)
+}
+  #+end_src
+
+  对对象的模仿我也就看到这里，跟自己的应用没有多大兴趣。其实还有ObjectWrap可以继承。暂时没有用到，先点到这里，有需要的继续。
+
+* 异步起来
+  
+  
 
 
-   
+  
