@@ -67,4 +67,5 @@
 | sort uniq                                    | 一对好兄弟                                     |   |   |   |
 | uniq -c                                      |                                                |   |   |   |
 | find ~ -type f -mtime 0                      | 连位置都记不得的时候，ls -lt也不行了，就用这个 |   |   |   |
-| awk 'NR%2==1'                                | 只输出奇数行                                         |   |   |   |
+| awk 'NR%2==1'                                | 只输出奇数行                                   |   |   |   |
+| yum provide/rpm -qf                          | 查询软件/文件属于哪个包                        |   |   |   |
