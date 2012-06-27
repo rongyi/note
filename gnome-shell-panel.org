@@ -1,0 +1,130 @@
+#+TITLE:     gnome-shell 分析
+#+AUTHOR:    ry
+#+EMAIL:     ry@localhost.localdomain
+#+DATE:      2012-06-27 Wed
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:{} -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:   
+#+LINK_HOME: 
+#+XSLT:
+
+* Panel的组成
+  panel上有三个组成部分：
+
+  + _leftBox: 放两个组件: ActivitiesButton, AppButton
+  + _centerBox: 放一个组件：  dateMenu
+  + _rightBox: 存放系统indicator
+  
+** _leftBox
+#+begin_src javascript
+        this._leftBox = new St.BoxLayout({ name: 'panelLeft' });
+        if (global.session_type == Shell.SessionType.USER) {
+            this._activitiesButton = new ActivitiesButton();
+            this._activities = this._activitiesButton.actor;
+            this._leftBox.add(this._activities);
+
+            // The activities button has a pretend menu, so as to integrate
+            // more cleanly with the rest of the panel
+            this._menus.addMenu(this._activitiesButton.menu);
+
+            this._appMenu = new AppMenuButton(this._menus);
+            this._leftBox.add(this._appMenu.actor);
+        }
+
+#+end_src
+
+上面代码给出了_leftBox的创建及添加ActivitiesButton和appMenu的过程。
+
+*** ActivitiesButton
+    定义在 /panel.js/ 中。
+    label和hotcorner通过下面语句实现。
+    #+begin_src javascript
+     this._label = new St.Label({ text: _("Activities") });
+     container.add_actor(this._label);
+
+     this.actor.label_actor = this._label;
+
+     this._hotCorner = new Layout.HotCorner();
+     container.add_actor(this._hotCorner.actor);
+
+    #+end_src
+   
+    
+    activitiesButton的press/release事件需要重新定义，因为其实现的功能不同于一般的menuButton.所以通过以下语句实现：
+#+begin_src javascript
+this.menu.open = Lang.bind(this, this._onMenuOpenRequest);
+this.menu.close = Lang.bind(this, this._onMenuCloseRequest);
+this.menu.toggle = Lang.bind(this, this._onMenuToggleRequest);
+#+end_src
+
+    button click/key press事件通过以下语句定义：
+#+begin_src javascript
+this.actor.connect_after('button-release-event', Lang.bind(this, this._onButtonRelease));
+this.actor.connect_after('key-release-event', Lang.bind(this, this._onKeyRelease));
+#+end_src
+    回调函数中调用 /Main.overview.toggle();/ 用来触发overview。
+*** AppMenuButton
+
+  定义在 /panel.js/ 文件中。作用是跟踪当前应用程序。同时提供launchApp时的notification。注意在overview状态时是不显示此button的，所以在代码中可以看到这两行：
+
+#+begin_src javascript
+        Main.overview.connect('hiding', Lang.bind(this, function () {
+            this.show();
+        }));
+        Main.overview.connect('showing', Lang.bind(this, function () {
+            this.hide();
+        }));
+#+end_src
+  
+
+** _centerBox
+
+ *_centerBox的创建* 
+#+begin_src javascript
+        this._centerBox = new St.BoxLayout({ name: 'panelCenter' });
+        this.actor.add_actor(this._centerBox);
+#+end_src
+
+ *_centerBox button的添加*
+#+begin_src javascript
+        this._centerBox.add(this._dateMenu.actor, { y_fill: true });
+        this._menus.addMenu(this._dateMenu.menu);
+#+end_src
+
+** _rightBox
+    *_rightBox的创建*
+
+   略
+
+    *_rightBox indicator的添加：*
+    首先在 /panel.js/ 文件首部定义了一些系统indicator常量，如下所示：
+#+begin_src javascript
+const STANDARD_STATUS_AREA_ORDER = ['a11y', 'keyboard', 'volume', 'bluetooth', 'network', 'battery', 'userMenu'];
+const STANDARD_STATUS_AREA_SHELL_IMPLEMENTATION = {
+    'a11y': imports.ui.status.accessibility.ATIndicator,
+    'volume': imports.ui.status.volume.Indicator,
+    'battery': imports.ui.status.power.Indicator,
+    'keyboard': imports.ui.status.keyboard.XKBIndicator,
+    'userMenu': imports.ui.userMenu.UserMenuButton
+};
+#+end_src
+
+    其后，在function ： /startStatusArea/ 中用for循环将这些indicator添加到_rightBox中，所以具体的函数调用如下图所示：
+
+    [[./include/images/panelIndicationInsert.png]]
+    #+CAPTION: panel _rightBox indicator添加函数调用关系
+
+    添加流程大致如此，startStatusArea会在main.js中被下面这条语句执行。
+#+begin_src javascript
+panel.startStatusArea();
+#+end_src
+
+框架大概如此，下一步：
+popupMenu的实现。
+

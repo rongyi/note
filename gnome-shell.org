@@ -1,0 +1,104 @@
+#+TITLE:     gnome-shell 调试总结
+#+AUTHOR:    fedora
+#+EMAIL:     fedora@localhost.localdomain
+#+DATE:      2012-06-26 Tue
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:   
+#+LINK_HOME: 
+#+XSLT:
+* Notification bubble出来位置的改动
+  目标： 将fedora gnome-shell的notification通知由底部移动至顶部。
+  #+begin_src bash
+  .
+|-- altTab.js
+|-- appDisplay.js
+|-- appFavorites.js
+|-- automountManager.js
+|-- autorunManager.js
+|-- boxpointer.js
+|-- bubblePlace.txt
+|-- calendar.js
+|-- checkBox.js
+|-- contactDisplay.js
+|-- ctrlAltTab.js
+|-- dash.js
+|-- dateMenu.js
+|-- dnd.js
+|-- endSessionDialog.js
+|-- environment.js
+|-- extensionSystem.js
+|-- flashspot.js
+|-- iconGrid.js
+|-- keyboard.js
+|-- keyringPrompt.js
+|-- layout.js
+|-- lightbox.js
+|-- link.js
+|-- lookingGlass.js
+|-- magnifierDBus.js
+|-- magnifier.js
+|-- main.js
+|-- messageTray.js
+|-- modalDialog.js
+|-- networkAgent.js
+|-- notificationDaemon.js
+|-- overview.js
+|-- panel.js
+|-- panelMenu.js
+|-- placeDisplay.js
+|-- polkitAuthenticationAgent.js
+|-- popupMenu.js
+|-- positionChange.txt
+|-- remoteSearch.js
+|-- runDialog.js
+|-- scripting.js
+|-- searchDisplay.js
+|-- search.js
+|-- shellDBus.js
+|-- shellEntry.js
+|-- shellMountOperation.js
+|-- status
+|   |-- accessibility.js
+|   |-- bluetooth.js
+|   |-- keyboard.js
+|   |-- network.js
+|   |-- power.js
+|   `-- volume.js
+|-- statusIconDispatcher.js
+|-- telepathyClient.js
+|-- tweener.js
+|-- userMenu.js
+|-- viewSelector.js
+|-- wanda.js
+|-- windowAttentionHandler.js
+|-- windowManager.js
+|-- workspace.js
+|-- workspacesView.js
+|-- workspaceSwitcherPopup.js
+|-- workspaceThumbnail.js
+`-- xdndHandler.js
+
+  #+end_src
+  UI中的文件如上列表所示，调试过程中主要用到的工具有: /grep -rni/ , /find/, /vim filename +linenumber/ 通过这三个工具实现对目标文件的锁定。
+
+** make it fail && change oneplace at a time
+   实现初步定位后，根据调试九法的初始步骤，一步一步的进行精确定位，直至定位到目标行。
+
+   相关对象： this._notificationBin 这个对象设置了通知消息的初始位置（y坐标）
+   相关函数： _showNotification / this._updateShowingNotification
+   #+begin_src bash
+   if (!this._notification.expanded)
+       tweenParams.y = -(Main.laffyoutManager.primaryMonitor.height - Main.panel.actor.height * 2 - 10); 
+   #+end_src
+   改变动画的目标坐标， 将坐标设在屏幕上方。
+** 测试
+   发现expanded的notification还是在底下，跟踪发现还是走的 /_showNotification/ 函数，所以跟下去，最终确认在 /_onNotificationExpanded/ 函数中更改_notificationBin.y的坐标。继续测试, done!
+   
+   
