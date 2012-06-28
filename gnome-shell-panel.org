@@ -125,6 +125,82 @@ const STANDARD_STATUS_AREA_SHELL_IMPLEMENTATION = {
 panel.startStatusArea();
 #+end_src
 
-框架大概如此，下一步：
-popupMenu的实现。
 
+* panel menu button的实现
+   /panelMenu.js/ 定义了panel menu button。其中先后定义了ButtonBox/Button/SystemStatusButton/三个对象,ButtonBox作为基类，Button继承ButtonBox，SystemStatusButton继承Button， /panel.js/ 中_rightBox添加的indicator都属于SystemStatusButton。
+
+   在 /panelMenu.js/ Button对象的定义中，引入了menu成员对象，如下代码所示：
+#+begin_src javascript
+if (dontCreateMenu)
+    this.menu = null;
+else
+    this.setMenu(new PopupMenu.PopupMenu(this.actor, menuAlignment, St.Side.TOP, 0));
+#+end_src
+   
+   然后在button press事件的回调中执行如下语句：
+#+begin_src javascript
+    _onButtonPress: function(actor, event) {
+        if (!this.menu)
+            return;
+
+        this.menu.toggle();
+    },
+#+end_src
+
+   在 /popupMenu.js/ PopupMenuBase基类中toggle函数如下所示：
+#+begin_src javascript
+    toggle: function() {
+        if (this.isOpen)
+            this.close(true);
+        else
+            this.open(true);
+    },
+#+end_src
+   
+   这样，调用open函数show出菜单，那么菜单是什么组件?答案是BoxPointer, 也就是说status indicator 点击打开的菜单控件和messageTray上通知icon点击打开的messageInfo是一个组件，可以通过 *PopupMenu* 对象的"constructor"中得到证明。代码如下：
+#+begin_src javascript
+        this._boxPointer = new BoxPointer.BoxPointer(arrowSide,
+                                                     { x_fill: true,
+                                                       y_fill: true,
+                                                       x_align: St.Align.START });
+        this.actor = this._boxPointer.actor;
+
+#+end_src
+
+所以open函数的实现也就不难理解，关键代码如下：
+
+#+begin_src javascript
+        this._boxPointer.setPosition(this.sourceActor, this._arrowAlignment);
+        this._boxPointer.show(animate);
+#+end_src
+   
+   各种 *menuItem* 定义也在在 /popupMenu.js/ ,主要的类型如下表：
+
+
+
+| Name                     | description                                                                                                   |   |   |   |
+|--------------------------+---------------------------------------------------------------------------------------------------------------+---+---+---|
+| PopupBaseMenuItem        | MenuItem基类                                                                                                    |   |   |   |
+| PopupMenuItem            | 类似一个label,创建此对象会在popupMenu中创建一个label，如volume indicator的第一行“Volume"就是一个PopupMenuItem |   |   |   |
+| PopupSeparatorMenuItem   | menuItem之间的分割空间，用于UI美化                                                                            |   |   |   |
+| PopupAlternatingMenuItem | item label可选择，有DEFAULT/ALTERNATIVE两块label可供选择                                                                 |   |   |   |
+| PopupSliderMenuItem      | 离散划动控件，典型： 音量控制                                                                                 |   |   |   |
+| Switch                   | 二进制开关控件的基类                                                                                                    |   |   |   |
+| PopupSwitchMenuItem      | 二进制开关控件                                                                                                |   |   |   |
+| PopupImageMenuItem       |                                                                                                               |   |   |   |
+| PopupMenuBase            |                                                                                                               |   |   |   |
+| PopupMenu                |                                                                                                               |   |   |   |
+| PopupSubMenu             |                                                                                                               |   |   |   |
+| PopupMenuSection         |                                                                                                               |   |   |   |
+| PopupSubMenuMenuItem     |                                                                                                               |   |   |   |
+| PopupComboMenu           |                                                                                                               |   |   |   |
+| PopupComboBoxMenuItem    |                                                                                                               |   |   |   |
+| RemoteMenu               |                                                                                                               |   |   |   |
+| PopupMenuManager         |                                                                                                               |   |   |   |
+
+
+   /popupMenu.js/还定义了一个辅助function： /addSettingsAction/ 直接添加一个PopupMenuItem将之与对应app的desktop相关联。
+
+   对statusBar以及上面的控件的结构大致如此。
+
+  
