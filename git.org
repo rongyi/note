@@ -29,10 +29,30 @@
 | git config alias.cm commit | cm == commit                        |   |   |   |
 | git config alias.ls status | ls == status                        |   |   |   |
 | git ls-tree                | 对git object的察看                  |   |   |   |
-| git cat-file               | 察看某个git object              |   |   |   |
+| git cat-file               | 察看某个git object                  |   |   |   |
 | git log                    | 察看log                             |   |   |   |
 | git log -p                 | 仔细察看log，含有diff信息           |   |   |   |
 | git show                   | 察看修改内容                        |   |   |   |
 | git checkout -b            |                                     |   |   |   |
 | git checkout               |                                     |   |   |   |
 | git merge branchNamev      |                                     |   |   |   |
+| .git/refs/{heads,flags}    | 都可以用作reference                      |   |   |   |
+
+* 存储模型
+** 文件内容
+   文件内容保存的名称叫做blob，通过内容的SHA序列值来索引这个blob，也即blob中不含有文件名/文件属性。
+** 文件夹
+   git中用Tree来表示，文件名/文件夹名都保存在这里。
+   格式sample
+|  Mode | 类型 |   SHA | 文件名   |   |
+|-------+------+-------+----------+---|
+| 00644 | blob | 1905e | file.txt |   |
+
+** Commit Object
+   这是历史的来源。只是指向一个Tree。
+   格式sample
+| Author | Commiter | message | commits |   |
+|--------+----------+---------+---------+---|
+|        |          |         |         |   |
+
+
