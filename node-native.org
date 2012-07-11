@@ -266,8 +266,9 @@ extern "C" {
   对对象的模仿我也就看到这里，跟自己的应用没有多大兴趣。其实还有ObjectWrap可以继承。暂时没有用到，先点到这里，有需要的继续。
 
 * 异步
-  
-  
+  涉及到libuv
+  具体可以参见这个[[https://github.com/pquerna/node-extension-examples.git][repo]]的介绍，这里就不详述。
 
-
+* 从C++内部发signal
+  [[https://github.com/bnoordhuis/node-event-emitter.git][这个repo]]叙述的很详细，就不画蛇添足了。
   
