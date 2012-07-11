@@ -124,7 +124,7 @@ const STANDARD_STATUS_AREA_SHELL_IMPLEMENTATION = {
 #+begin_src javascript
 panel.startStatusArea();
 #+end_src
-
+    
 
 * panel menu button的实现
    /panelMenu.js/ 定义了panel menu button。其中先后定义了ButtonBox/Button/SystemStatusButton/三个对象,ButtonBox作为基类，Button继承ButtonBox，SystemStatusButton继承Button， /panel.js/ 中_rightBox添加的indicator都属于SystemStatusButton。
