@@ -13,6 +13,8 @@
 #+LINK_UP:   
 #+LINK_HOME: 
 #+XSLT:
+#+STYLE: <link rel="stylesheet" href="./include/css/worg.css" type="text/css" />
+#+STYLE: <link rel="stylesheet" href="./include/css/worg-classic.css" type="text/css" />
 
 * 简介
   Linus发明，发明的初衷是发现世面上没一个他满意的SCM软件，所以他决定造一个。

@@ -13,6 +13,8 @@
 #+LINK_UP:   
 #+LINK_HOME: 
 #+XSLT:
+#+STYLE: <link rel="stylesheet" href="./include/css/worg.css" type="text/css" />
+#+STYLE: <link rel="stylesheet" href="./include/css/worg-classic.css" type="text/css" />
 
 * 简介
   在这里搜索到的只有[[http://cnodejs.org/topic/4f3dc5e19605c56a4b05351f][这篇]] 文章，所以本篇文档的初衷是总结一下自己学习node native模块写法。希望能帮助到大家一些，省去一些搜索时间。

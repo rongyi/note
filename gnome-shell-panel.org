@@ -13,6 +13,8 @@
 #+LINK_UP:   
 #+LINK_HOME: 
 #+XSLT:
+#+STYLE: <link rel="stylesheet" href="./include/css/worg.css" type="text/css" />
+#+STYLE: <link rel="stylesheet" href="./include/css/worg-classic.css" type="text/css" />
 
 * Panel的组成
   panel上有三个组成部分：

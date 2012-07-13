@@ -12,6 +12,9 @@
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+LINK_UP:   
 #+LINK_HOME: 
+#+STYLE: <link rel="stylesheet" href="./include/css/worg.css" type="text/css" />
+#+STYLE: <link rel="stylesheet" href="./include/css/worg-classic.css" type="text/css" />
+
 
 * jwz
   看了《代码奔腾》中的他，才知道他后来开夜店是有理由的，很拉风。

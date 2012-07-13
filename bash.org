@@ -13,6 +13,9 @@
 #+LINK_UP:   
 #+LINK_HOME: 
 #+XSLT:
+#+STYLE: <link rel="stylesheet" href="./include/css/worg.css" type="text/css" />
+#+STYLE: <link rel="stylesheet" href="./include/css/worg-classic.css" type="text/css" />
+
 
 * 20%去对付80%的应用
 | 命令                                         | 说明                                           |   |   |   |

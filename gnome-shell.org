@@ -13,6 +13,9 @@
 #+LINK_UP:   
 #+LINK_HOME: 
 #+XSLT:
+#+STYLE: <link rel="stylesheet" href="./include/css/worg.css" type="text/css" />
+#+STYLE: <link rel="stylesheet" href="./include/css/worg-classic.css" type="text/css" />
+
 * Notification bubble出来位置的改动
   目标： 将fedora gnome-shell的notification通知由底部移动至顶部。
   #+begin_src bash

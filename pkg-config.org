@@ -12,6 +12,9 @@
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+LINK_UP:   
 #+LINK_HOME: 
+#+STYLE: <link rel="stylesheet" href="./include/css/worg.css" type="text/css" />
+#+STYLE: <link rel="stylesheet" href="./include/css/worg-classic.css" type="text/css" />
+
 
 * gcc默认对#include <file.h>的查询路径为：
   #+begin_src bash
