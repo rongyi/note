@@ -1,0 +1,36 @@
+#+TITLE:     index.org
+#+AUTHOR:    ry
+#+EMAIL:     ry@ry-desktop
+#+DATE:      2012-07-11 星期三
+#+DESCRIPTION: 
+#+KEYWORDS: 
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:{} -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:nil skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:   
+#+LINK_HOME: 
+#+STYLE: <link rel="stylesheet" href="./include/css/worg.css" type="text/css" />
+#+STYLE: <link rel="stylesheet" href="./include/css/worg-classic.css" type="text/css" />
+
+* [[./bash.org][BASH]]
+
+* [[./coders_at_work.org][《Coders at work》笔记]]
+
+* [[./debug-9-rule.org][debug 9 rule]]
+
+* [[./gcc.org][gcc]]
+
+* [[./git.org][git]]
+
+* [[./gnome-shell.org][gnome-shell]]
+
+* [[./gnome-shell-panel.org][gnome-shell panel]]
+
+* [[./node-native.org][node native]]
+
+* [[./vim.org][vim]]
+
+* [[./pkg-config.org][pkg-config]]
