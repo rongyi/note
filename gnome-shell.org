@@ -105,3 +105,17 @@
    发现expanded的notification还是在底下，跟踪发现还是走的 /_showNotification/ 函数，所以跟下去，最终确认在 /_onNotificationExpanded/ 函数中更改_notificationBin.y的坐标。继续测试, done!
    
    
+
+
+* 怎样将notification bubble 调整至屏幕左下角，右下角，
+  gnome-shell默认是出现在中间，hacking一段，找到结果，作如下修改可以实现。
+  #+begin_src javascript
+  messageTray.js中的MessageTray的初始化函数中有这么一句：
+  this._notificationBin = new St.Bin();
+  如若是想让其出现在左边，则修改成如下：
+  this._notificationBin = new St.Bin({x_align: St.Align.START});
+  出现在右下角？
+  this._notificationBin = new St.Bin({x_align: St.Align.END});
+
+  #+end_src
+
