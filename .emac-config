@@ -1,0 +1,21 @@
+(require 'org-publish)
+(setq org-publish-project-alist
+      '(
+        ("org-notes"
+         :base-directory "~/Documents/github/note"
+         :base-extension "org"
+         :publishing-directory "~/Documents/github/note/out"
+         :recursive t
+         :publishing-function org-publish-org-to-html
+         :headline-levels 4         
+         :auto-preamble t
+         )
+        ("org-static"
+         :base-directory "~/Documents/github/note"
+         :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|doc\\|xls\\|ppt\\|rar\\|tar.gz\\|tar\\|gz\\|zip\\|cpp\\|c\\|el"
+         :publishing-directory "~/Documents/github/note/out"
+         :recursive t
+         :publishing-function org-publish-attachment
+         )
+	 )
+) 
