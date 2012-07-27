@@ -75,3 +75,15 @@
 | $#                                           | 命令行参数的个数                               |   |   |   |
 | $@ / $*                                      | 命令行所有参数                                 |   |   |   |
 | & % $ # _ { } ~ ^ \                          | latex escape symbol |   |   |   |
+
+* gsetting在调试中的应用
+  gsetting是gconf的上层封装,遇到个nautilus国际化的问题,即要求桌面上显示的"Computer"/"Home"/"Trash"三个图表的name要与系统当前的语言一致.这个过程就用到gsetting了.debug的大致过程如下:
+
+  #+begin_src bash
+  gsettings list-schemas|grep nautilus # 找到org.gnome.nautilus.desktop这个setting name
+  gsettings  list-recursively org.gnome.nautilus.desktop #列出此setting中的所有选项以及选项当前的值
+  grep -rn computer-icon-name nautilus/ #在nautilus源码中搜寻一个关键字,找到相关代码文件,最终定位在./libnautilus-private/nautilus-global-preferences.h文件中
+  根据头文件的宏一路找去,最终是发现三个词没有国际化.
+  加上_()这个用来国际化的函数,重启发现只有Home实现了国际化,最终发现Home在setting中的name为空值,尝试将另外对应两项也设为空值看看,成功!
+   #+end_src
+
