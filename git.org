@@ -21,24 +21,27 @@
   最大的特点是分布式，和分支。
   
 * 最长用的命令记录
-| 命令                       | 做啥子                              |   |   |   |
-|----------------------------+-------------------------------------+---+---+---|
-| git init                   | 在当前文件夹下初始化一个repo        |   |   |   |
-| git add file.txt           | 将file.txt加入index中               |   |   |   |
-| git commit -m "log"        | 将index提交到记录中去，一次提交完成 |   |   |   |
-| git status                 | 察看work directory                  |   |   |   |
-| git config color.ui true   | 终端彩色输出                        |   |   |   |
-| git config alias.cm commit | cm == commit                        |   |   |   |
-| git config alias.ls status | ls == status                        |   |   |   |
-| git ls-tree                | 对git object的察看                  |   |   |   |
-| git cat-file               | 察看某个git object                  |   |   |   |
-| git log                    | 察看log                             |   |   |   |
-| git log -p                 | 仔细察看log，含有diff信息           |   |   |   |
-| git show                   | 察看修改内容                        |   |   |   |
-| git checkout -b            |                                     |   |   |   |
-| git checkout               |                                     |   |   |   |
-| git merge branchNamev      |                                     |   |   |   |
+| 命令                       | 做啥子                                   |   |   |   |
+|----------------------------+------------------------------------------+---+---+---|
+| git init                   | 在当前文件夹下初始化一个repo             |   |   |   |
+| git add file.txt           | 将file.txt加入index中                    |   |   |   |
+| git commit -m "log"        | 将index提交到记录中去，一次提交完成      |   |   |   |
+| git status                 | 察看work directory                       |   |   |   |
+| git config color.ui true   | 终端彩色输出                             |   |   |   |
+| git config alias.cm commit | cm == commit                             |   |   |   |
+| git config alias.ls status | ls == status                             |   |   |   |
+| git ls-tree                | 对git object的察看                       |   |   |   |
+| git cat-file               | 察看某个git object                       |   |   |   |
+| git log                    | 察看log                                  |   |   |   |
+| git log -p                 | 仔细察看log，含有diff信息                |   |   |   |
+| git show                   | 察看修改内容                             |   |   |   |
+| git checkout -b            |                                          |   |   |   |
+| git checkout               |                                          |   |   |   |
+| git merge branchNamev      |                                          |   |   |   |
 | .git/refs/{heads,flags}    | 都可以用作reference                      |   |   |   |
+| git diff                   | diff change since last git add or git rm |   |   |   |
+| git diff HEAD              | diff change since last commit            |   |   |   |
+| git log filename           | list change belong to a specific file    |   |   |   |
 
 * 存储模型
 ** 文件内容
