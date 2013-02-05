@@ -1,0 +1,90 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	line-height: 150%;
+	font-family: "Microsoft Yahei", "XHei", Arial, sans-serif;
+}
+body {
+	margin: auto;
+	width: 800px;
+}
+h1.title {
+	margin: 50px 0px 50px 0px;
+	padding: 10px;
+	text-align: center;
+	color: white;
+	letter-spacing: 0.1em;
+	font-size: 35px;
+	background-color: blue;
+	-moz-border-radius: 30px;
+	-webkit-border-radius: 30px;
+	border-radius: 30px;
+	border-width: medium;
+	text-shadow: 0.5px 0.5px 0.5px #eeeeee;
+}
+/*字体设置*/
+
+h2, h3, h4, h5, h6 {
+	margin: 10px 0px 10px 0px;
+}
+/*目录的设置*/
+
+#text-table-of-contents {
+	margin: 20px 20px 20px 20px;
+}
+li {
+
+	list-style-type: none;
+	margin: 2px 0px 2px 0px;
+	text-align: left;
+}
+ul li {
+	font-size: 14px;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+a:hover {
+	color: #2B1C7D;
+	text-decoration: underline;
+}
+a:link {
+	color: #0790C0;
+	text-decoration: none;
+}
+a:visited {
+	color: #FF80b0;
+	text-decoration: none;
+}
+pre.src, pre.example {
+	width: 800px;
+	margin: 10px 10px 10px 10px;
+	padding: 10px;
+	background-color: skyblue;
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 12px;
+/*	color: #002020;*/
+	color:midnightblue;
+	box-shadow: #333 3px 3px 4px;
+	-o-box-shadow: #333 3px 3px 4px;
+	-webkit-box-shadow: #333 3px 3px 4px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+/* 文本主体设置*/
+
+div#postamble {
+	margin: 20px 0px 20px 0px;
+	font-style: italic;
+	font-size: 11px;
+	font-family:"Courier New", Courier, monospace;
+}
+
+div.img {
+	display:table;
+}
+
+img {
+	max-width:800px;
+	vertical-align: middle;
+}

@@ -1,0 +1,123 @@
+body {
+    font-size: 10.5pt;
+    font-family : Bitstream Vera Sans, Lucida Sans, SimSun, 宋体, sans-serif;
+    color: black;
+    background : white;
+}
+.note, .warning, .caution, .important {
+    font-size: 14pt;
+    color: red;
+    background-color: #ffee40;
+}
+#tabBodyFrame {
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+#plus1 {
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+#tabBody {
+    margin-top: 3%;
+    margin-left: 3%;
+    margin-right: 3%;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 3%;
+    padding-bottom: 0;
+    border: 2pt solid #ffa500;
+    background : white;
+    text-align: justify;
+    display: block;
+    text-align: left;
+}
+#footer {
+    text-align: center;
+    margin-top: 9pt;
+}
+#vim_logo, #deplate_logo, #adsense1, #adsense2, #js51la, #rss {
+ display: inline-block;
+ margin: 2px;
+ vertical-align: middle;
+}
+a {
+    color: blue;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+    background-color: #ffe4c4;
+}
+code {
+    font-family : Bitstream Vera Sans Mono, Courier New, Courier, monospace;
+}
+.code {
+    font-family : Bitstream Vera Sans Mono, Courier New, Courier, monospace;
+    border: #777777 1px solid;
+    margin-left: 0em;
+    margin-right: 0em;
+    padding: 0em;
+    font-size: 9pt;
+    overflow: auto;
+}
+.verbatim {
+    font-size: 9pt;
+}
+h1 {
+    font-family : Arial, Bitstream Vera Sans, Lucida Sans, 黑体, sans-serif;
+    margin-top: 28pt;
+    margin-bottom: 21pt;
+    padding-bottom: 10pt;
+    font-size: 22pt;
+    border-bottom: 2px solid #ffa500;
+}
+h2 {
+    font-family : Arial, Bitstream Vera Sans, Lucida Sans, 黑体, sans-serif;
+    margin-top: 20pt;
+    margin-bottom: 15pt;
+    font-size: 16pt;
+    border-bottom: 1px solid #ffa500;
+}
+h3 {
+    font-family : Arial, Bitstream Vera Sans, Lucida Sans, 黑体, sans-serif;
+    margin-top: 16pt;
+    margin-bottom: 12pt;
+    font-size: 14pt;
+    border-bottom: 1px dashed #ffa500;
+}
+h4 {
+    font-family : Bitstream Vera Sans, Lucida Sans, SimSun, 宋体, sans-serif;
+    margin-top: 10pt;
+    margin-bottom: 10pt;
+    font-size: 12pt;
+}
+h5 {
+    font-family : Bitstream Vera Sans, Lucida Sans, SimSun, 宋体, sans-serif;
+    margin-top: 10pt;
+    margin-bottom: 5pt;
+    font-size: 12pt;
+}
+h6 {
+    font-family : Bitstream Vera Sans, Lucida Sans, SimSun, 宋体, sans-serif;
+    margin-top: 10pt;
+    font-size: 12pt;
+}
+li {
+    line-height: 150%;
+}
+p {
+    text-indent : 0em;
+    font-size: 10.5pt;
+    line-height: 150%;
+}
+img {
+    border: 0;
+}
+#tags {
+    font-size: 9pt;
+    font-family : Bitstream Vera Sans, Lucida Sans, SimSun, 宋体, sans-serif;
+    color: black;
+    text-align: right;
+    float: right;
+}
