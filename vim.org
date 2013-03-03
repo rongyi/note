@@ -14,8 +14,7 @@
 #+LINK_HOME: 
 #+XSLT:
 #+STYLE: <link rel="stylesheet" href="./include/css/worg.css" type="text/css" />
-#+STYLE: <link rel="stylesheet" href="./include/css/worg-classic.css" type="text/css" />
-
+#+STARTUP: showall
 
 * 简介
   设想这样一种场景，一个人才思泉涌，他打开某个编辑器，一气呵成，没有任何的删除与跳转，然后凭借这个杰作拿到诺贝尔，显然这样的人用Notepad/Emacs/Vim效果都是一样。（Vim还要慢一些，因为初始状态为Normal模式）所以，我想说的是软件有它的应用场景。Vim也不例外。Vim就是让你能够快速的进行移动/删除/替换等编辑行为。
