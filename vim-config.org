@@ -1,4 +1,4 @@
-#+TITLE:     Vim后Github时代配置
+#+TITLE:     Vim配置--基于Github
 #+AUTHOR:    荣怡
 #+EMAIL:     ry@ry-ThinkPad-T400
 #+DATE:      2013-03-03 Sun
@@ -17,4 +17,38 @@
 #+STARTUP: showall
 
 
-* 关于配置
+* 我需要的功能
+  + 括号补全
+  + 快速打开文件
+  + 代码自动补全
+  + 函数信息列表
+  
+
+* 配置过程
+  Github出现之后也有些基于Github的配置Vim配置好方法，大家比较常用的是[[https://github.com/tpope/vim-pathogen][vim-pathogen]] 以及[[https://github.com/windelicato/dotfiles][vundle]] ，它们的主要区别是在更新配置时不需要对配置文件作任何修改，而Vundle则需要，我选择的是前者。主页上都有安装方法此处略。
+
+  我需要的repo
+  #+BEGIN_SRC bash
+  git://github.com/mileszs/ack.vim.git
+git://github.com/vim-scripts/Auto-Pairs.git
+https://github.com/kien/ctrlp.vim.git
+git://github.com/vim-scripts/c.vim.git
+git://github.com/Valloric/ListToggle.git
+git://github.com/scrooloose/nerdtree
+git://github.com/Valloric/python-indent.git
+https://github.com/vim-scripts/restore_view.vim.git
+git://github.com/scrooloose/syntastic.git
+git://github.com/majutsushi/tagbar.git
+git://github.com/vim-scripts/taglist.vim.git
+git://github.com/tomtom/tcomment_vim.git
+git://github.com/Lokaltog/vim-easymotion.git
+git://github.com/tpope/vim-fugitive.git
+git://github.com/Valloric/vim-indent-guides.git
+git://github.com/Lokaltog/vim-powerline.git
+git://github.com/tpope/vim-sensible.git
+git://github.com/tpope/vim-surround.git
+git://github.com/Valloric/YouCompleteMe.git
+  #+END_SRC
+
+  
+  全部clone放 =./vim/bundle= 下即可，遵照各自的安装说明就好
