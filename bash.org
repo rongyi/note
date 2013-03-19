@@ -1,11 +1,11 @@
-#+TITLE:     bash.org
-#+AUTHOR:    ry
-#+EMAIL:     ry@ry-ThinkPad-T400
+#+TITLE:     Shell拾零
+#+AUTHOR:    荣怡
+#+EMAIL:     sqrongyi@163.com
 #+DATE:      2012-05-28 一
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
-#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:{} -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
@@ -15,66 +15,98 @@
 #+XSLT:
 #+STYLE: <link rel="stylesheet" href="./include/css/worg.css" type="text/css" />
 #+STYLE: <link rel="stylesheet" href="./include/css/worg-classic.css" type="text/css" />
-
+#+STARTUP: showall
 
 * 20%去对付80%的应用
-| 命令                                         | 说明                                           |   |   |   |
-|----------------------------------------------+------------------------------------------------+---+---+---|
-| ls                                           |                                                |   |   |   |
-| ls -l                                        |                                                |   |   |   |
-| ls -t                                        | 在凌乱的Download下最有用，按时间排序           |   |   |   |
-| pwd                                          |                                                |   |   |   |
-| rm                                           |                                                |   |   |   |
-| rm -rf                                       |                                                |   |   |   |
-| touch                                        |                                                |   |   |   |
-| mkdir                                        |                                                |   |   |   |
-| mkdir -p                                     |                                                |   |   |   |
-| cd                                           |                                                |   |   |   |
-| locate                                       |                                                |   |   |   |
-| rpm -ivh                                     |                                                |   |   |   |
-| rpm -e                                       |                                                |   |   |   |
-| rpm -qa                                      |                                                |   |   |   |
-| dpkg -i                                      |                                                |   |   |   |
-| apt-cache search                             |                                                |   |   |   |
-| yum install                                  |                                                |   |   |   |
-| rpmbuild -ba                                 |                                                |   |   |   |
-| rpmbuild -bp                                 |                                                |   |   |   |
-| top                                          |                                                |   |   |   |
-| ps aux                                       |                                                |   |   |   |
-| pgrep                                        |                                                |   |   |   |
-| pkill                                        |                                                |   |   |   |
-| kill                                         |                                                |   |   |   |
-| cat                                          |                                                |   |   |   |
-| less                                         |                                                |   |   |   |
-| more                                         |                                                |   |   |   |
-| cut                                          |                                                |   |   |   |
-| nl                                           |                                                |   |   |   |
-| grep                                         |                                                |   |   |   |
-| grep -i                                      |                                                |   |   |   |
-| grep -v                                      |                                                |   |   |   |
-| grep -H                                      |                                                |   |   |   |
-| grep -n                                      |                                                |   |   |   |
-| sed -e                                       |                                                |   |   |   |
-| sed 's/ab/cd/'                               |                                                |   |   |   |
-| awk -F '{print $0}'                          |                                                |   |   |   |
-| find . -name a -o -name b -exec rm -rf {} \; |                                                |   |   |   |
-| echo '{1..10}'                               |                                                |   |   |   |
-| seq 1 10                                     |                                                |   |   |   |
-| rm !$                                        |                                                |   |   |   |
-| df -h                                        |                                                |   |   |   |
-| du -sh                                       |                                                |   |   |   |
-| df -T                                        | 相应目录的挂载点                               |   |   |   |
-| wc -c -l                                     |                                                |   |   |   |
-| tr -d                                        |                                                |   |   |   |
-| tr 'a-z' 'A-Z'                               | 大小写改变                                     |   |   |   |
-| sort uniq                                    | 一对好兄弟                                     |   |   |   |
-| uniq -c                                      |                                                |   |   |   |
-| find ~ -type f -mtime 0                      | 连位置都记不得的时候，ls -lt也不行了，就用这个 |   |   |   |
-| awk 'NR%2==1'                                | 只输出奇数行                                   |   |   |   |
-| yum provide/rpm -qf                          | 查询软件/文件属于哪个包                        |   |   |   |
-| $#                                           | 命令行参数的个数                               |   |   |   |
-| $@ / $*                                      | 命令行所有参数                                 |   |   |   |
-| & % $ # _ { } ~ ^ \                          | latex escape symbol |   |   |   |
+    + =ls -l= :
+
+      detail information
+    + =ls -t= :
+
+      按时间排序，在凌乱的Download下最有效
+    + =apt-cache search= =apt-get source=:
+
+      Ubuntu(deb系)下载源码的好搭档
+    + =yum search= =yum-download --source=:
+
+      Fedora(rpm系)上下载源码的好搭档
+    + =rpmbuild -ba= =rpmbuild -bp=:
+
+      打包命令
+    + =top=
+
+      在 =top= 的输出中 =M= 按内存使用排序 =P= 按CPU使用排序
+    + =ps aux= =pgrep= =kill=
+
+      进程查看都靠这些了
+    + =cat=
+
+      - =-e= 参数将结尾符打印出来，对排查空格，代码洁癖者有疗效
+      - 新建临时文件， cat > newfile.txt ==> 输入内容 ==> <C-d>
+    + =less=
+
+    + =more=
+
+    + =cut=
+
+      =-d= =-f=
+    + =nl=
+
+    + =grep -i= =grep -v= =grep -H= =grep -n=
+
+    + =sed -e= =sed ='=s/ab/cd/='
+
+    + =awk -F '{print $0}='
+
+    + =find . -name a -o -name b -exec rm -rf {} \;= 
+
+    + =echo= '={1..10}='
+
+    + =seq 1 10=
+
+    + =rm !$=
+
+    + =df -h=
+
+    + =du -sh=
+
+    + =df -T=
+
+      显示fs类型
+    + =wc -c -l=
+
+    + =tr -d=
+
+      删除Windows换行可以用这个命令                                |
+    + =tr= '=a-z=' '=A-Z='
+
+      大小写改变                                     
+    + =sort uniq=
+
+      Shell中的好基友
+    + =uniq -c=
+
+    + =find ~ -type f -mtime 0=
+
+      连位置都记不得的时候，ls -lt也不行了，就用这个 
+    + =awk ='=NR%2==1='
+
+      只输出奇数行                                   
+    + =yum provide/rpm -qf=
+
+      (RPM系)查询软件/文件属于哪个包
+    + =dpkg-query -S /file/path=
+
+      (Debian系)查询某个文件输入哪个包，配合 =apt-get source=有奇效
+    + =$#=
+
+      命令行参数的个数                               
+    + =$@= =$*=
+
+      命令行所有参数                                 
+    + =& % $ # _ { } ~ ^ \=
+
+      latex escape symbol
 
 * gsetting在调试中的应用
   gsetting是gconf的上层封装,遇到个nautilus国际化的问题,即要求桌面上显示的"Computer"/"Home"/"Trash"三个图表的name要与系统当前的语言一致.这个过程就用到gsetting了.debug的大致过程如下:
@@ -85,5 +117,5 @@
   grep -rn computer-icon-name nautilus/ #在nautilus源码中搜寻一个关键字,找到相关代码文件,最终定位在./libnautilus-private/nautilus-global-preferences.h文件中
   根据头文件的宏一路找去,最终是发现三个词没有国际化.
   加上_()这个用来国际化的函数,重启发现只有Home实现了国际化,最终发现Home在setting中的name为空值,尝试将另外对应两项也设为空值看看,成功!
-   #+end_src
+  #+end_src
 
