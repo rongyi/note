@@ -1,11 +1,11 @@
-#+TITLE:     git.org
-#+AUTHOR:    ry
-#+EMAIL:     ry@ry-ThinkPad-T400
-#+DATE:      2012-05-28 一
+#+TITLE:     Git explain
+#+AUTHOR:    荣怡
+#+EMAIL:     sqrongyi@163.com
+#+DATE:      2013-02-05 Tue
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
-#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   H:3 num:nil toc:t \n:nil @:t ::t |:t ^:{} -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
@@ -13,51 +13,189 @@
 #+LINK_UP:   
 #+LINK_HOME: 
 #+XSLT:
-#+STYLE: <link rel="stylesheet" href="./include/css/worg.css" type="text/css" />
-#+STYLE: <link rel="stylesheet" href="./include/css/worg-classic.css" type="text/css" />
+#+STYLE: <link rel="stylesheet" type="text/css" href="./include/css/worg.css" />
+#+STARTUP: showall
 
-* 简介
-  Linus发明，发明的初衷是发现世面上没一个他满意的SCM软件，所以他决定造一个。
-  最大的特点是分布式，和分支。
+* Git简介
+
+* 历史
+  05年由Linux本人发明，伴随着Kernel的发展而产生。Kernel的头十年一直用 =diff/patch= 进行代码管控，后由商业公司BitMove赞助，将其公司产品BitKeeper供Kernel免费使用，后由于社区有人对BitKeeper进行逆向工程惹怒其母公司从而终止了BitKeeper对Kernel的授权。Linus因为不想回到 =diff/patch= 时代遂在当时寻找一种替代方案，他寻找的条件有两个：
+  + 分布(distributed)
+  + 可靠(reliable)
+
+  遗憾的是当时没有一款管控工具入他的法眼，于是，他写了一个，命名为Git。
+
+
+* Git设计原则
+  上述的筛选条件就是Git的设计原则：
+  + Distributed
+  + Reliable
+  + High Performance
   
-* 最长用的命令记录
-| 命令                       | 做啥子                                   |   |   |   |
-|----------------------------+------------------------------------------+---+---+---|
-| git init                   | 在当前文件夹下初始化一个repo             |   |   |   |
-| git add file.txt           | 将file.txt加入index中                    |   |   |   |
-| git commit -m "log"        | 将index提交到记录中去，一次提交完成      |   |   |   |
-| git status                 | 察看work directory                       |   |   |   |
-| git config color.ui true   | 终端彩色输出                             |   |   |   |
-| git config alias.cm commit | cm == commit                             |   |   |   |
-| git config alias.ls status | ls == status                             |   |   |   |
-| git ls-tree                | 对git object的察看                       |   |   |   |
-| git cat-file               | 察看某个git object                       |   |   |   |
-| git log                    | 察看log                                  |   |   |   |
-| git log -p                 | 仔细察看log，含有diff信息                |   |   |   |
-| git show                   | 察看修改内容                             |   |   |   |
-| git checkout -b            |                                          |   |   |   |
-| git checkout               |                                          |   |   |   |
-| git merge branchNamev      |                                          |   |   |   |
-| .git/refs/{heads,flags}    | 都可以用作reference                      |   |   |   |
-| git diff                   | diff change since last git add or git rm |   |   |   |
-| git diff HEAD              | diff change since last commit            |   |   |   |
-| git log filename           | list change belong to a specific file    |   |   |   |
+  Linux在Google的Tech Talk上讲Git时提到：
+  #+BEGIN_QUOTE
+  If you are not distributed, you are not woth using
 
-* 存储模型
-** 文件内容
-   文件内容保存的名称叫做blob，通过内容的SHA序列值来索引这个blob，也即blob中不含有文件名/文件属性。
-** 文件夹
-   git中用Tree来表示，文件名/文件夹名都保存在这里。
-   格式sample
-|  Mode | 类型 |   SHA | 文件名   |   |
-|-------+------+-------+----------+---|
-| 00644 | blob | 1905e | file.txt |   |
+  -- Linus
+  #+END_QUOTE
 
-** Commit Object
-   这是历史的来源。只是指向一个Tree。
-   格式sample
-| Author | Commiter | message | commits |   |
-|--------+----------+---------+---------+---|
-|        |          |         |         |   |
+  可见他把分布式看得有多重，因为要支持Kernel开发所以必须要支持可以在offline仍然可以开发并且在联网时可以方便提交的一种机制，而且在传输过程中保证数据的完整性，在这两个前提下保证对版本操作的高速。
+
+* 内部实现
+  以本人学习Git的经验在了解Git内部数据存储模型后会更好的掌握上层的操作命令。
+  
+  需要说明以下几个基本概念：
+  + repository
+    
+    一个版本信息的集合，往往对应于一个project
+  + Git directory
+    
+    Git用来保存内部数据的文件夹，一般为 =.git= 文件夹
+  + Working directory
+    
+    工作目录，一个工程所在的目录，一般指 =.git= 文件夹同级的位置。
+
+    
+  Git的数据类型有：
+  + blob
+  + tree
+  + tag
+  + commit
+
+  需要记住两个大前提：
+  1. Git Never see files, only the content.
+  2. No Delta
+
+** Content 保存
+  Git管控的最小基本单位是blob，而这个最小单位 *不包括* 文件名信息，仅仅与文件内容相关，也即如果有多份文件，而每份文件的内容都相同，这份内容在Git内部仅被保存一次。文件名保存在文件所在目录信息里。目录对应Git的存储结构是tree，如果你熟悉 =ext fs= 的话，对这样的说明一定不陌生。
+  
+  那怎么保证reliable？Git从最基本的文件做起，它保存文件内容的步骤：
+
+  以被保存的文件内容为输入生成SHA1序列，一次SHA1序列为key将内容通过zlib压缩后作为此key的value保存，映射到文件系统中就是以key作为文件名，value写入此文件中，具体实现对40位的前两位建文件夹后38位建文件(在前两位的文件夹中)，将内容写入这38位的文件中。
+     
+     
+  SHA1计算的具体实现：
+  可以在Git源码中 =sha1_file.c:write_sha1_file_prepare= 中找到具体计算的过程。之前有讲过只跟文件内容相关，但不全是文件内容，详细的计算输入是：
+  #+BEGIN_SRC bash
+  |类型String|空格|文件内容长度|\0|文件内容|
+  #+END_SRC
+  
+  这里有个问题：为什么要区分类型？如果只有一种类型不是更简洁更优雅吗？问题的答案在理解一下介绍的存储模型就清楚了。
+
+** 存储模型
+   Git保存的是snapshot而不是delta，这样的好处是不必关心中间的任何状态。以svn为例，从revision 1234 到2345的diff操作需要从1234到2345的所有delta patch过来然后通过网络传输过来，对于Git而言每次提交都完整保存stage中的状态，提交与提交之前有联系通过这个联系穿梭与版本之间。
+   
+   举个示例：
+   #+BEGIN_SRC bash
+   mkdir demo && cd demo && git init
+   echo "Amour" > demo.txt
+   git add .
+   git commit -m "just a demo"
+   #+END_SRC
+   上命令就完成了第一次提交，执行下列命令查看输出：
+   #+BEGIN_SRC bash
+   find .git/objects/ -type f |sort
+   .git/objects/71/688ac8b8587aaf8818dc0c55d62e22e75b22ef
+   .git/objects/c5/df312b024f98725ca13e4135225c640c67da24
+   .git/objects/cd/6f44469f436230a1b6285b7b545d0738386ae6
+
+   git cat-file -t 7168
+   tree
+   git cat-file -t c5df
+   commit
+   git cat-file -t cd6f
+   blob
+
+   git cat-file -p  7168
+   100644 blob cd6f44469f436230a1b6285b7b545d0738386ae6	demo.txt
+   
+   git cat-file -p  c5df
+   tree 71688ac8b8587aaf8818dc0c55d62e22e75b22ef
+   author rongyi <yi.rong@yamutech.com> 1360044012 +0800
+   committer rongyi <yi.rong@yamutech.com> 1360044012 +0800
+
+   just a demo
+   
+   git cat-file -p  cd6f
+   Amour
+
+   #+END_SRC
+
+   可以看见提交过程中的一些信息都保存在了Git object中。而各object之间的联系可以通过下图来描述。
+
+   [[./include/images/git_first.png]]
+   
+   第二此提交些内容：
+   #+BEGIN_SRC bash
+   echo "new year" > 2013.txt
+   git add 2013.txt
+   git commit -m "happy new year"
+   
+   #+END_SRC
+   存储模型如下：
+   
+   [[./include/images/git_second.png]]
+
+   这张图解释了为什么之前Git要分类型的问题，因为Git内部的存储模型为单向无环图(Directed Acyclic Graph)，分类型的原因即在于要维系好这个模型！如果在计算SHA1序列的过程中 *仅仅* 依赖文件内容的话，那从理论上可以构造出任意和tree，commit等SHA1序列一样的序列，这样这个模型一旦存有环就跨掉了。所以Git内部在计算SHA1序列时会在头部硬塞些内容来保正从用户的输入永远都不可能构造出存在环的情况，保重了Git的reliable。可以理解为我们在使用Git时永远都处于Git的用户态。
+
+
+* 快速上手
+
+** 标记自己
+   #+BEGIN_SRC bash
+   git config --global user.name "大名"
+   git config --global user.email "邮箱"
+   git config --global color.ui true
+   git config --global alias.ls status
+   git config --global merge.tool meld
+   git config --global core.editor vim
+
+   #+END_SRC
+
+** 搞到repo
+   自己造？
+   #+BEGIN_SRC bash
+   git init || git init --bare
+   #+END_SRC
+   
+   别人的？
+   #+BEGIN_SRC bash
+   git clone git@github.com/someone/somerepo.git
+   #+END_SRC
+
+   
+** 修改/提交
+   #+BEGIN_SRC bash
+   git add file.txt
+   git commit -m "fix XXX"
+
+   #+END_SRC
+
+** 显示日志
+   #+BEGIN_SRC bash
+   git log -1
+   git log -p
+   git log -1 -p
+   git show HEAD
+   git show HEAD~1
+   git log --grep="keystring" #查询某次提交含有"keystring"的log
+   git blame file.txt #same as svn blame
+   #+END_SRC
+
+** 分支相关
+   分支在Git里是强烈推荐使用的，一般书上对Git中的分支都有两个字形容： *extreamly lightweight* ，本质就是在 =refs/heads= 中添加个文件，然后文件内容写上某次提交的SHA1序列。
+   
+   #+BEGIN_SRC bash
+   git branch newbranch
+   git checkout -b newbranch
+   git checkout newbranch
+   #make change and commit
+   git checkout develop
+   git merge --no-ff newbranch
+   
+   #+END_SRC
+
+* Git带来的开发模型
+  [[http://nvie.com/posts/a-successful-git-branching-model/][这里]]介绍的很详细，不赘述。
 
 
