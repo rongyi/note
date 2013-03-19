@@ -107,6 +107,15 @@
     + =& % $ # _ { } ~ ^ \=
 
       latex escape symbol
+    + check 64 cpu?
+      
+      =cat /proc/cpuinfo |grep lm=
+    
+    + check OS 32 or 64?
+      
+      =uname -a=
+    
+    
 
 * gsetting在调试中的应用
   gsetting是gconf的上层封装,遇到个nautilus国际化的问题,即要求桌面上显示的"Computer"/"Home"/"Trash"三个图表的name要与系统当前的语言一致.这个过程就用到gsetting了.debug的大致过程如下:
