@@ -1,0 +1,150 @@
+#+TITLE:     tcpdump使用及源码小觑
+#+AUTHOR:    荣怡
+#+EMAIL:     sqrongyi@163.com
+#+DATE:      2013-03-19 Tue
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:   
+#+LINK_HOME: 
+#+XSLT:
+#+STYLE: <link rel="stylesheet" type="text/css" href="./include/css/worg.css" />
+#+STARTUP: showall
+
+* 简介
+  =tcpdump= 可谓是网络编程中必不可少的debug工具。本文简单介绍自己对 =tcpdump= 的使用以及源码。看了源码才知道原来 =libpcap= 才是 =tcpdump= 背后的大英雄。
+
+
+* 常用选项
+
+  + =-D=
+    
+    list本地所有接口，接口前的index可以作为 =-i= 参数
+  + =i= 
+
+    指定监听接口， =any= 为本地所有接口
+
+  + =-n=
+
+    不要转换IP地址为hostname
+
+  + =-nn=
+    
+    对hostname和端口号都不要去转换
+
+  + =-X=
+
+    将包的内容输出，左边二进制，右边ASCII
+
+  + =-c=
+
+    总共抓这么多packet
+
+  + =-v -vv -vvv=
+
+    详细信息
+
+* 常见用例
+
+  #+BEGIN_SRC bash
+  tcpdump udp
+  tcpdump tcp
+  tcpdump udp and port 53
+  tcpdump udp and src 192.168.1.1
+  tcpdump udp and host 192.168.1.1
+  tcpdump udp and dst 192.168.1.1
+  tcpdump udp and dst port 53
+
+  tcpdump portrange 53-54
+  tcpdump less 32 #包小于32字节的
+  tcpdump greater 128 #包大于128字节的
+
+  tcpdump -w a.pcap #保存到文件，这个文件随后可以用支持pcap包格式的软件打开，如wireshark
+
+  tcpdump -r a.pcap #自己抓的自己打开，自己比较少用。
+  #+END_SRC
+
+
+  个人平时用的就这么多了，高级用法[[http://danielmiessler.com/study/tcpdump/][这里]] 有详细使用样例，可以参考。
+
+* 背后的大英雄： =libpcap=
+
+  看源码的过程中对 =libpcap= 基本api有些了解。大致说明如下：
+
+** 创建 =pcap_t= 描述符
+   类似于文件句柄，抓包的第一步就要要创建这个类型的描述符，有两种创建方法：
+   + online： =pcap_open_live=
+   + offline： 忘记了，可以通过 =tcpdump -r= 参数查看
+
+** 应用过滤规则
+   仅提供规则描述，由 =pcap_compile= API来编译这个规则获得内部规则的句柄，然后将此句柄应用到之前创建的 =pcap_t= 描述符上。你提供给 =tcpdump= 的过滤条件就是这样被应用到过滤过程中的。上两个步骤的一个样例代码可以如下：
+
+   #+BEGIN_SRC c
+   static pcap_t *pd;
+   pd = pcap_open_live(device, total_count, 0, 0, ebuf);
+   struct bpf_program filter;
+   /* filter_str like "udp and port 53" */
+   pcap_compile(pd, &filter, filter_str, 1, 0); 
+   pcap_setfilter(pd, &filter);
+
+   #+END_SRC
+
+** callback的提供
+   在进入抓包循环主体之前需要定义好回调函数，即告诉 =libpcap= 包来了该怎么办，怎么去处理。
+
+   这里一般的pattern是定义一个全局的回调函数指针，在针对用于不同的输入，在处理过程中将这个全局函数指针指到某具体的回调函数，以实现某种程度的动态性。
+
+   =tcpdump= 中保存到文件以及输出到终端两个选择的callback指定如下代码：
+
+   #+BEGIN_SRC c
+   pcap_handler callback;
+   /* stdout */
+   callback = print_packet;
+
+   /* write to file */
+   callback = dump_packet;
+   pcap_userdata = (u_char *)p;//callback携带的参数下文会讲到
+
+   #+END_SRC
+   具体 =print_packet= 以及 =dump_packet= 如何实现不妨一窥源码。
+
+** 进入主循环
+
+   #+BEGIN_SRC c
+   pcap_loop(pd, total_count, handle_pcap, (u_char *)dumper);
+
+   #+END_SRC
+   上节中的callback携带的参数就是这个loop接口的最后一个参数传进去。
+
+
+** 保存到文件的接口
+
+   #+BEGIN_SRC c
+   pcap_dumper_t *dumper = NULL;
+   dumper = pcap_dump_open(pd, out_file);
+   /* 这里user_data就是loop接口传递进去的dumper */
+   pcap_dump(user_data, pkthdr, packet);
+   pcap_dump_flush((pcap_dumper_t *)user_data);
+
+   #+END_SRC
+
+
+** pcap格式
+
+   一个pcap包的格式，以一个dns请求报文为例，抓到的数据报文格式如下：
+                                            
+   #+BEGIN_SRC bash
+    +--------+-----------+---------+-------+-------------+
+    |pcap hdr|  ether hdr|ipv4     |udp    |dns request  |
+    |        |           |         |       |             |
+    +--------+-----------+---------+-------+-------------+
+   #+END_SRC                               
+   
+   所需要做的是就是一层一层的剥掉，按自己的抓包需要进一步过滤。
+
+
