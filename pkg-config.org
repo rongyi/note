@@ -12,8 +12,9 @@
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+LINK_UP:   
 #+LINK_HOME: 
-#+STYLE: <link rel="stylesheet" href="./include/css/worg.css" type="text/css" />
-#+STYLE: <link rel="stylesheet" href="./include/css/worg-classic.css" type="text/css" />
+#+STYLE: <link rel="stylesheet" type="text/css" href="./include/css/worg.css" />
+#+STARTUP: showall
+
 
 
 * gcc默认对#include <file.h>的查询路径为：
@@ -44,7 +45,7 @@
   #+end_src
 
 * pkg-config工作原理
-  这个命令会在 /usr/lib/pkgconfig, /usr/share/pkgconfig, /usr/local/lib/pkgconfig and  /usr/local/share/pkg‐config这几个地方搜索.pc文件，pc文件里面包含了这个lib的位置信息，所以没什么神秘的，一切都是一层套一层，最后在开源软件发布的时候，不出意外你都会在源码目录看见.pc文件。注意的是，如果你安装软件的位置比较特殊，你需要指定PKG_CONFIG_PATH变量。比如
+  这个命令会在 =/usr/lib/pkgconfig= , =/usr/share/pkgconfig= , =/usr/local/lib/pkgconfig= and  =/usr/local/share/pkg‐config= 这几个地方搜索.pc文件，pc文件里面包含了这个lib的位置信息，所以没什么神秘的，一切都是一层套一层，最后在开源软件发布的时候，不出意外你都会在源码目录看见.pc文件。注意的是，如果你安装软件的位置比较特殊，你需要指定PKG_CONFIG_PATH变量。比如
   #+begin_src bash
   PKG_CONFIG_PATH=$PKG_CONFIG_PATH:~/pkgconfig
   #+end_src
