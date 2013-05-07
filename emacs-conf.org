@@ -1,0 +1,6 @@
+
+* daemon模式启动下的字体配置
+  #+BEGIN_SRC bash
+  echo "Emacs.font: Consolas-12" >> ~/.Xdefaults
+  xrdb -merge ~/.Xdefaults
+  #+END_SRC
