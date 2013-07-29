@@ -1,0 +1,106 @@
+#+TITLE: libpcap源码分析
+#+DATE: <2013-07-26 Fri>
+#+AUTHOR: 荣怡
+#+EMAIL: yi.rong@yamutech.com
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:{} arch:headline
+#+OPTIONS: author:t c:nil creator:comment d:(not LOGBOOK) date:t e:t
+#+OPTIONS: email:nil f:t inline:t num:t p:nil pri:nil stat:t tags:t
+#+OPTIONS: tasks:t tex:t timestamp:t toc:t todo:t |:t
+#+CREATOR: Emacs 24.3.1 (Org mode N/A)
+#+DESCRIPTION:
+#+EXCLUDE_TAGS: noexport
+#+KEYWORDS:
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+
+
+* 简介
+  =libpcap= 是抓包不可或缺的一个跨平台库，本篇文档试图剖析 =libpcap=  Linux平台上核心API的实现细节。
+
+  使用 =libpcap= 的主要步骤如下：
+
+  1. 找到(或直接指定)接口(find)
+  2. 打开此接口(setup)
+  3. 启动，开始(start)
+
+  关注的主要问题有：
+  + 硬件设备的发现
+  + 网络数据的获取
+  + 包格式
+  + filter的设置机制
+
+
+
+* 硬件设备的发现
+  主要通过这个接口实现：
+
+  #+BEGIN_SRC bash
+  pcap_if_t *pcap_findalldevs()
+  #+END_SRC
+
+  内部的实现细节是通过调用 =getifaddrs= C API来获得本地网卡地址信息，由于一块网卡可能含多个地址，所以在处理时有趣考虑这样的情况。可以查看 =pcap_findalldevs= 接口调用的static函数 =add_or_find_if= 了解具体实现细节。
+
+  接口的返回值指针类型是这样的一个结构体：
+
+  #+BEGIN_SRC bash
+  struct pcap_if {
+    struct pcap_if *next; # 通过next来将系统所有网络设备串在单链表上。
+    char *name;
+    char *description;
+    struct pcap_addr *addresses;
+    bpf_u_int32 flags;
+  }
+  #+END_SRC
+
+  主要是在地址之上再包装些描述信息。 =addresses= 的类型定义如下：
+
+  #+BEGIN_SRC bash
+  struct pcap_addr {
+    struct pcap_addr *next;
+    struct sockaddr *addr;
+    struct sockaddr *netmask;
+    struct sockaddr *broadaddr;
+    struct sockaddr *dstaddr;
+  }
+  #+END_SRC
+
+  =tcpdump= 的实现中当不指定网卡时调用libpcap的 =pcap_lookdev= 接口，此接口就是获得 =pcap_findalldevs= 返回的单链表第一个设备的name属性。
+
+
+
+* 打开接口
+
+  此接口名称: =pcap_open_live= 此函数的调用栈如下:
+
+  #+BEGIN_SRC bash
+  .
+  └── pcap_open_live
+    ├── pcap_create
+    │   └── pcapp_create_common
+    ├── pcap_set_snaplen
+    ├── pcap_set_promisc
+    └── pcap_set_timeout
+    ├── pcap_activate
+  #+END_SRC
+
+** =pcap_create=
+
+   此函数主要是初始化 =pcap_t= 核心结构体。完成的主要任务有：
+
+   1. 分配 =pcap_t= 结构体内存
+   2. 对结构体中的 *平台无关* 属性采用默认值设置
+   3. 对结构体中的 *平台相关* 属性（主要是一些以 =_op= 字样结尾）指定默认一个无任何操作的函数。这一过程可以在其调用的static函数 =initialize_op= 可以体现。
+   4. 指定平台相关的初始化函数入口，比如Linux平台上指定active操作的函数为 =pcap_activate_linux=
+
+** =pcap_activate=
+
+   此函数主要是绑定raw socket来实现抓取数据。
+
+   实现的步骤如下：
+   1. socket()
+   2. setsocketopt()
+   3. mmap()
+
+   这个过程代码看的懂，但是与kernel深度耦合，不理解kernel里面 =TPACKET_V2= 等实现完全白搭，所以至此，代码跟踪开展不下去了，给跪了，了解kernel 网络部分！！
+      
+  
