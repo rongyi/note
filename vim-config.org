@@ -1,33 +1,60 @@
-#+TITLE:     Vim配置--基于Github
-#+AUTHOR:    荣怡
-#+EMAIL:     ry@ry-ThinkPad-T400
-#+DATE:      2013-03-03 Sun
+#+TITLE: 个人Vim配置过程说明
+#+DATE: <2013-08-01 Thu>
+#+AUTHOR: 荣怡
+#+EMAIL: sqrongyi@163.com
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:{} arch:headline
+#+OPTIONS: author:t c:nil creator:comment d:(not LOGBOOK) date:t e:t
+#+OPTIONS: email:nil f:t inline:t num:t p:nil pri:nil stat:t tags:t
+#+OPTIONS: tasks:t tex:t timestamp:t toc:t todo:t |:t
+#+CREATOR: Emacs 24.3.1 (Org mode N/A)
 #+DESCRIPTION:
+#+EXCLUDE_TAGS: noexport
 #+KEYWORDS:
-#+LANGUAGE:  en
-#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
-#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
-#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
-#+EXPORT_SELECT_TAGS: export
-#+EXPORT_EXCLUDE_TAGS: noexport
-#+LINK_UP:   
-#+LINK_HOME: 
-#+XSLT:
-#+STYLE: <link rel="stylesheet" href="./include/css/worg.css" type="text/css" />
-#+STARTUP: showall
+#+LANGUAGE: en
+#+SELECT_TAGS: export
 
 
-* 我需要的功能
-  + 括号补全
-  + 快速打开文件
-  + 代码自动补全
-  + 函数信息列表
   
 
 * 配置过程
-  Github出现之后也有些基于Github的配置Vim配置好方法，大家比较常用的是[[https://github.com/tpope/vim-pathogen][vim-pathogen]] 以及[[https://github.com/windelicato/dotfiles][vundle]] ，它们的主要区别是在更新配置时不需要对配置文件作任何修改，而Vundle则需要，我选择的是前者。主页上都有安装方法此处略。
+  之前配置Vim一般会有个 =~/.vim= 文件夹来存放各种插件。然后手动拷贝，比较麻烦。后来有Vim版的tarball然后直接打开Vim执行个命令就可以安装插件， =git= 出现之后开发模式变了，Vim配置方面也有点变化，出现了基于 =Git= 的插件配置方法。主要是基于这两个插件[[https://github.com/tpope/vim-pathogen][vim-pathogen]] 以及[[https://github.com/windelicato/dotfiles][vundle]] ，它们的主要区别是 =vim-pathogen= 在安装/卸载新插件时只是自己手动的去 =git clone= 以及手动删除对应插件的文件夹 ，而 =vundle= 则需要修改 =.vimrc= 文件，我选择的是基于 =vim-pathogen= 的Vim配置。因为 *最终* 发现 =vim-pathogen= 要更为方便一些。下文详细叙述 *基于vim-pathogen* 的各插件安装过程以及插件的说明。
 
-  我需要的repo
+  
+* vim-pathogen
+
+  首先备份你的 =.vimrc= 以及 =.vim/= 文件。
+  执行下列命令：
+  #+BEGIN_SRC bash
+  # create nessary dir
+  mkdir -p .vim/{autoload,bundle}
+  # get vim-pathogen
+  git clone https://github.com/tpope/vim-pathogen.git /tmp/vim-pathogen
+  # copy pathogen.vim to vim autoload dir
+  cp /tmp/vim-pathogen/autoload/pathogen.vim ~/.vim/autoload
+  #+END_SRC
+
+  然后修改 =.vimrc= 文件添加以下内容到配置文件顶部:
+
+  #+BEGIN_SRC bash
+  execute pathogen#infect()
+  syntax on
+  filetype plugin indent on
+  #+END_SRC
+
+  至此管理插件的插件 =vim-pathogen= 安装成功。
+  后续插件的安装大部分只是简单的 =git clone= 到 =.vim/bundle= 文件夹即可。
+
+
+
+* [[https://github.com/Valloric/YouCompleteMe][YouCompleteMe]]
+  插件功效： 代码补全
+  有用过Eclipse开发C一段时间因为Vim的补全实在令人沮丧，所以折衷的方案是在Eclipse里安装Vim插件。后来发现这款插件，我又回来了。
+  我无法掩盖我对这款插件的推崇，所以我把它放在第一位来讲。
+
+  因为YCM需要较高版本vim的支持，所以最好编译安装最新版本的vim这在官方的wiki里有详细的安装说明。
+
+  
+  
   #+BEGIN_SRC bash
     https://github.com/mileszs/ack.vim.git
     https://github.com/vim-scripts/Auto-Pairs.git
@@ -57,3 +84,4 @@
 
   
   全部clone放 =./vim/bundle= 下即可，遵照各自的安装说明就好
+  
