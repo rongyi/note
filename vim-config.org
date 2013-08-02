@@ -52,8 +52,13 @@
   我无法掩盖我对这款插件的推崇，所以我把它放在第一位来讲。
 
   因为YCM需要较高版本vim的支持，所以最好编译安装最新版本的vim这在官方的wiki里有详细的安装说明。
+  编译新版本Vim在[[https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source][官方wiki]] 有详细的说明，其首页有详细的安装步骤，这里不赘述。
 
-  
+* [[https://github.com/chriskempson/tomorrow-theme][Tomorrow Theme]]
+  插件功效: 主题配色
+
+  之前一直用desert主题，后来厌倦了，换了这个Tomorrow主题，用的是其中白色的一款，后来对这个主题也小小的疲倦了，换其他的主题，失败了，因为换不过去了！真心觉得赏心悦目。主题的安装和其他的插件有些不同，直接放在 =.vim/colors= 文件夹里即可。
+
   
   #+BEGIN_SRC bash
     https://github.com/mileszs/ack.vim.git
