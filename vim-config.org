@@ -53,12 +53,17 @@
 
   因为YCM需要较高版本vim的支持，所以最好编译安装最新版本的vim这在官方的wiki里有详细的安装说明。
   编译新版本Vim在[[https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source][官方wiki]] 有详细的说明，其首页有详细的安装步骤，这里不赘述。
+  怎样编译YCM也在官方有详细说明，同样不赘述。
 
 * [[https://github.com/chriskempson/tomorrow-theme][Tomorrow Theme]]
   插件功效: 主题配色
 
   之前一直用desert主题，后来厌倦了，换了这个Tomorrow主题，用的是其中白色的一款，后来对这个主题也小小的疲倦了，换其他的主题，失败了，因为换不过去了！真心觉得赏心悦目。主题的安装和其他的插件有些不同，直接放在 =.vim/colors= 文件夹里即可。
 
+* CtrlP
+  插件功效: buffer管理
+
+  用过Emacs知道emacs的mini buffer功能配配合ido插件可以将创建文件和打开文件等行为耍的风声水起。CtrlP在我看来就类似Emacs的mini buffer。有了它buffer的管理从此变得轻松自在。
   
   #+BEGIN_SRC bash
     https://github.com/mileszs/ack.vim.git
