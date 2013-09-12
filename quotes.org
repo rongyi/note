@@ -1,0 +1,25 @@
+* 计算机方面的名言警句
+  #+BEGIN_QUOTE
+  Any fool can write code that a computer can u nderstand. Good programmer write code that humans can understand.
+  -- Martin Fowler
+  #+END_QUOTE
+
+  #+BEGIN_QUOTE
+  You think you know when you learn, are more sure when  you can write, even more when you can teach, but certain when you can program.
+  -- Alan Perlis(Yale University computer scientist)
+  #+END_QUOTE
+
+  #+BEGIN_QUOTE
+  Make it run, make it right, make it fast
+  --Butler Lampson
+  #+END_QUOTE
+
+  #+BEGIN_QUOTE
+  The best writing is rewriting
+  --E. B. White
+  #+END_QUOTE
+
+  #+BEGIN_QUOTE
+  Programs must be written for people to read, and only incidentally for machines to execute.
+  -- Abelson & Sussman, SICP, preface to the first edition
+  #+END_QUOTE
