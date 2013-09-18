@@ -12,6 +12,8 @@
 #+KEYWORDS:
 #+LANGUAGE: en
 #+SELECT_TAGS: export
+#+STYLE: <link rel="stylesheet" type="text/css" href="./include/css/worg.css" />
+#+STARTUP: showall
 
 
 
