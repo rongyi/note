@@ -1,20 +1,20 @@
-#+TITLE: 个人Vim配置过程说明
-#+DATE: <2013-09-18 Wed>
-#+AUTHOR: 荣怡
-#+EMAIL: sqrongyi@163.com
-#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:{} arch:headline
-#+OPTIONS: author:t c:nil creator:comment d:(not LOGBOOK) date:t e:t
-#+OPTIONS: email:nil f:t inline:t num:t p:nil pri:nil stat:t tags:t
-#+OPTIONS: tasks:t tex:t timestamp:t toc:t todo:t |:t
-#+CREATOR: Emacs 24.3.1 (Org mode N/A)
+#+TITLE:     vim简介
+#+AUTHOR:    ry
+#+EMAIL:     ry@localhost.localdomain
+#+DATE:      2012-05-25 Fri
 #+DESCRIPTION:
-#+EXCLUDE_TAGS: noexport
 #+KEYWORDS:
-#+LANGUAGE: en
-#+SELECT_TAGS: export
-#+STYLE: <link rel="stylesheet" type="text/css" href="./include/css/worg.css" />
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t 
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:   
+#+LINK_HOME: 
+#+XSLT:
+#+STYLE: <link rel="stylesheet" href="./include/css/worg.css" type="text/css" />
 #+STARTUP: showall
-
 
 
   
