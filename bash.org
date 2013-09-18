@@ -114,7 +114,10 @@
     + check OS 32 or 64?
       
       =uname -a=
-    
+
+    + 查看ascii码表
+
+      =man ascii=
     
 
 * gsetting在调试中的应用
