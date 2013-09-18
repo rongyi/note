@@ -1,6 +1,6 @@
 #+TITLE:     gnome-shell 调试总结
-#+AUTHOR:    fedora
-#+EMAIL:     fedora@localhost.localdomain
+#+AUTHOR:    荣怡
+#+EMAIL:     sqrongyi@163.com
 #+DATE:      2012-06-26 Tue
 #+DESCRIPTION:
 #+KEYWORDS:
@@ -10,8 +10,8 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+LINK_UP:   
-#+LINK_HOME: 
+#+LINK_UP:
+#+LINK_HOME:
 #+XSLT:
 #+STYLE: <link rel="stylesheet" href="./include/css/worg.css" type="text/css" />
 #+STYLE: <link rel="stylesheet" href="./include/css/worg-classic.css" type="text/css" />
@@ -98,13 +98,13 @@
    相关函数： _showNotification / this._updateShowingNotification
    #+begin_src bash
    if (!this._notification.expanded)
-       tweenParams.y = -(Main.laffyoutManager.primaryMonitor.height - Main.panel.actor.height * 2 - 10); 
+       tweenParams.y = -(Main.laffyoutManager.primaryMonitor.height - Main.panel.actor.height * 2 - 10);
    #+end_src
    改变动画的目标坐标， 将坐标设在屏幕上方。
 ** 测试
    发现expanded的notification还是在底下，跟踪发现还是走的 /_showNotification/ 函数，所以跟下去，最终确认在 /_onNotificationExpanded/ 函数中更改_notificationBin.y的坐标。继续测试, done!
-   
-   
+
+
 
 
 * 怎样将notification bubble 调整至屏幕左下角，右下角，
@@ -118,4 +118,3 @@
   this._notificationBin = new St.Bin({x_align: St.Align.END});
 
   #+end_src
-
