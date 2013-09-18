@@ -1,5 +1,5 @@
 #+TITLE: 个人Vim配置过程说明
-#+DATE: <2013-08-01 Thu>
+#+DATE: <2013-09-18 Wed>
 #+AUTHOR: 荣怡
 #+EMAIL: sqrongyi@163.com
 #+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:{} arch:headline
@@ -12,6 +12,7 @@
 #+KEYWORDS:
 #+LANGUAGE: en
 #+SELECT_TAGS: export
+
 
 
   
@@ -64,6 +65,8 @@
   插件功效: buffer管理
 
   用过Emacs知道emacs的mini buffer功能配配合ido插件可以将创建文件和打开文件等行为耍的风声水起。CtrlP在我看来就类似Emacs的mini buffer。有了它buffer的管理从此变得轻松自在。
+
+* 插件列表
   
   #+BEGIN_SRC bash
     https://github.com/mileszs/ack.vim.git
