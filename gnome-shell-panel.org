@@ -10,8 +10,8 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+LINK_UP:   
-#+LINK_HOME: 
+#+LINK_UP:
+#+LINK_HOME:
 #+XSLT:
 #+STYLE: <link rel="stylesheet" href="./include/css/worg.css" type="text/css" />
 #+STYLE: <link rel="stylesheet" href="./include/css/worg-classic.css" type="text/css" />
@@ -22,7 +22,7 @@
   + _leftBox: 放两个组件: ActivitiesButton, AppButton
   + _centerBox: 放一个组件：  dateMenu
   + _rightBox: 存放系统indicator
-  
+
 ** _leftBox
 #+begin_src javascript
         this._leftBox = new St.BoxLayout({ name: 'panelLeft' });
@@ -56,8 +56,8 @@
      container.add_actor(this._hotCorner.actor);
 
     #+end_src
-   
-    
+
+
     activitiesButton的press/release事件需要重新定义，因为其实现的功能不同于一般的menuButton.所以通过以下语句实现：
 #+begin_src javascript
 this.menu.open = Lang.bind(this, this._onMenuOpenRequest);
@@ -83,11 +83,11 @@ this.actor.connect_after('key-release-event', Lang.bind(this, this._onKeyRelease
             this.hide();
         }));
 #+end_src
-  
+
 
 ** _centerBox
 
- *_centerBox的创建* 
+ *_centerBox的创建*
 #+begin_src javascript
         this._centerBox = new St.BoxLayout({ name: 'panelCenter' });
         this.actor.add_actor(this._centerBox);
@@ -126,7 +126,7 @@ const STANDARD_STATUS_AREA_SHELL_IMPLEMENTATION = {
 #+begin_src javascript
 panel.startStatusArea();
 #+end_src
-    
+
 
 * panel menu button的实现
    /panelMenu.js/ 定义了panel menu button。其中先后定义了ButtonBox/Button/SystemStatusButton/三个对象,ButtonBox作为基类，Button继承ButtonBox，SystemStatusButton继承Button， /panel.js/ 中_rightBox添加的indicator都属于SystemStatusButton。
@@ -138,7 +138,7 @@ if (dontCreateMenu)
 else
     this.setMenu(new PopupMenu.PopupMenu(this.actor, menuAlignment, St.Side.TOP, 0));
 #+end_src
-   
+
    然后在button press事件的回调中执行如下语句：
 #+begin_src javascript
     _onButtonPress: function(actor, event) {
@@ -158,7 +158,7 @@ else
             this.open(true);
     },
 #+end_src
-   
+
    这样，调用open函数show出菜单，那么菜单是什么组件?答案是BoxPointer, 也就是说status indicator 点击打开的菜单控件和messageTray上通知icon点击打开的messageInfo是一个组件，可以通过 *PopupMenu* 对象的"constructor"中得到证明。代码如下：
 #+begin_src javascript
         this._boxPointer = new BoxPointer.BoxPointer(arrowSide,
@@ -175,7 +175,7 @@ else
         this._boxPointer.setPosition(this.sourceActor, this._arrowAlignment);
         this._boxPointer.show(animate);
 #+end_src
-   
+
    各种 *menuItem* 定义也在在 /popupMenu.js/ ,主要的类型如下表：
 
 
@@ -205,4 +205,4 @@ else
 
    对statusBar以及上面的控件的结构大致如此。
 
-  
+

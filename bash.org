@@ -10,8 +10,8 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+LINK_UP:   
-#+LINK_HOME: 
+#+LINK_UP:
+#+LINK_HOME:
 #+XSLT:
 #+STYLE: <link rel="stylesheet" href="./include/css/worg.css" type="text/css" />
 #+STYLE: <link rel="stylesheet" href="./include/css/worg-classic.css" type="text/css" />
@@ -58,7 +58,7 @@
 
     + =awk -F '{print $0}='
 
-    + =find . -name a -o -name b -exec rm -rf {} \;= 
+    + =find . -name a -o -name b -exec rm -rf {} \;=
 
     + =echo= '={1..10}='
 
@@ -80,7 +80,7 @@
       删除Windows换行可以用这个命令                                |
     + =tr= '=a-z=' '=A-Z='
 
-      大小写改变                                     
+      大小写改变
     + =sort uniq=
 
       Shell中的好基友
@@ -88,10 +88,10 @@
 
     + =find ~ -type f -mtime 0=
 
-      连位置都记不得的时候，ls -lt也不行了，就用这个 
+      连位置都记不得的时候，ls -lt也不行了，就用这个
     + =awk ='=NR%2==1='
 
-      只输出奇数行                                   
+      只输出奇数行
     + =yum provide/rpm -qf=
 
       (RPM系)查询软件/文件属于哪个包
@@ -100,25 +100,25 @@
       (Debian系)查询某个文件输入哪个包，配合 =apt-get source=有奇效
     + =$#=
 
-      命令行参数的个数                               
+      命令行参数的个数
     + =$@= =$*=
 
-      命令行所有参数                                 
+      命令行所有参数
     + =& % $ # _ { } ~ ^ \=
 
       latex escape symbol
     + check 64 cpu?
-      
+
       =cat /proc/cpuinfo |grep lm=
-    
+
     + check OS 32 or 64?
-      
+
       =uname -a=
 
     + 查看ascii码表
 
       =man ascii=
-    
+
 
 * gsetting在调试中的应用
   gsetting是gconf的上层封装,遇到个nautilus国际化的问题,即要求桌面上显示的"Computer"/"Home"/"Trash"三个图表的name要与系统当前的语言一致.这个过程就用到gsetting了.debug的大致过程如下:

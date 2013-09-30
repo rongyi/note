@@ -5,24 +5,24 @@
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
-#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:{} -:t f:t *:t <:t 
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:{} -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+LINK_UP:   
-#+LINK_HOME: 
+#+LINK_UP:
+#+LINK_HOME:
 #+XSLT:
 #+STYLE: <link rel="stylesheet" href="./include/css/worg.css" type="text/css" />
 #+STARTUP: showall
 
 
-  
+
 
 * 配置过程
   之前配置Vim一般会有个 =~/.vim= 文件夹来存放各种插件。然后手动拷贝，比较麻烦。后来有Vim版的tarball然后直接打开Vim执行个命令就可以安装插件， =git= 出现之后开发模式变了，Vim配置方面也有点变化，出现了基于 =Git= 的插件配置方法。主要是基于这两个插件[[https://github.com/tpope/vim-pathogen][vim-pathogen]] 以及[[https://github.com/windelicato/dotfiles][vundle]] ，它们的主要区别是 =vim-pathogen= 在安装/卸载新插件时只是自己手动的去 =git clone= 以及手动删除对应插件的文件夹 ，而 =vundle= 则需要修改 =.vimrc= 文件，我选择的是基于 =vim-pathogen= 的Vim配置。因为 *最终* 发现 =vim-pathogen= 要更为方便一些。下文详细叙述 *基于vim-pathogen* 的各插件安装过程以及插件的说明。
 
-  
+
 * vim-pathogen
 
   首先备份你的 =.vimrc= 以及 =.vim/= 文件。
@@ -69,7 +69,7 @@
   用过Emacs知道emacs的mini buffer功能配配合ido插件可以将创建文件和打开文件等行为耍的风声水起。CtrlP在我看来就类似Emacs的mini buffer。有了它buffer的管理从此变得轻松自在。
 
 * 插件列表
-  
+
   #+BEGIN_SRC bash
     https://github.com/mileszs/ack.vim.git
     https://github.com/vim-scripts/Auto-Pairs.git
@@ -97,6 +97,6 @@
     https://github.com/Valloric/YouCompleteMe.git
   #+END_SRC
 
-  
+
   全部clone放 =./vim/bundle= 下即可，遵照各自的安装说明就好
-  
+

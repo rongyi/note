@@ -5,13 +5,13 @@
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
-#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t 
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+LINK_UP:   
-#+LINK_HOME: 
+#+LINK_UP:
+#+LINK_HOME:
 #+XSLT:
 #+STYLE: <link rel="stylesheet" href="./include/css/worg.css" type="text/css" />
 #+STARTUP: showall
@@ -28,7 +28,7 @@
   The best writing is rewriting.
   #+END_QUOTE
   所以编辑时就 *一定* 会涉及到修改行为。Vim就是让你能快速的进行移动/删除/替换等编辑行为。
-  
+
   同一个键盘要做两样事情，行为与输入正文。怎样区分你想输入的是告诉Vim的行为还是输入的正文？ Vim引入了模式之分，简言之，在一个模式下你的键盘输入会当作命令，这个模式官方名称为Normal模式，对应的就是Insert模式，在这个模式之中的所有键盘输入都会被当作文本的追加。怎样在两者之间进行切换？ /ESC/ 进入Normal模式， 进入Insert模式有很多，最基本是 /i/ 。下文会详细叙述。你也可以做这样一种想象，Normal模式让好像是在编辑内容上盖了一层透明薄膜，你的输入都是最先被这层薄膜截获，并对应某种行为，这种行为的结果要么是改变当前光标的位置，为你的输入作准备，要么是改变了你所编辑的文本内容。在这层薄膜上最大的好处就是可以方便的在文档中游走。 Emacs的做法是通过 =Ctrl= =Meta= 辅助作为快捷键操作。这是另外一种思路。
 
   + *接口与实现* 这是IT里不厌其繁所讲到的，这里不涉及到编程语言的API，我想说的是不论VIM也好Emacs也好其实都只是实现不同而已，那接口在哪里？在你的大脑中，你的意念就是接口，说白了不论你是VIMer也好Emacser也好，首先你下手之前已经在你的大脑里有某种意念，只是下手之时键盘映射不一样而已。当然这里我忽略了局限性，即软件的差异固然会造成你思考的某种方式的差异。你在用某种软件时相辅相成的相互作用的过程会影响你的思考模式。好比手里拿个锤子看什么就像钉子一样。所以下文对vim的介绍都是以Intent和Vim键映射这样的列表展开。
@@ -37,7 +37,7 @@
 
 * 移动
   编辑过程中不可避免的要移动光标，这个时候，各个编辑器的差距就全出来了。一般Vim的介绍文章上来就是 /hjkl/ ，我决定按移动步伐从小到大的顺序来介绍。见下表：
-  
+
 
 | Intent                                     | Vim key map          |
 |--------------------------------------------+----------------------|
@@ -75,11 +75,11 @@
   这是我认为Vim最为强大的地方，我认为Vim在这方面丝毫不逊于Emacs。所谓编辑上下文，就是你处在编辑的一个过程当中，你所需要做的下一个步骤Vim都有帮你做键盘映射。没有任何动鼠标的意念。
   #+begin_quote
   时空局部性原理--计算机程序从时间和空间都表现出“局部性”：
-  
+
   时间的局部性（Temporal Locality）：最近被访问的内存内容（指令或数据）很快还会被访问；
-  
+
   空间的局部性（Spatial Locality）：靠近当前正在被访问内存的内存内容很快也会被访问。
-  
+
   --《计算机体系结构量化研究方法》
   #+end_quote
   同样我觉得编辑过程也存在这种局部性原理。下面的列表就是从局部性出发，设想你在一个编辑环境中所能做的事情。
@@ -137,7 +137,7 @@
 | 如何执行宏 | @a                                                   |
   #+CAPTION: 宏
   个人不推荐宏，当编辑文本行数为10000+时，宏的速度和sed的速度不可同日而语，还是用sed吧。
-  
+
 * 保存
 | Intent           | Vim key map        |
 |------------------+--------------------|

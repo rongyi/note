@@ -10,8 +10,8 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+LINK_UP:   
-#+LINK_HOME: 
+#+LINK_UP:
+#+LINK_HOME:
 #+XSLT:
 #+STYLE: <link rel="stylesheet" type="text/css" href="./include/css/worg.css" />
 #+STARTUP: showall
@@ -23,9 +23,9 @@
 * 常用选项
 
   + =-D=
-    
+
     list本地所有接口，接口前的index可以作为 =-i= 参数
-  + =i= 
+  + =i=
 
     指定监听接口， =any= 为本地所有接口
 
@@ -34,7 +34,7 @@
     不要转换IP地址为hostname
 
   + =-nn=
-    
+
     对hostname和端口号都不要去转换
 
   + =-X=
@@ -89,7 +89,7 @@
    pd = pcap_open_live(device, total_count, 0, 0, ebuf);
    struct bpf_program filter;
    /* filter_str like "udp and port 53" */
-   pcap_compile(pd, &filter, filter_str, 1, 0); 
+   pcap_compile(pd, &filter, filter_str, 1, 0);
    pcap_setfilter(pd, &filter);
 
    #+END_SRC
@@ -137,14 +137,14 @@
 ** pcap格式
 
    一个pcap包的格式，以一个dns请求报文为例，抓到的数据报文格式如下：
-                                            
+
    #+BEGIN_SRC bash
     +--------+-----------+---------+-------+-------------+
     |pcap hdr|  ether hdr|ipv4     |udp    |dns request  |
     |        |           |         |       |             |
     +--------+-----------+---------+-------+-------------+
-   #+END_SRC                               
-   
+   #+END_SRC
+
    所需要做的是就是一层一层的剥掉，按自己的抓包需要进一步过滤。
 
 
