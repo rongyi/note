@@ -23,3 +23,9 @@
   Programs must be written for people to read, and only incidentally for machines to execute.
   -- Abelson & Sussman, SICP, preface to the first edition
   #+END_QUOTE
+
+  #+BEGIN_QUOTE
+  A man is a success if he get up in the morning and get to bed at night and in between he does what he wants to do
+
+  -- Bob Dylan
+  #+END_QUOTE
