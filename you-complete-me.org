@@ -5,8 +5,8 @@
   #+BEGIN_QUOTE
   "I don't wanna kill you! What would I do without you? Go back to
   ripping off mob dealers? No, no. No! You...you complete me."
-  
-  -- Joker in /Dark Knight/ 
+
+  -- Joker in /Dark Knight/
   #+END_QUOTE
 
   对这句台词印象深刻所以看到这个插件的名字时便想试试看，而尝试的结果便是太爽了！忍不住要写篇简介介绍推广之。下文便是安装和使用心得。
@@ -17,9 +17,9 @@
 
    + [[https://github.com/tpope/vim-pathogen][vim-pathogen]]
    + [[https://github.com/gmarik/vundle][vundle]]
-   
+
    个人喜欢前一个，而插件作者喜欢vundle，也推荐用vundle安装。所以用vundle安装方法可以参考官方介绍。
-   
+
    下载源码的命令如下：
    #+BEGIN_SRC bash
    cd ~/.vim/bundle
@@ -28,7 +28,7 @@
    git submodule update --init --recursive
    #+END_SRC
 ** llvm binary
-   插件强烈建议用llvm官方编译好的二进制库，所以直接到[[http://llvm.org/releases/download.html#3.2][官方]] 下载跟你平台对应的库，比如我下载的就是 =Clang Binaries for Ubuntu-12.04/x86= 这个版本，假设解压后放的位置在这里：
+   插件强烈建议用llvm官方编译好的二进制库，所以直接到[[http://llvm.org/releases/download.html#3.2][官方]] 下载跟你平台对应的库，比如我下载的就是 =Clang Binaries for Ubuntu-12.04/x86= 这个版本，现在更新到依赖clang 3.3,可以下预编译的debian版本。假设解压后放的位置在这里：
 
    #+BEGIN_SRC bash
    ~/tmp/ycm/clang+llvm-3.2-x86-linux-ubuntu-12.04
@@ -63,9 +63,9 @@
    # harmful
    '-I',
    '.',
-   
+
    #+END_SRC
 
-   到这里安装ycm的步骤结束，但是不一定就能启动正常因为ycm对Vim版本的要求较高，所以最直接的办法就是先删除本机Vim然后下载Vim源码编译安装最新的Vim即可，具体可以参见ycm的[[https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source][wiki]] 页有详细的编译步骤。此处不再赘述。 
+   到这里安装ycm的步骤结束，但是不一定就能启动正常因为ycm对Vim版本的要求较高，所以最直接的办法就是先删除本机Vim然后下载Vim源码编译安装最新的Vim即可，具体可以参见ycm的[[https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source][wiki]] 页有详细的编译步骤。此处不再赘述。
 
    更新过vim然后就可以尝试Vim + ycm的箭步如飞感觉了。
