@@ -131,3 +131,5 @@
   加上_()这个用来国际化的函数,重启发现只有Home实现了国际化,最终发现Home在setting中的name为空值,尝试将另外对应两项也设为空值看看,成功!
   #+end_src
 
+* awesome wm setting
+  在文件 =/usr/share/xsessions/awesome.desktop= 中修改NoDisplay配置，项为true，则这样重启session才会有选择项
