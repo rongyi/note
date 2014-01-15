@@ -133,3 +133,9 @@
 
 * awesome wm setting
   在文件 =/usr/share/xsessions/awesome.desktop= 中修改NoDisplay配置，项为true，则这样重启session才会有选择项
+
+* Python pip install 的代理设置，
+  #+BEGIN_SRC bash
+  export http_proxy=192.168.1.1:8888
+  sudo -E pip install package-name
+  #+END_SRC
