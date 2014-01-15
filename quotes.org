@@ -33,3 +33,8 @@
   Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish.
   -Neal Stephenson, “In the Beginning was the Command Line”
   #+END_QUOTE
+
+  #+BEGIN_QUOTE
+  Most people just make the mistake that is should be simple to design simple things. In reality, the effort required to design something is inversely proportional to the simplicity of the result.
+  -- Roy Fileding
+  #+END_QUOTE
