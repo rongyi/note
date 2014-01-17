@@ -171,4 +171,4 @@
 | 进入Visual模式的三种方式                       | =v= =V= =Ctrl-v= |
 | Visual模式中跳到选中内容另一端                 | =o=              |
 | 直接删除一个单词，不管光标在这个单词的哪个位置 | =daw= =diw=      |
-
+| 打开Vim直接在insert模式下                      | vim -c 'startinsert' |
