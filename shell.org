@@ -138,4 +138,5 @@
   #+BEGIN_SRC bash
   export http_proxy=192.168.1.1:8888
   sudo -E pip install package-name
+  pip install --proxy="http://xx.xx.xx.xx:xxxx" packagename
   #+END_SRC
