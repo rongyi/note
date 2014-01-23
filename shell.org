@@ -140,3 +140,7 @@
   sudo -E pip install package-name
   pip install --proxy="http://xx.xx.xx.xx:xxxx" packagename
   #+END_SRC
+* xmonad中去配置左手鼠标操作：
+  #+BEGIN_SRC
+  xmodmap -e "pointer = 3 2 1"
+  #+END_SRC
