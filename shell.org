@@ -141,6 +141,10 @@
   pip install --proxy="http://xx.xx.xx.xx:xxxx" packagename
   #+END_SRC
 * xmonad中去配置左手鼠标操作：
-  #+BEGIN_SRC
+  #+BEGIN_SRC bash
   xmodmap -e "pointer = 3 2 1"
+  #+END_SRC
+  这样做法只是一次session中生效，如果要持久的要在 =/usr/share/X11/xorg.conf.d/10-evdev.conf= 的pointer字段添加：
+  #+BEGIN_SRC bash
+  Option "ButtonMapping" "3 2 1"
   #+END_SRC
