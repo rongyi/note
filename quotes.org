@@ -38,3 +38,31 @@
   Most people just make the mistake that is should be simple to design simple things. In reality, the effort required to design something is inversely proportional to the simplicity of the result.
   -- Roy Fileding
   #+END_QUOTE
+  #+BEGIN_QUOTE
+  If a problem is not completely understood, it is probably best to provide no solution at all.
+  -- principles of X
+  #+END_QUOTE
+  #+BEGIN_QUOTE
+  I hate code, and I want as little of it as possible in out product
+  -- Jack Diederich
+  #+END_QUOTE
+  #+BEGIN_QUOTE
+  The old adage "don't reinvent the wheel" doesn't apply when the wheel comes attached to locomotive engin.
+  #+END_QUOTE
+  #+BEGIN_QUOTE
+  Inventing your own wheels give you a deep appreciation and understanding of how wheels work and what makes a good one.
+  #+END_QUOTE
+
+  #+BEGIN_QUOTE
+  The signature of "this shouldn't be a class" is when the class havs two methods, and one of them is the constructor. Any time you see these signs, you probably should have just written a function.
+  #+END_QUOTE
+  #+BEGIN_QUOTE
+  Refactoring > Rewriting
+  #+END_QUOTE
+
+  #+BEGIN_QUOTE
+  The most important element of successful software development is learning.
+  #+END_QUOTE
+  #+BEGIN_QUOTE
+  Good IT workers really don't like saying "I don't know." If they say it, they probably mean it. So stop pushing for a definitive answer when one doesn't exist. It's perfectly resonable to want some sort of plan up front. I'm actually one of those funny types who believe up front planning is a necessity. So long as everyone understands an estimate is just that: an estimate. You learn as you go along and discore more detail. So you revise the estimate accordingly.
+  #+END_QUOTE
