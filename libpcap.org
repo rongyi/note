@@ -38,7 +38,7 @@
   pcap_if_t *pcap_findalldevs()
   #+END_SRC
 
-  内部的实现细节是通过调用 =getifaddrs= C API来获得本地网卡地址信息，由于一块网卡可能含多个地址，所以在处理时有趣考虑这样的情况。可以查看 =pcap_findalldevs= 接口调用的static函数 =add_or_find_if= 了解具体实现细节。
+  内部的实现细节是通过调用 =getifaddrs= C API来获得本地网卡地址信息，由于一块网卡可能含多个地址，所以在处理时有去考虑这样的情况。可以查看 =pcap_findalldevs= 接口调用的static函数 =add_or_find_if= 了解具体实现细节。
 
   接口的返回值指针类型是这样的一个结构体：
 
@@ -103,7 +103,7 @@
 
 *** 获取link层协议
     在 =pcap/bpf.h= 中定义了一些link层类型，先通过函数 =iface_get_arp_type= 获得arp层的类型，然后通过函数 =map_arphrd_to_dlt= 来将此类型转化为自己定义的类型。
-    
+
    这个过程代码看的懂，但是与kernel深度耦合，不理解kernel里面 =TPACKET_V2= 等实现完全白搭，所以至此，代码跟踪开展不下去了，给跪了，了解kernel 网络部分！！
 
 
