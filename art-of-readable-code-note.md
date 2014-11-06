@@ -44,9 +44,9 @@ Joshua Bloch在设计Java API时，身边总会放一本字典，（《Coders at
   + 闭区间的边界值变量： first, last
   + 布尔变量带上： is, has, can, should让人一眼明了
   + 定义的位置： 不要先定义一大坨变量放在那里，用到的时候再定义也不迟。
- 
+
 # 代码风格 #
-  
+
 参见[kernel style](https://github.com/torvalds/linux/blob/master/Documentation/zh_CN/CodingStyle "kernel coding style")
 
 
@@ -56,12 +56,12 @@ Joshua Bloch在设计Java API时，身边总会放一本字典，（《Coders at
 
 所以优先考虑写好代码然后再考虑写好注释的事。
 
-* 用TODO（要干的）/FIXME(已知不完美的)/HACK(承认写的挫的）
+* 用TODO（要干的）/FIXME(已知不完美的)/HACK(承认写的有点hack的）
 
 * 传参时有需要可以加inline注释
 	log_new_file(file_name, /\* max_file_count= \*/10, /\*max_file_size_mb=\*/10)
   这样别人就不用再去看API找这两个参数什么意思了
-  
+
 # control flow方面 #
 
 * 不要使用 do while （宏里面除外）
@@ -70,7 +70,7 @@ Joshua Bloch在设计Java API时，身边总会放一本字典，（《Coders at
   + 先处理positive
   + 先处理简单
   + 先处理最interesting的
-  
+
 # 将大的表达式简化 #
 
 * 考虑用一个“cache”变量缓存大的表达式

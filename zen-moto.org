@@ -30,3 +30,12 @@ Consoling words are more for strangers, for hospitals, not kin.
 although motorcycle riding is romantic, motorcycle maintenance is purely classic.
 #+END_QUOTE
 这就是作者为什么选择这样的一个过程去阐述他的思想。
+
+#+BEGIN_QUOTE
+To live only for some future goal is shallow. It's the sides of the mountain which sustain life, not the top.
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+Quality is a characteristic of thought and statement that is recognized by a nonthinking process. Because definitions are a product of regid, formal thinking, quality cannot be defined.
+#+END_QUOTE
+这里引出问题，逻辑的矛盾，正所谓道可道非常道。
