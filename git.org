@@ -195,7 +195,13 @@
 
    #+END_SRC
 
+
+
 * Git带来的开发模型
   [[http://nvie.com/posts/a-successful-git-branching-model/][这里]]介绍的很详细，不赘述。
 
-
+* git碎片整理
+** 找出一个committer修改过的所有的文件
+  #+BEGIN_SRC bash
+  git log --no-merges --stat --author="rongyi" --name-only --pretty=format:""""
+  #+END_SRC
