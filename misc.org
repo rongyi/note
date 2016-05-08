@@ -1,0 +1,30 @@
+*  cpp0x11 reading note
+
+
+use anonymous namespaces for private free-standing functions.
+
+do not inline stuff in the class definition.在class定义之外的头文件中另外写，不过我看C++的作者书上也没有这么要求过。
+
+    inline int Foo::value() const {
+        return value_;
+    }
+
+in C++ you do not need to explicitly return from main.
+
+* 调试九法
+** Understand the system
+** Make it fail
+** Quit thinking and look
+** Divide and conquer
+** Change one thing at a time
+** Keep an audit trail
+** Check the plug
+** Get a fresh view
+** if you don't fix it , it ain't fixed
+** 《禅与摩托车维修技术》
+
+* npm proxy setting:
+  #+BEGIN_SRC bash
+  npm config set registry=http://registry.npmjs.org
+  npm config set proxy=http://127.0.0.1:8087
+  #+END_SRC
