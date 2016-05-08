@@ -100,3 +100,20 @@
 
   全部clone放 =./vim/bundle= 下即可，遵照各自的安装说明就好
 
+
+* Vim去除window decorator under linux
+  #+BEGIN_SRC c
+  src/gui_gtk_x11.c
+ @@ -3230,6 +3230,11 @@ gui_mch_init(void)
+
+      gtk_widget_set_name(gui.mainwin, "vim-main-window");
+
+ +    /*no X window title bar*/
+ +    gtk_window_set_decorated(GTK_WINDOW(gui.mainwin), FALSE);
+ +    /*set opacity, decrement the second value to more transparent*/
+ +    /*gtk_window_set_opacity(GTK_WINDOW(gui.mainwin), 0.99);*/
+ +
+      /* Create the PangoContext used for drawing all text. */
+      gui.text_context = gtk_widget_create_pango_context(gui.mainwin);
+      pango_context_set_base_dir(gui.text_context, PANGO_DIRECTION_LTR);
+  #+END_SRC
