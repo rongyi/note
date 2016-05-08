@@ -3,19 +3,11 @@
   echo "Emacs.font: Consolas-12" >> ~/.Xdefaults
   xrdb -merge ~/.Xdefaults
   #+END_SRC
-#+BEGIN_QUOTE
-Emacs is like a brain, at maximum you can only utilize about 10% of its real power :)
-#+END_QUOTE
 
-* js支持，用的tern，配置文件 =.tern-project= 如下：
-  #+BEGIN_SRC
-  {
-  "plugins": {
-    "node": {
-    }
-  }
-  }
-  #+END_SRC
+  #+BEGIN_QUOTE
+  Emacs is like a brain, at maximum you can only utilize about 10% of its real power :)
+  #+END_QUOTE
+
 
 * ggtags mode
 
