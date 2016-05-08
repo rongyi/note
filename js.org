@@ -1,5 +1,0 @@
-* npm proxy setting:
-  #+BEGIN_SRC bash
-  npm config set registry=http://registry.npmjs.org
-  npm config set proxy=http://127.0.0.1:8087
-  #+END_SRC
