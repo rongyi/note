@@ -85,14 +85,26 @@ aiming to provide good interactive response and desktop performance,
 Linux implements real-time priorities in accordance with the relevant
  Unix standards, specifically POSIX.1b.
 
-    四种类型的调度器：
-    1. stop_sched_class:
-       The stop_sched_class is to stop cpu, using on SMP system, for
+ sched chain:
+ #+BEGIN_SRC c
+ #define SCHED_NORMAL   0
+ #define SCHED_FIFO    1
+ #define SCHED_RR    2
+ #define SCHED_BATCH   3
+ /* SCHED_ISO: reserved but not implemented yet */
+ #define SCHED_IDLE    5
+ #define SCHED_DEADLINE    6
+ #+END_SRC
+
+ 四种类型的调度器：
+ 1. stop_sched_class:
+    The stop_sched_class is to stop cpu, using on SMP system, for
 load balancing and cpu hotplug. This class have the highest scheduling priority.
 
-       If your system does not define CONFIG_SMP, you can try to remove
-this class, there are several files need to be changed for successful compilation.
+If your system does not define CONFIG_SMP, you can try to remove
+this class, there are several files need to be changed for successful
+compilation.
 
-    2. rt_sched_class
-    3. fair_sched_class
-    4. idle_sched_class
+ 2. rt_sched_class
+ 3. fair_sched_class
+ 4. idle_sched_class
