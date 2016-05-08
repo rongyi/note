@@ -15,3 +15,11 @@
 |-------+------------------|
 | <M-*> | go back(like C-t in Vim) |
 | <M-.> | go to definition(like C-] in Vim |
+
+* shell打开zsh出现比较怪的字符解决方法：
+  添加如下至 =.zshrc= 中
+  #+BEGIN_SRC bash
+  if [[ $TERM = dumb ]]; then
+     unset zle_bracketed_paste
+  fi
+  #+END_SRC
