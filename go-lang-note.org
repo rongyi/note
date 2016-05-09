@@ -1,0 +1,47 @@
+* The go programming language notes
+  #+BEGIN_QUOTE
+  With constant pressure to add features and options and configurations, and to ship code quickly, it's easy to neglect simplicity, even though in the long run simplicity is the key to good software.
+  #+END_QUOTE
+
+  #+BEGIN_QUOTE
+  Only through simplicity of design can a system remain stable, secure, and coherent as it grows
+  #+END_QUOTE
+
+  go has:
+  + GC
+  + package system
+  + first class function
+  + lexical scope
+  + system call interface
+  + immutable string
+
+
+  go programm consists:
+  + function (func)
+  + variables (var)
+  + constants (const)
+  + types (type)
+
+
+  go does not need semicolons at the ends of statements or declarations, except where two or more appear on the same line.
+
+  variable declaration:
+  #+BEGIN_SRC bash
+  var s string // declare a variable s with type string
+  #+END_SRC
+  If it is not explicitly initialized, it is implicitly initialized to the =zero value= for its type.
+
+  short variable declaration: ':='
+
+  for loop is the only loop statement in Go.
+
+  A map is a reference to the data structure created by make. When a map is passed to a function, the function receives a copy of the reference.
+
+
+  By default sends and receives block until both the sender and receiver are ready. This property allowed us to wait at the end of our program for the "ping" message without having to use any other synchronization.
+
+
+  By default channels are unbuffered, meaning that they will only accept sends (chan <-) if there is a corresponding receive (<- chan) ready to receive the sent value. Buffered channels accept a limited number of values without a corresponding receiver for those values.
+
+  When using channels as function parameters, you can specify if a channel is meant to only send or receive values. This specificity increases the type-safety of the program.
+

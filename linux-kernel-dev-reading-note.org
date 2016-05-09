@@ -161,3 +161,8 @@ compilation.
    Provide mechanism, not policy.
    
    The process does not refer to the syscall by name.
+
+   current syscall count
+   #+BEGIN_SRC c
+   #define NR_syscalls 327 /* sizeof(syscalls_64)	# */
+   #+END_SRC
