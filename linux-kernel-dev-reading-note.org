@@ -147,3 +147,17 @@ compilation.
     #define MAX_PRIO    (MAX_RT_PRIO + NICE_WIDTH)
     #define DEFAULT_PRIO    (MAX_RT_PRIO + NICE_WIDTH / 2)
     #+END_SRC
+
+** ch05: system calls
+   The existence of these interfaces, and the fact that applications are not free to
+   directly do whatever they want, is key to providing a stable system.
+
+   Syscall provide:
+   1. First, it provides an abstracted hardware interface for userspace.
+   2. System calls ensure system security and stability.
+   3. A single common layer between user-space and the rest of the
+   system allows for the virtualized system provided to processe.
+
+   Provide mechanism, not policy.
+   
+   The process does not refer to the syscall by name.
