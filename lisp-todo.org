@@ -1,0 +1,10 @@
+* lisp书籍列表
+** DONE practical lisp
+** DONE land of lisp
+    上面两本过年的时候翻完了，后面争取把这些都过完。
+** TODO ansi common lisp
+** TODO on lisp
+** TODO commlisp recipes
+** TODO let over lambda
+** TODO The go programming language
+** TODO emacs lisp introduction
