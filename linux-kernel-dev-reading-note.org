@@ -166,3 +166,21 @@ compilation.
    #+BEGIN_SRC c
    #define NR_syscalls 327 /* sizeof(syscalls_64)	# */
    #+END_SRC
+
+** ch06: interrupt
+    Interrupt context is time-critical because the interrupt handler interrupts other code.
+Code should be quick and simple.
+
+Every process on the system previously needed two pages of contiguous,
+nonswappable kernel memory.
+
+Perhaps not surprising, the implementation of the interrupt handling system in Linux is
+architecture-dependent.
+
+** ch08: sync
+Ensuring that unsafe concurrency is prevented and that race conditions do not
+occur is called synchronization.
+
+The kernel provides a set of interfaces that implement these atomic instructions
++ locking: Threads hold locks locks protect data.
+
