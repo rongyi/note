@@ -8,3 +8,4 @@
 ** TODO let over lambda
 ** TODO The go programming language
 ** TODO emacs lisp introduction
+** TODO Patterns of software -- Richard P. Gabriel
