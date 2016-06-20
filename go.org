@@ -1,0 +1,7 @@
+* go笔记
+
+1. escape analysis
+   堆和栈，对于C/C++而言auto变量自然分配在栈上而如果需要分配在堆上则需要通过malloc调用来分配内存在
+   堆上。而对于Go语言来讲编译时候会根据是否有外部引用来判断是否将内存分配在堆或者是栈上。
+   [[http://dave.cheney.net/2014/06/07/five-things-that-make-go-fast][Five things that make Go fast]]这篇文章里有详细的叙述。所以对于有些地方直接将类似与C/C++中的
+   auto变量地址返回的这样的情景请不要惊讶。编译器已经考虑到了。
