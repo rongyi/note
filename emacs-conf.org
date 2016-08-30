@@ -23,3 +23,8 @@
      unset zle_bracketed_paste
   fi
   #+END_SRC
+
+* build emacs on centos 7
+#+BEGIN_SRC bash
+yum install gnutls-devel.x86_64 ncurses-devel.x86_64 info.x86_64 texinfo.x86_64 libX11-devel.x86_64 libXaw-devel.x86_64 openjpeg-devel.x86_64 libpng-devel.x86_64 giflib-devel.x86_64 libtiff-devel.x86_64 turbojpeg-devel.x86_64 libjpeg-turbo-devel.x86_64
+#+END_SRC
