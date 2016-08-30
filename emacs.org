@@ -4,8 +4,6 @@
   xrdb -merge ~/.Xdefaults
   #+END_SRC
 
-
-
 * ggtags mode
 
 | key   | meaning          |
