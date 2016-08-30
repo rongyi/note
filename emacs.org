@@ -4,9 +4,6 @@
   xrdb -merge ~/.Xdefaults
   #+END_SRC
 
-  #+BEGIN_QUOTE
-  Emacs is like a brain, at maximum you can only utilize about 10% of its real power :)
-  #+END_QUOTE
 
 
 * ggtags mode
@@ -28,3 +25,9 @@
 #+BEGIN_SRC bash
 yum install gnutls-devel.x86_64 ncurses-devel.x86_64 info.x86_64 texinfo.x86_64 libX11-devel.x86_64 libXaw-devel.x86_64 openjpeg-devel.x86_64 libpng-devel.x86_64 giflib-devel.x86_64 libtiff-devel.x86_64 turbojpeg-devel.x86_64 libjpeg-turbo-devel.x86_64
 #+END_SRC
+
+* quote
+
+#+BEGIN_QUOTE
+Emacs is like a brain, at maximum you can only utilize about 10% of its real power :)
+#+END_QUOTE
