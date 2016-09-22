@@ -1,0 +1,42 @@
+
+
+#+BEGIN_QUOTE
+Co-workers and bosses are not usually your friends: You will spend a lot of time with co-workers.  You may eventually become close friends with some of them, but in general, you will move on in three years and aside from maintaining cordial relations you will not go out of your way to invite them over to dinner.  They will treat you in exactly the same way.  You should be a good person to everyone you meet — it is the moral thing to do, and as a sidenote will really help your networking — but do not be under the delusion that everyone is your friend.
+
+You radically overestimate the average skill of the competition because of the crowd you hang around with:  Many people already successfully employed as senior engineers cannot actually implement FizzBuzz.  Just read it and weep.  Key takeaway: you probably are good enough to work at that company you think you’re not good enough for.  They hire better mortals, but they still hire mortals.
+
+Networking: it isn’t just for TCP packets: Networking just means a) meeting people who at some point can do things for you (or vice versa) and b) making a favorable impression on them.
+
+
+
+In general, big companies pay more (money, benefits, etc) than startups.  Engineers with high perceived value make more than those with low perceived value.  Senior engineers make more than junior engineers.  People working in high-cost areas make more than people in low-cost areas.  People who are skilled in negotiation make more than those who are not.
+
+
+
+How do I become better at negotiation?  This could be a post in itself.  Short version:
+
+a)  Remember you’re selling the solution to a business need (raise revenue or decrease costs) rather than programming skill or your beautiful face.
+
+b)  Negotiate aggressively with appropriate confidence, like the ethical professional you are.  It is what your counterparty is probably doing.  You’re aiming for a mutual beneficial offer, not for saying Yes every time they say something.
+
+c)  “What is your previous salary?” is employer-speak for “Please give me reasons to pay you less money.”  Answer appropriately.
+
+d)  Always have a counteroffer.  Be comfortable counteroffering around axes you care about other than money.  If they can’t go higher on salary then talk about vacation instead.
+
+e)  The only time to ever discuss salary is after you have reached agreement in principle that they will hire you if you can strike a mutually beneficial deal.  This is late in the process after they have invested a lot of time and money in you, specifically, not at the interview.  Remember that there are large costs associated with them saying “No, we can’t make that work” and, appropriately, they will probably not scuttle the deal over comparatively small issues which matter quite a bit to you, like e.g. taking their offer and countering for that plus a few thousand bucks then sticking to it.
+
+f)  Read a book.  Many have been written about negotiation.  I like Getting To Yes.  It is a little disconcerting that negotiation skills are worth thousands of dollars per year for your entire career but engineers think that directed effort to study them is crazy when that could be applied to trivialities about a technology that briefly caught their fancy.
+
+Your most important professional skill is communication: Remember engineers are not hired to create programs and how they are hired to create business value?  The dominant quality which gets you jobs is the ability to give people the perception that you will create value.  This is not necessarily coextensive with ability to create value.
+
+Some of the best programmers I know are pathologically incapable of carrying on a conversation.  People disproportionately a) wouldn’t want to work with them or b) will underestimate their value-creation ability because they gain insight into that ability through conversation and the person just doesn’t implement that protocol.  Conversely, people routinely assume that I am among the best programmers they know entirely because a) there exists observable evidence that I can program and b) I write and speak really, really well.
+
+(Once upon a time I would have described myself as “Slightly below average” in programming skill.  I have since learned that I had a radically skewed impression of the skill distribution, that programming skill is not what people actually optimize for, and that modesty is against my interests.  These days if you ask me how good of a programmer I am I will start telling you stories about how I have programmed systems which helped millions of kids learn to read or which provably made companies millions.  The question of where I am on the bell curve matters to no one, so why bother worrying about it?)
+
+Communication is a skill.  Practice it: you will get better.  One key sub-skill is being able to quickly, concisely, and confidently explain how you create value to someone who is not an expert in your field and who does not have a priori reasons to love you.  If when you attempt to do this technical buzzwords keep coming up (“Reduced 99th percentile query times by 200 ms by optimizing indexes on…”), take them out and try again.  You should be able to explain what you do to a bright 8 year old, the CFO of your company, or a programmer in a different specialty, at whatever the appropriate level of abstraction is.
+
+
+All business decisions are ultimately made by one or a handful of multi-cellular organisms closely related to chimpanzees, not by rules or by algorithms: People are people.  Social grooming is a really important skill.  People will often back suggestions by friends because they are friends, even when other suggestions might actually be better.  People will often be favoritably disposed to people they have broken bread with.  (There is a business book called Never Eat Alone.  It might be worth reading, but that title is whatever the antonym of deceptive advertising is.)  People routinely favor people who they think are like them over people they think are not like them.  (This can be good, neutral, or invidious.  Accepting that it happens is the first step to profitably exploiting it.)
+
+
+#+END_QUOTE
