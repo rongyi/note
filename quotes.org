@@ -63,6 +63,15 @@
   #+BEGIN_QUOTE
   The most important element of successful software development is learning.
   #+END_QUOTE
+
   #+BEGIN_QUOTE
   Good IT workers really don't like saying "I don't know." If they say it, they probably mean it. So stop pushing for a definitive answer when one doesn't exist. It's perfectly resonable to want some sort of plan up front. I'm actually one of those funny types who believe up front planning is a necessity. So long as everyone understands an estimate is just that: an estimate. You learn as you go along and discore more detail. So you revise the estimate accordingly.
+  #+END_QUOTE
+
+  #+BEGIN_QUOTE
+  "If people knew how hard I worked to get my mastery, it wouldn't seem so wonderful at all." - Michelangelo
+  #+END_QUOTE
+  #+BEGIN_QUOTE
+  Building something by gradually refine a prototype is good for morale because It keeps you engaged. In software my rule is: always have working code. If you're writing something you'll be able to test in an hour, you have the prospect of an immediate reward to motivate you. The same is true in the arts, and particularly in oil painting. Most Painters start with a blurry sketch and gradually refine it.
+  -- From P.G. Hakers and Painters
   #+END_QUOTE
