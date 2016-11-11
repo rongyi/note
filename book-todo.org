@@ -10,5 +10,5 @@
 ** TODO let over lambda
 ** DOING The go programming language
 ** DONE emacs lisp introduction
-** TODO Patterns of software -- Richard P. Gabriel
+** DONE Patterns of software -- Richard P. Gabriel
 ** READING [[https://github.com/astaxie/build-web-application-with-golang][Build Web Application with go]]
