@@ -7,3 +7,4 @@
    auto变量地址返回的这样的情景请不要惊讶。编译器已经考虑到了。
 2. Sender close the channel
 3. using recover() trapped the panic
+4. format %T get the type
