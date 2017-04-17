@@ -4,11 +4,11 @@
 ** DONE practical lisp
 ** DONE land of lisp
     上面两本过年的时候翻完了，后面争取把这些都过完。
-** READING DOING ansi common lisp
-** TODO on lisp
+** DONE DOING ansi common lisp
+** DONE on lisp
 ** TODO commlisp recipes
-** TODO let over lambda
+** DONE let over lambda
 ** DOING The go programming language
 ** DONE emacs lisp introduction
 ** DONE Patterns of software -- Richard P. Gabriel
-** READING [[https://github.com/astaxie/build-web-application-with-golang][Build Web Application with go]]
+** DONE [[https://github.com/astaxie/build-web-application-with-golang][Build Web Application with go]]
