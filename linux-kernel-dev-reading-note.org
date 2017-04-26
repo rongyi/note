@@ -159,12 +159,12 @@ compilation.
    system allows for the virtualized system provided to processe.
 
    Provide mechanism, not policy.
-   
+
    The process does not refer to the syscall by name.
 
    current syscall count
    #+BEGIN_SRC c
-   #define NR_syscalls 327 /* sizeof(syscalls_64)	# */
+   #define NR_syscalls 327 /* sizeof(syscalls_64) # */
    #+END_SRC
 
 ** ch06: interrupt
@@ -183,4 +183,3 @@ occur is called synchronization.
 
 The kernel provides a set of interfaces that implement these atomic instructions
 + locking: Threads hold locks locks protect data.
-

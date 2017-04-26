@@ -75,3 +75,9 @@
   Building something by gradually refine a prototype is good for morale because It keeps you engaged. In software my rule is: always have working code. If you're writing something you'll be able to test in an hour, you have the prospect of an immediate reward to motivate you. The same is true in the arts, and particularly in oil painting. Most Painters start with a blurry sketch and gradually refine it.
   -- From P.G. Hakers and Painters
   #+END_QUOTE
+
+  #+BEGIN_QUOTE
+  Just like an expensive guitar won’t make you a great guitar player and the best running shoes won’t get you out of the door every day, productivity techniques won’t finish your project. They might help, but you have to put the work in. You have to keep showing up and keep chipping away at it. No tool will ever do that for you.
+
+  -- https://thorstenball.com/blog/2017/01/16/what-i-didnt-do-to-write-a-book/
+  #+END_QUOTE
