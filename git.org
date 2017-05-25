@@ -207,3 +207,8 @@
   #+END_SRC
 * emacs中的magit
   不得不说magit大大提高的git的使用速度. Howard Abrams作了一个非常好的 [[https://www.youtube.com/watch?v%3DvQO7F2Q9DwA][demo]]. 推荐.
+* from https://csswizardry.com/2017/05/little-things-i-like-to-do-with-git/
+#+BEGIN_SRC bash
+# show commit summary
+git shortlog -sn
+#+END_SRC
