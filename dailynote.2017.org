@@ -5,3 +5,11 @@
   install emac for mac, Good point: instead of `brew install emacs-mac`, I should have written, `brew tap railwaycat/emacsmacport && brew install emacs-mac`.
 
   always been partial to "A Tale Of Five Editors" ~ http://www.catb.org/esr/writings/taoup/html/ch13s02.html
+* https://jacquesmattheij.com/improving-a-legacy-codebase
+  关于怎样去重构老代码，你进入一家公司面对的一坨屎的时候的处理方式。
+
+  1. backup 把所有能想到的备份都做好。
+  2. 线上版本分支记好，并且自己能够编译出来这个版本。简而言之就是先跟线上对标。
+  3. DB先不要动，等到逻辑都理清楚了最后动。
+  4. 多写测试用例，这个平时一直在做
+  5. 不要试图去写一个第二版。
