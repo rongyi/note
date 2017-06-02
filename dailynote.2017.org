@@ -1,6 +1,7 @@
 * http://observer.com/2017/05/apple-facebook-google-amazon-secrets-dream-job/
 1. The interview process is designed to challenge you, and even the best candidates feel “stumped.” The question is this: What do you do next?
 2. Life is a team sport.记得团队合作，记得聆听他人意见。
+
 * smooth emacs: https://github.com/railwaycat/homebrew-emacsmacport https://news.ycombinator.com/item?id=12830206
   install emac for mac, Good point: instead of `brew install emacs-mac`, I should have written, `brew tap railwaycat/emacsmacport && brew install emacs-mac`.
 
@@ -19,3 +20,6 @@
 
 * http://www.daedtech.com/how-to-keep-your-best-programmers
   离职原因，恩，死海效应之前也听说过
+
+* https://12factor.net/
+  定义一些规范，开发部署等
