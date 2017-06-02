@@ -23,3 +23,6 @@
 
 * https://12factor.net/
   定义一些规范，开发部署等
+
+* http://marcio.io/2015/07/handling-1-million-requests-per-minute-with-golang/
+  golang的workqueue模型
