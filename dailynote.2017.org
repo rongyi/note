@@ -26,3 +26,15 @@
 
 * http://marcio.io/2015/07/handling-1-million-requests-per-minute-with-golang/
   golang的workqueue模型
+
+* TODO http://goyalankit.com/blog/linux-bridge
+  里面正好也参考了正在看的书Understanding Linux Network
+
+* TODO http://rabbitstack.github.io/operating%20systems/linux-containers-internals-part-i/
+  Container Internal
+
+* https://news.ycombinator.com/item?id=14486657
+  推荐书的帖子,比如：
+  + Working Effectively with Legacy Code by Michael Feathers
+  + The Effective Engineer
+  + The Design of Design: Essays from a Computer Scientist" by Frederick P. Brooks
