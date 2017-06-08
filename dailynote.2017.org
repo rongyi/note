@@ -38,3 +38,10 @@
   + Working Effectively with Legacy Code by Michael Feathers
   + The Effective Engineer
   + The Design of Design: Essays from a Computer Scientist" by Frederick P. Brooks
+  + Advanced Programming in the Unix Environment by Stevens
+  + Operating Systems: Design and Implementation by Tanenbaum
+  + The Art of Unix Programming by ESR
+  + Parsing Techniques by Grune and Jacobs
+  + Applied Cryptography by Schneier
+* https://www.destroyallsoftware.com/compendium/network-protocols?share_key=97d3ba4c24d21147
+  网络
