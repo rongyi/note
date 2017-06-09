@@ -45,3 +45,9 @@
   + Applied Cryptography by Schneier
 * https://www.destroyallsoftware.com/compendium/network-protocols?share_key=97d3ba4c24d21147
   网络
+* https://news.ycombinator.com/item?id=14508063
+  做好离职:
+    1. Focus on transition asap. Give the leaving employee plenty of time to document knowledge.
+    2. Make sure to treat all parties involved with respect.
+    3. Have an exit interview with the founder where you can give final feedback (with the understanding that it may be ignored).
+    4. Treat everyone like you might work with them again.
