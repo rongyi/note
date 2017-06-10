@@ -34,3 +34,5 @@
    dev_add_pack(&ip_packet_type);
    #+END_SRC
    所以各种类型的注册可以跟着上面的注册函数去找即可。
+
+4. 网桥的设置函数： br_dev_setup
