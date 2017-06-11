@@ -40,3 +40,9 @@
 5. 网桥的删除： br_dev_delete，先删除port后清理fdb，最后停掉gc，删除/sys文件系统相关。
 
 6. ip_rcv之后处理分本地投递和转发两个路径，对应函数为： ip_local_deliver ip_forward
+
+   #+BEGIN_SRC c
+  rth->u.dst.input = ip_forward;
+  rth->u.dst.output = ip_output;
+   #+END_SRC
+   还是挂接好函数指针，后面在 dst_output这样的函数中直接call。
