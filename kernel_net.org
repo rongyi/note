@@ -46,3 +46,5 @@
   rth->u.dst.output = ip_output;
    #+END_SRC
    还是挂接好函数指针，后面在 dst_output这样的函数中直接call。
+
+   决定路由的函数: ip_route_input 就会得到对应的函数指针，并设置skb->dst字段。
