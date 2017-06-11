@@ -38,3 +38,5 @@
 4. 网桥的设置函数： br_dev_setup, 里面有函数指针各种ops（ethtool, net_dev_ops）的对接。
 
 5. 网桥的删除： br_dev_delete，先删除port后清理fdb，最后停掉gc，删除/sys文件系统相关。
+
+6. ip_rcv之后处理分本地投递和转发两个路径，对应函数为： ip_local_deliver ip_forward
