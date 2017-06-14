@@ -50,3 +50,8 @@
    决定路由的函数: ip_route_input 就会得到对应的函数指针，并设置skb->dst字段。
 
 7. egress路径： ip_queue_xmit tcp发送路径会调这个函数。
+   函数的最后的Netfilter hook:
+   #+BEGIN_SRC c
+  return NF_HOOK(PF_INET, NF_IP_LOCAL_OUT, skb, NULL, rt->u.dst.dev,
+           dst_output);
+   #+END_SRC
