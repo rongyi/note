@@ -48,3 +48,5 @@
    还是挂接好函数指针，后面在 dst_output这样的函数中直接call。
 
    决定路由的函数: ip_route_input 就会得到对应的函数指针，并设置skb->dst字段。
+
+7. egress路径： ip_queue_xmit tcp发送路径会调这个函数。
