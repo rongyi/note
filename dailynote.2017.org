@@ -57,3 +57,5 @@
   https://simplystatistics.org/2017/06/13/the-future-of-education-is-plain-text/
 
   两篇文章相似，plain text，纸和笔，讲这些的重要性。
+* https://blog.tintagel.pl/2017/06/09/openbsd-daily.html
+  每天坚持阅读bsd代码，很有启发。
