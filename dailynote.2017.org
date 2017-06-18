@@ -51,3 +51,4 @@
     2. Make sure to treat all parties involved with respect.
     3. Have an exit interview with the founder where you can give final feedback (with the understanding that it may be ignored).
     4. Treat everyone like you might work with them again.
+* api design rest原则: http://blog.restcase.com/7-rules-for-rest-api-uri-design/
