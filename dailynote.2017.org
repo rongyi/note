@@ -60,3 +60,9 @@ api design rest原则
   两篇文章相似，plain text，纸和笔，讲这些的重要性。
 * https://blog.tintagel.pl/2017/06/09/openbsd-daily.html
   每天坚持阅读bsd代码，很有启发。
+
+* https://medium.com/udacity/how-i-learned-to-code-in-my-30s-61ad21180208
+  30岁转编程的心路历程
+  How do you know if you are immersing? If you are not dreaming in code, you are not immersing yet.
+
+  Everyone has time commitments, so to learn as fast as possible, try to apply the principle of immersion as best as you can.
