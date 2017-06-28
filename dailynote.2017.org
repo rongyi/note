@@ -66,3 +66,15 @@ api design rest原则
   How do you know if you are immersing? If you are not dreaming in code, you are not immersing yet.
 
   Everyone has time commitments, so to learn as fast as possible, try to apply the principle of immersion as best as you can.
+
+
+* http://blog.triplebyte.com/how-to-interview-engineers
+关于面试：
+1. 不去看背景，盲面就看他编程水平
+2. 筛简历然后电话面，简历50%的淘汰，电话面试30%的淘汰
+3. 做录用建议时要大家开会，必须出现至少一个强烈建议录用的情况
+
+* http://blog.triplebyte.com/how-to-pass-a-programming-interview
+  上篇文章的姐妹篇
+1. 热情，要先有准备，对这家公司让你兴奋的点可以列下
+2. Practice, practice, practice(Cracking the coding interview)
