@@ -81,3 +81,9 @@ api design rest原则
 
 * https://visualgo.net
   图形展示各种算法
+
+
+* https://news.ycombinator.com/item?id=287767
+  If they don't have the money to pay you, you're not an employee, you're a founder and you get the same deal that they get.
+
+If they balk, suggest that they find another code monkey while you find another biz monkey and let the market decide who ends up with the bananas.
