@@ -87,3 +87,7 @@ api design rest原则
   If they don't have the money to pay you, you're not an employee, you're a founder and you get the same deal that they get.
 
 If they balk, suggest that they find another code monkey while you find another biz monkey and let the market decide who ends up with the bananas.
+
+* http://zackshapiro.com/post/22010015010/9-things-i-wish-someone-had-told-me-about-life
+1. Work hard, be nice to people. If you make eye contact, say hi. Everybody felt this way at some point, you’re not the only one who’s uncomfortable.
+2. The un-comfortability is good for you. Comfort zones need to be stretched.
