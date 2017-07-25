@@ -96,3 +96,6 @@ If they balk, suggest that they find another code monkey while you find another 
 Forget the drama. Focus on being happy.
 Speaking of which, keep a journal. Seriously. Your memory is extremely faulty. I
 “Let us so live that when we come to die even the undertaker will be sorry.” – Mark Twain
+
+* https://rakyll.org/leakingctx/
+  golang context的解释
