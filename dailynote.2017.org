@@ -77,7 +77,8 @@ api design rest原则
 * http://blog.triplebyte.com/how-to-pass-a-programming-interview
   上篇文章的姐妹篇
 1. 热情，要先有准备，对这家公司让你兴奋的点可以列下
-2. Practice, practice, practice(Cracking the coding interview)
+2. Practice, practice, practice(Cracking the coding interview), 刷完lintcode
+还是有些帮助。
 
 * https://visualgo.net
   图形展示各种算法
@@ -98,6 +99,6 @@ Speaking of which, keep a journal. Seriously. Your memory is extremely faulty. I
 “Let us so live that when we come to die even the undertaker will be sorry.” – Mark Twain
 
 * https://rakyll.org/leakingctx/
-  golang context的解释
+  golang context的解释，不错
 * https://github.com/miekg/dns
   一个goversion的DNS库，以后可以根据这个写些应用
