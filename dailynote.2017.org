@@ -99,3 +99,5 @@ Speaking of which, keep a journal. Seriously. Your memory is extremely faulty. I
 
 * https://rakyll.org/leakingctx/
   golang context的解释
+* https://github.com/miekg/dns
+  一个goversion的DNS库，以后可以根据这个写些应用
