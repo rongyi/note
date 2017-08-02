@@ -107,3 +107,14 @@ Speaking of which, keep a journal. Seriously. Your memory is extremely faulty. I
 * https://github.com/GeertJohan/gomatrix
   连接到matrix的一个golang程序，看了一下实现，对每一个列增加一个goroutine然后在里面按
 时间每次更新即可。没什么大的技巧在里面。但很有创意。
+* http://www.chestergrant.com/26-highlights-from-mini-habits-by-stephen-guise
+坚持一个小习惯：
+a. Writing a Gratitude Journal
+
+b. Going to Gym in the morning
+
+c. Programming in the morning
+
+d. Reading in the morning
+
+I copied some of my highlights here:
