@@ -106,4 +106,4 @@ Speaking of which, keep a journal. Seriously. Your memory is extremely faulty. I
   js的trickey part
 * https://github.com/GeertJohan/gomatrix
   连接到matrix的一个golang程序，看了一下实现，对每一个列增加一个goroutine然后在里面按
-时间每次更新即可。没什么大的技巧在里面。
+时间每次更新即可。没什么大的技巧在里面。很有创意
