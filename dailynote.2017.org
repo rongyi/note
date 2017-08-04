@@ -113,3 +113,9 @@ a. Writing a Gratitude Journal
 b. Going to Gym in the morning
 c. Programming in the morning
 d. Reading in the morning
+* http://nakamotoinstitute.org/shelling-out/
+  money的起源，从贝壳讲起
+* https://dev.to/tkaczanowski/explaining-programming-to-6-years-old-kids
+  向小孩子讲程序员的工作。
+* https://www.deekit.com/how-do-i-find-a-remote-job-part-1/
+  remote job经验之谈
