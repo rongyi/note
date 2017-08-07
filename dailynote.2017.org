@@ -119,3 +119,5 @@ d. Reading in the morning
   向小孩子讲程序员的工作。
 * https://www.deekit.com/how-do-i-find-a-remote-job-part-1/
   remote job经验之谈
+* https://maryrosecook.com/blog/post/git-from-the-inside-out
+  git的internel表示，和我多年前接触git写的文章神似
