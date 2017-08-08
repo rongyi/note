@@ -121,3 +121,10 @@ d. Reading in the morning
   remote job经验之谈
 * https://maryrosecook.com/blog/post/git-from-the-inside-out
   git的internel表示，和我多年前接触git写的文章神似
+* https://news.ycombinator.com/item?id=14951671
+  一周工作四小时那本书的看法，这位的评价很中肯
+Like any other book... There is no recipe for success. But there are a lot of techniques on how to maximize your income.
+* https://www.youtube.com/watch?v=HcStlHGpjN8
+  jeff dean的AI课程
+* https://www.quantstart.com/articles/matrix-algebra-linear-algebra-for-deep-learning-part-2
+  线性代数
