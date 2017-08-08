@@ -128,3 +128,5 @@ Like any other book... There is no recipe for success. But there are a lot of te
   jeff dean的AI课程
 * https://www.quantstart.com/articles/matrix-algebra-linear-algebra-for-deep-learning-part-2
   线性代数
+* http://tengine.taobao.org/book/
+  淘宝的enginx书籍
