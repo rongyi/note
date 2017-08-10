@@ -1,5 +1,6 @@
 * tcp惊群问题的解决
 这里分析的很详细[fn:1]
+当前worker的数量为配置的7/8以上时会set ngx_accept_disabled
 
 * Footnotes
 
