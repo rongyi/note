@@ -130,3 +130,7 @@ Like any other book... There is no recipe for success. But there are a lot of te
   线性代数
 * http://tengine.taobao.org/book/
   淘宝的enginx书籍
+* https://nicoleorchard.com/blog/compilers
+编译器的入门讲解
+* https://michael.steindorfer.name/publications/phd-thesis-efficient-immutable-collections.pdf
+  排版很赞的一个C++ DS讲解
