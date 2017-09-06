@@ -136,3 +136,5 @@ Like any other book... There is no recipe for success. But there are a lot of te
   排版很赞的一个C++ DS讲解
 * 手写sql
 https://github.com/cstack/db_tutorial
+* python的坑
+https://github.com/satwikkansal/wtfpython
