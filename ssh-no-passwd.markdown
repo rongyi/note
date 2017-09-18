@@ -31,3 +31,8 @@
 最终，你只需要轻松敲入：
 
     ssh test175
+
+
+note: when update a ssh key, please update ssh key:
+
+ssh-add
