@@ -8,3 +8,5 @@
 3. using recover() trapped the panic
 4. format %T get the type
 5. %q a single-quoted character literal safely escaped with Go syntax.
+6. trace: GOMAXPROCS=2 GODEBUG=schedtrace=1000,scheddetail=1 ./trace
+   https://www.goinggo.net/2015/02/scheduler-tracing-in-go.html for detail
