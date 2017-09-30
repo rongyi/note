@@ -10,3 +10,85 @@
 5. %q a single-quoted character literal safely escaped with Go syntax.
 6. trace: GOMAXPROCS=2 GODEBUG=schedtrace=1000,scheddetail=1 ./trace
    https://www.goinggo.net/2015/02/scheduler-tracing-in-go.html for detail
+
+* go code fix
+github.com\rogpeppe\godef\go\parser\parser.go
+
+// p.error(path.Pos(), fmt.Sprintf("cannot find identifier for package %q: %v", litToString(path), err))
+
+fixed this
+
+* init vs main?
+Programs initialize and begin execution from the main package. If the main package imports other packages, they will be imported in the compile time. If one package is imported many times, it will be only compiled once. After importing packages, programs will initialize the constants and variables within the imported packages, then execute the init function if it exists, and so on. After all the other packages are initialized, programs will initialize constants and variables in the main package, then execute the init function inside the package if it exists. The following figure shows the process.
+* dot import
+
+#+BEGIN_SRC bash
+import(
+    . "fmt"
+)
+#+END_SRC
+
+The dot operator means you can omit the package name when you call functions inside of that package. Now `fmt.Printf("Hello world")` becomes to `Printf("Hello world")`.
+* Assertion of Comma-ok pattern
+#+BEGIN_SRC bash
+if value, ok := element.(int); ok
+#+END_SRC
+* why golang's default ServeMux match "/notfound" path to "/"
+the answer is in the pathMatch function.
+* rob pike
+  #+BEGIN_QUOTE
+  Go is more about software engineering than programming language research. Or to rephrase, it is about language design in the service of software engineering.
+  #+END_QUOTE
+* make vs new?
+Go有两个数据结构创建函数：new和make。两者的区别在学习Go语言的初期是一个常见的混淆点。基本的区别是`new(T)`返回一个`*T`，返回的这个指针可以被隐式地消除引用（图中的黑色箭头）。而`make(T, args)`返回一个普通的T。通常情况下，T内部有一些隐式的指针（图中的灰色箭头）。一句话，new返回一个指向已清零内存的指针，而make返回一个复杂的结构。
+* continious stack
+  方便goroutine的stack
+* 网络api netpoll
+On Linux, it uses epoll, on the BSDs and Darwin, it uses kqueue and on Windows it uses IoCompletionPort.
+* build option
+  -gcflags='-N -l'
+  否则local变量会被优化掉不好调试。
+* package命令规则
+是单数，不是复数。
+* http gzip response write
+https://gist.github.com/the42/1956518
+* pprof[fn:1]:
+#+BEGIN_SRC go
+package main
+
+import (
+  "fmt"
+  "log"
+  "net/http"
+  _ "net/http/pprof" // here be dragons
+)
+
+func main() {
+  http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintf(w, "Hello World!")
+  })
+  log.Fatal(http.ListenAndServe(":8080", nil))
+}
+#+END_SRC
+
+url:
++ /debug/pprof/profile: 30-second CPU profile
++ /debug/pprof/heap: heap profile
++ /debug/pprof/goroutine?debug=1: all goroutines with stack traces
++ /debug/pprof/trace: take a trace
+* http response body process:
+Body不关闭，http客户端无法复用tcp连接，导致连接数上涨。需要做到两点：
+
+#+BEGIN_SRC go
+res, _ := client.Do(req)
+io.Copy(ioutil.Discard, res.Body)
+res.Body.Close()
+#+END_SRC
+即body应当被读取，然后关闭。
+
+* gorm memleak:
+gorm need rows.Close()
+
+* Footnotes
+
+[fn:1] http://mmcloughlin.com/posts/your-pprof-is-showing
