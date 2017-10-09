@@ -103,7 +103,7 @@ Speaking of which, keep a journal. Seriously. Your memory is extremely faulty. I
 * https://github.com/miekg/dns
   一个goversion的DNS库，以后可以根据这个写些应用
 * https://github.com/denysdovhan/wtfjs
-  js的trickey part
+  js的tricky part
 * https://github.com/GeertJohan/gomatrix
   连接到matrix的一个golang程序，看了一下实现，对每一个列增加一个goroutine然后在里面按
 时间每次更新即可。没什么大的技巧在里面。但很有创意。
