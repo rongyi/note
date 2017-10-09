@@ -89,6 +89,9 @@ res.Body.Close()
 * gorm memleak:
 gorm need rows.Close()
 
+* interface in struct
+https://stackoverflow.com/questions/24537443/meaning-of-a-struct-with-embedded-anonymous-interface
+
 * Footnotes
 
 [fn:1] http://mmcloughlin.com/posts/your-pprof-is-showing
