@@ -12,17 +12,17 @@
    https://www.goinggo.net/2015/02/scheduler-tracing-in-go.html for detail
 
 * go code fix
-github.com\rogpeppe\godef\go\parser\parser.go
+  github.com\rogpeppe\godef\go\parser\parser.go
 
-// p.error(path.Pos(), fmt.Sprintf("cannot find identifier for package %q: %v", litToString(path), err))
+  // p.error(path.Pos(), fmt.Sprintf("cannot find identifier for package %q: %v", litToString(path), err))
 
-fixed this
+  fixed this
 
 * init vs main?
-Programs initialize and begin execution from the main package. If the main package imports other packages, they will be imported in the compile time. If one package is imported many times, it will be only compiled once. After importing packages, programs will initialize the constants and variables within the imported packages, then execute the init function if it exists, and so on. After all the other packages are initialized, programs will initialize constants and variables in the main package, then execute the init function inside the package if it exists. The following figure shows the process.
+  Programs initialize and begin execution from the main package. If the main package imports other packages, they will be imported in the compile time. If one package is imported many times, it will be only compiled once. After importing packages, programs will initialize the constants and variables within the imported packages, then execute the init function if it exists, and so on. After all the other packages are initialized, programs will initialize constants and variables in the main package, then execute the init function inside the package if it exists. The following figure shows the process.
 * dot import
 
-#+BEGIN_SRC bash
+  #+BEGIN_SRC bash
 import(
     . "fmt"
 )
@@ -91,6 +91,11 @@ gorm need rows.Close()
 
 * interface in struct
 https://stackoverflow.com/questions/24537443/meaning-of-a-struct-with-embedded-anonymous-interface
+
+* Which declaration form should I use?
+Use long declaration when you can’t know what data to store beforehand, otherwise, use short declaration. Use multiple declaration when you want to define multiple variables together or as an hint for code readability that the variables will be used together.
+
+You can’t use short declarations outside of functions including main function. Or: you will meet with this error: “syntax error: non-declaration statement outside function body”.
 
 * Footnotes
 

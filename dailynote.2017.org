@@ -138,3 +138,5 @@ Like any other book... There is no recipe for success. But there are a lot of te
 https://github.com/cstack/db_tutorial
 * python的坑
 https://github.com/satwikkansal/wtfpython
+* why golang?
+https://hackernoon.com/the-beauty-of-go-98057e3f0a7d
