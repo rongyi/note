@@ -148,3 +148,13 @@ how js work
 对jeff bezos的一些总结
 * https://techiedelight.quora.com/500-Data-Structures-and-Algorithms-practice-problems-and-their-solutions?__filter__&__nsrc__=2&__snid3__=1594232728&amp;share=1
 500 个数据结构以及解答
+* http://irreal.org/blog/?p=6533
+香浓如何解决问题：
++ Simplify.
++ Learn and think about similar problems and solutions.
++ Approach a problem from different angles.
++ Break the problem into small parts.
++ Solve the problem backwards: from solution to problem.
++ Extend your solution as far as it will go.
+* http://winterflower.github.io/2017/08/17/software-engineering-notebook/
+要记笔记
