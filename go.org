@@ -97,6 +97,23 @@ Use long declaration when you can’t know what data to store beforehand, otherw
 
 You can’t use short declarations outside of functions including main function. Or: you will meet with this error: “syntax error: non-declaration statement outside function body”.
 
+* go lang tool pprof
+  #+BEGIN_SRC bash
+  go get github.com/google/pprof
+  #+END_SRC
+
+  #+BEGIN_SRC go
+  import (
+  "runtime/pprof"
+  )
+  pprof.StartCPUProfile(os.Stdout)
+  defer pprof.StopCPUProfile()
+  #+END_SRC
+  生成profile文件之后用tool来inspect：
+  #+BEGIN_SRC bash
+  go tool pprof cpu.profile
+  #+END_SRC
+
 * Footnotes
 
 [fn:1] http://mmcloughlin.com/posts/your-pprof-is-showing
