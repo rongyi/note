@@ -117,6 +117,8 @@ You can’t use short declarations outside of functions including main function.
 
   内存全量使用情况：
   go tool pprof -alloc_space http://localhost:6060/debug/pprof/heap
+  当前情况使用：
+  go tool pprof -inuse_space http://localhost:6060/debug/pprof/heap
 
 * Footnotes
 
