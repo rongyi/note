@@ -113,7 +113,10 @@ You can’t use short declarations outside of functions including main function.
   #+BEGIN_SRC bash
   go tool pprof cpu.profile
   #+END_SRC
+  see: [fn:2] for detail
 
 * Footnotes
 
 [fn:1] http://mmcloughlin.com/posts/your-pprof-is-showing
+
+[fn:2] http://www.integralist.co.uk/posts/profiling-go/
