@@ -98,6 +98,7 @@ Use long declaration when you can’t know what data to store beforehand, otherw
 You can’t use short declarations outside of functions including main function. Or: you will meet with this error: “syntax error: non-declaration statement outside function body”.
 
 * go lang tool pprof
+  tl,dr : [fn:2]
   #+BEGIN_SRC bash
   go get github.com/google/pprof
   #+END_SRC
@@ -113,12 +114,14 @@ You can’t use short declarations outside of functions including main function.
   #+BEGIN_SRC bash
   go tool pprof cpu.profile
   #+END_SRC
-  see: [fn:2] for detail
-
   内存全量使用情况：
   go tool pprof -alloc_space http://localhost:6060/debug/pprof/heap
   当前情况使用：
   go tool pprof -inuse_space http://localhost:6060/debug/pprof/heap
+  保存png文件:
+  apt-get install graphviz
+  go tool pprof -png http://localhost:6060/debug/pprof/heap > data.png
+  如果是想知道CPU哪里慢了，用pprof
 
 * Footnotes
 
