@@ -123,6 +123,11 @@ You can’t use short declarations outside of functions including main function.
   go tool pprof -png http://localhost:6060/debug/pprof/heap > data.png
   如果是想知道CPU哪里慢了，用pprof
 
+* create reader from string?
+#+BEGIN_SRC go
+strings.NewReader(s)
+#+END_SRC
+
 * Footnotes
 
 [fn:1] http://mmcloughlin.com/posts/your-pprof-is-showing
