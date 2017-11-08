@@ -128,6 +128,9 @@ You can’t use short declarations outside of functions including main function.
 strings.NewReader(s)
 #+END_SRC
 
+* ssh connect方法：
+github.com/rapidloop/rtop 这个repo里有相关方法，可以参考
+
 * Footnotes
 
 [fn:1] http://mmcloughlin.com/posts/your-pprof-is-showing
