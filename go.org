@@ -96,6 +96,8 @@ https://stackoverflow.com/questions/24537443/meaning-of-a-struct-with-embedded-a
 Use long declaration when you can’t know what data to store beforehand, otherwise, use short declaration. Use multiple declaration when you want to define multiple variables together or as an hint for code readability that the variables will be used together.
 
 You can’t use short declarations outside of functions including main function. Or: you will meet with this error: “syntax error: non-declaration statement outside function body”.
+* add line number for a log:
+  log.SetFlags(log.LstdFlags | log.Lshortfile)
 
 * go lang tool pprof
   tl,dr : [fn:2]
