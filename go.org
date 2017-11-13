@@ -139,6 +139,14 @@ github.com/rapidloop/rtop 这个repo里有相关方法，可以参考
 * coredump的查看
 还是用dlv工具[fn:3]
 
+* go tool的一些参数
+go build -x
+看看过程都干了啥
+go test -race
+死锁检测
+go get -d
+只是clone不去安装
+
 * Footnotes
 
 [fn:1] http://mmcloughlin.com/posts/your-pprof-is-showing
