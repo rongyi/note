@@ -98,6 +98,8 @@ Use long declaration when you can’t know what data to store beforehand, otherw
 You can’t use short declarations outside of functions including main function. Or: you will meet with this error: “syntax error: non-declaration statement outside function body”.
 * add line number for a log:
   log.SetFlags(log.LstdFlags | log.Lshortfile)
+* 关于GMP之间的关系以及为什么引入P
+   许多关于Go调度的上来就是给你GMP，但这里的展开我觉的讲的很好 https://news.ycombinator.com/item?id=12459841
 
 * go lang tool pprof
   tl,dr : [fn:2]
