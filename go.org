@@ -100,6 +100,7 @@ You can’t use short declarations outside of functions including main function.
   log.SetFlags(log.LstdFlags | log.Lshortfile)
 * 关于GMP之间的关系以及为什么引入P
    许多关于Go调度的上来就是给你GMP，但这里的展开我觉的讲的很好 https://news.ycombinator.com/item?id=12459841
+   这个也不错， http://morsmachine.dk/go-scheduler
 
 * go lang tool pprof
   tl,dr : [fn:2]
@@ -135,8 +136,13 @@ strings.NewReader(s)
 * ssh connect方法：
 github.com/rapidloop/rtop 这个repo里有相关方法，可以参考
 
+* coredump的查看
+还是用dlv工具[fn:3]
+
 * Footnotes
 
 [fn:1] http://mmcloughlin.com/posts/your-pprof-is-showing
 
 [fn:2] http://www.integralist.co.uk/posts/profiling-go/
+
+[fn:3] https://rakyll.org/coredumps/
