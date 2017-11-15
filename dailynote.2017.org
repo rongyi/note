@@ -158,3 +158,6 @@ how js work
 + Extend your solution as far as it will go.
 * http://winterflower.github.io/2017/08/17/software-engineering-notebook/
 要记笔记
+* https://eli.thegreenplace.net/2017/concurrent-servers-part-4-libuv/
+作者从一个单进程串行后端服务写起到多线程到基于select/epoll到libuv写一个后端服务，对于底层细节了解很有帮助(三年前自己也很喜欢抠这些细节)，当然这些对于
+创业公司而言其实没有必要，因为是在造轮子，对于一门后端语言比如Go都已经做好封装，只需要写上层逻辑即可。
