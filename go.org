@@ -149,6 +149,8 @@ go get -d
 * grpc
 编译proto：
 protoc --go_out=plugins=grpc:. helloworld.proto
+定义的proto会生成对应Client/Server的interface， 后面对应server的实现函数signature就需要和interface中指定的一样。
+主要是stream这里需要理解一下，可以单向也可以全双工。通过获得stream然后对应读和写操作。
 
 * Footnotes
 
