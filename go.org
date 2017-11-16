@@ -146,6 +146,9 @@ go test -race
 死锁检测
 go get -d
 只是clone不去安装
+* grpc
+编译proto：
+protoc --go_out=plugins=grpc:. helloworld.proto
 
 * Footnotes
 
