@@ -151,6 +151,28 @@ go get -d
 protoc --go_out=plugins=grpc:. helloworld.proto
 定义的proto会生成对应Client/Server的interface， 后面对应server的实现函数signature就需要和interface中指定的一样。
 主要是stream这里需要理解一下，可以单向也可以全双工。通过获得stream然后对应读和写操作。
+* 防止goroutine泄露
+#+BEGIN_SRC go
+  doWork := func(done <-chan interface{}, strchan <-chan string) <-chan interface{} {
+    terminated := make(chan interface{})
+    go func() {
+      defer fmt.Println("doWork exited.")
+      defer close(terminated)
+      for {
+        select {
+        case s := <-strchan:
+          fmt.Println(s)
+        // add this to prevent goroutine leak
+        case <-done:
+          return
+        }
+      }
+    }()
+    return terminated
+  }
+#+END_SRC
+
+  一般都会添加一个done channel用来退出，不妨称为done channel pattern吧。
 
 * Footnotes
 
