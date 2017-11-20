@@ -1,0 +1,77 @@
+#+TITLE: ovs概览
+#+DATE: <2017-11-20 Mon>
+#+AUTHOR: dev
+#+EMAIL: sqrongyi@163.com
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+OPTIONS: author:t c:nil creator:comment d:(not "LOGBOOK") date:t
+#+OPTIONS: e:t email:nil f:t inline:t num:t p:nil pri:nil stat:t
+#+OPTIONS: tags:t tasks:t tex:t timestamp:t toc:t todo:t |:t
+#+CREATOR: Emacs 25.3.1 (Org mode 8.2.10)
+#+DESCRIPTION:
+#+EXCLUDE_TAGS: noexport
+#+KEYWORDS:
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+
+* 简介
+  之前的工作对ovs应用层比较熟悉，但没有看过ovs的源码，所以这里大概瞄了一眼，宏观的一些记录。
+
+* 基本数据结构
+** 端口结构体
+#+BEGIN_SRC c
+struct vport {
+  struct net_device *dev;
+  struct datapath *dp;
+  struct vport_portids __rcu *upcall_portids;
+  u16 port_no;
+
+  struct hlist_node hash_node;
+  struct hlist_node dp_hash_node;
+  const struct vport_ops *ops;
+
+  struct list_head detach_list;
+  struct rcu_head rcu;
+};
+#+END_SRC
+** 数据面：datapath
+#+BEGIN_SRC c
+struct datapath {
+  struct rcu_head rcu;
+  struct list_head list_node;
+
+  /* Flow table. */
+  struct flow_table table;
+
+  /* Switch ports. */
+  struct hlist_head *ports;
+
+  /* Stats. */
+  struct dp_stats_percpu __percpu *stats_percpu;
+
+  /* Network namespace ref. */
+  possible_net_t net;
+
+  u32 user_features;
+
+  u32 max_headroom;
+};
+
+#+END_SRC
+** flow table
+#+BEGIN_SRC c
+struct flow_table {
+  struct table_instance __rcu *ti;
+  struct table_instance __rcu *ufid_ti;
+  struct mask_cache_entry __percpu *mask_cache;
+  struct mask_array __rcu *mask_array;
+  unsigned long last_rehash;
+  unsigned int count;
+  unsigned int ufid_count;
+};
+#+END_SRC
+** flow key
+参见ovs-2.8.1/datapath/flow.h:68， 太大了，这里就不贴了。
+
+* 收发流程
+挂到kernel上，注册对应函数，来一个报文时ovs的入口函数为： =void ovs_dp_process_packet(struct sk_buff *skb, struct sw_flow_key *key)= 这里会看到生成flow表的key，查表，send等所有细节。
+对应的发送函数为： =void ovs_vport_send(struct vport *vport, struct sk_buff *skb, u8 mac_proto)=
