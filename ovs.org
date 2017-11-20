@@ -2,7 +2,7 @@
 #+DATE: <2017-11-20 Mon>
 #+AUTHOR: dev
 #+EMAIL: sqrongyi@163.com
-#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:{} arch:headline
 #+OPTIONS: author:t c:nil creator:comment d:(not "LOGBOOK") date:t
 #+OPTIONS: e:t email:nil f:t inline:t num:t p:nil pri:nil stat:t
 #+OPTIONS: tags:t tasks:t tex:t timestamp:t toc:t todo:t |:t
@@ -70,8 +70,61 @@ struct flow_table {
 };
 #+END_SRC
 ** flow key
-参见ovs-2.8.1/datapath/flow.h:68， 太大了，这里就不贴了。
+参见ovs-2.8.1/datapath/flow.h:68
+** 规则
+参见ovs-2.8.1/ofproto/ofproto-provider.h:351
+** action
+#+BEGIN_SRC c
+struct rule_actions {
+    /* Flags.
+     *
+     * 'has_meter' is true if 'ofpacts' contains an OFPACT_METER action.
+     *
+     * 'has_learn_with_delete' is true if 'ofpacts' contains an OFPACT_LEARN
+     * action whose flags include NX_LEARN_F_DELETE_LEARNED. */
+    bool has_meter;
+    bool has_learn_with_delete;
+    bool has_groups;
+
+    /* Actions. */
+    uint32_t ofpacts_len;         /* Size of 'ofpacts', in bytes. */
+    struct ofpact ofpacts[];      /* Sequence of "struct ofpacts". */
+};
+#+END_SRC
 
 * 收发流程
-挂到kernel上，注册对应函数，来一个报文时ovs的入口函数为： =void ovs_dp_process_packet(struct sk_buff *skb, struct sw_flow_key *key)= 这里会看到生成flow表的key，查表，send等所有细节。
+挂到kernel上，注册对应函数，来一个报文时ovs的入口函数为： =int ovs_vport_receive(struct vport *vport, struct sk_buff *skb, const struct ip_tunnel_info *tun_info)= 后续会继续调用=void ovs_dp_process_packet(struct sk_buff *skb, struct sw_flow_key *key)= 这里会看到生成flow表的key，查表，send等所有细节。
+
 对应的发送函数为： =void ovs_vport_send(struct vport *vport, struct sk_buff *skb, u8 mac_proto)=
+
+** flow action process
+#+BEGIN_SRC c
+static int do_execute_actions(struct datapath *dp, struct sk_buff *skb,
+            struct sw_flow_key *key,
+            const struct nlattr *attr, int len)
+#+END_SRC
+最常见的output action
+#+BEGIN_SRC c
+static void do_output(struct datapath *dp, struct sk_buff *skb, int out_port,
+          struct sw_flow_key *key)
+#+END_SRC
+
+action的drop是作为默认处理的，在定义的如下enum中没有drop！如果这些都没有，程序跳入最后一行free skbbuff那里。
+
+#+BEGIN_SRC c
+enum ovs_action_attr {
+  OVS_ACTION_ATTR_UNSPEC,
+  OVS_ACTION_ATTR_OUTPUT,       /* u32 port number. */
+  OVS_ACTION_ATTR_USERSPACE,    /* Nested OVS_USERSPACE_ATTR_*. */
+...
+#+END_SRC
+* flow消失
+有三种方式：
+1. 通过Remote Controller直接发送移除Flow Entry的消息，通过Openflow来做，这个没得说
+2. 通过OpenFlow Switch的过期机制， hard_timeout, idle_timeout在flow里看见过的，
+3. OpenFlow Switch的逐出机制，当OpenFlow Switch需要回收资源时，会行使这一权限。
+
+
+* 参考
+1. http://blog.csdn.net/yuzhihui_no1/article/details/39298321
+2. http://www.cnblogs.com/CasonChan/p/4613812.html
