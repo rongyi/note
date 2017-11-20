@@ -122,8 +122,35 @@ enum ovs_action_attr {
 有三种方式：
 1. 通过Remote Controller直接发送移除Flow Entry的消息，通过Openflow来做，这个没得说
 2. 通过OpenFlow Switch的过期机制， hard_timeout, idle_timeout在flow里看见过的，
-3. OpenFlow Switch的逐出机制，当OpenFlow Switch需要回收资源时，会行使这一权限。
+3. OpenFlow Switch的逐出机制，当OpenFlow Switch需要回收资源时，会行使这一权限，这个倒是很少见。
+* 保留端口信息
+#+BEGIN_SRC c
+//ovs-2.8.1/include/openflow/openflow-1.0.h:29
+/* Port number(s)   meaning
+ * ---------------  --------------------------------------
+ * 0x0000           not assigned a meaning by OpenFlow 1.0
+ * 0x0001...0xfeff  "physical" ports
+ * 0xff00...0xfff6  "reserved" but not assigned a meaning by OpenFlow 1.x
+ * 0xfff7...0xffff  "reserved" OFPP_* ports with assigned meanings
+ */
 
+/* Ranges. */
+#define OFPP_MAX        OFP_PORT_C(0xff00) /* Max # of switch ports. */
+#define OFPP_FIRST_RESV OFP_PORT_C(0xfff7) /* First assigned reserved port. */
+#define OFPP_LAST_RESV  OFP_PORT_C(0xffff) /* Last assigned reserved port. */
+
+/* Reserved output "ports". */
+#define OFPP_UNSET      OFP_PORT_C(0xfff7) /* For OXM_OF_ACTSET_OUTPUT only. */
+#define OFPP_IN_PORT    OFP_PORT_C(0xfff8) /* Where the packet came in. */
+#define OFPP_TABLE      OFP_PORT_C(0xfff9) /* Perform actions in flow table. */
+#define OFPP_NORMAL     OFP_PORT_C(0xfffa) /* Process with normal L2/L3. */
+#define OFPP_FLOOD      OFP_PORT_C(0xfffb) /* All ports except input port and
+                                            * ports disabled by STP. */
+#define OFPP_ALL        OFP_PORT_C(0xfffc) /* All ports except input port. */
+#define OFPP_CONTROLLER OFP_PORT_C(0xfffd) /* Send to controller. */
+#define OFPP_LOCAL      OFP_PORT_C(0xfffe) /* Local openflow "port". */
+#define OFPP_NONE       OFP_PORT_C(0xffff) /* Not associated with any port. */
+#+END_SRC
 
 * 参考
 1. http://blog.csdn.net/yuzhihui_no1/article/details/39298321
