@@ -161,3 +161,14 @@ how js work
 * https://eli.thegreenplace.net/2017/concurrent-servers-part-4-libuv/
 作者从一个单进程串行后端服务写起到多线程到基于select/epoll到libuv写一个后端服务，对于底层细节了解很有帮助(三年前自己也很喜欢抠这些细节)，当然这些对于
 创业公司而言其实没有必要，因为是在造轮子，对于一门后端语言比如Go都已经做好封装，只需要写上层逻辑即可。
+* https://news.ycombinator.com/item?id=15732087
+Since you asked, I'll try to share what I've learned. You can become incredibly effective if you invest in the skills to become a better teacher. Usually if someone is not learning, its the teacher not doing a good job.
+1. Test - before starting any topic, make sure your student has a grasp of the prerequisites by giving them simple tasks. Just because you have taught them the prerequisites a week ago does not mean that they didn't forget.
+2. When you are teaching them, talk as little as possible. The only thing you should be saying is the concepts.
+3. Ask lots of questions. Ie: What is an object (expect them to repeat what you told them); What happens if (insert 10x different cases). Teach by asking.
+4. Set 0 expectations. If you get frustrated its because you have expectations. Many people have self confidence issues. Being disappointed will cause your students emotional stress and they will not be able to learn. They might start to avoid asking you questions...
+5. Listen. Many times, your students could be saying what you wanted to hear, but worded differently. Their analogy could have the same concept as yours but very different. Learn to recognize what students are saying.
+I can't emphasize #3 enough. When I teach, I never say more than 2 sentences without asking a question. Because you quickly realize that people have a hard time retaining more than 2-3 sentences at a time.
+You should 100% invest your time to get better at teaching. Teaching is a skill that schools robs from our childhood growing up. It helps you sympathize with people better, understand people better, communicate with people better, etc., all pretty real skills to have.
+* https://news.ycombinator.com/item?id=15733745
+如何阅读科技类书籍
