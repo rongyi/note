@@ -1,0 +1,132 @@
+#+TITLE: opentsdb
+#+DATE: <2017-06-15 四>
+#+AUTHOR: ry
+#+EMAIL: ry@ry-VirtualBox
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:{} arch:headline
+#+OPTIONS: author:t c:nil creator:comment d:(not "LOGBOOK") date:t
+#+OPTIONS: e:t email:nil f:t inline:t num:t p:nil pri:nil stat:t
+#+OPTIONS: tags:t tasks:t tex:t timestamp:t toc:t todo:t |:t
+#+CREATOR: Emacs 25.1.1 (Org mode 8.2.10)
+#+DESCRIPTION:
+#+EXCLUDE_TAGS: noexport
+#+KEYWORDS:
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+
+* 简介
+  本文详细叙述搭建opentsdb过程。
+简介
+  本文简介opentsdb搭建流程。opentsdb的搭建依赖链： opentsdb->hbase->java。下文逐个展开。
+* java环境
+  推荐用oracle java而不是openjdk。所以需要去官网下载java。当前下载的版本为：jdk-8u131-linux-x64.tar.gz。一般解压会得到带有版本信息的文件夹。
+
+  #+BEGIN_SRC bash
+  tar xvf ~/Downloads/jdk-8u131-linux-x64.tar.gz
+  mv jdk1.8.0_131 /usr/local/java
+  #+END_SRC
+
+  设置环境变量，将下面的环境变量添加到 =$HOME/.bashrc= 中
+
+  #+BEGIN_SRC bash
+  export JAVA_HOME=/usr/local/java
+  CLASSPATH=/usr/local/java/lib/dt.jar:/usr/local/java/lib/tools.jar
+  PATH=/usr/local/java/bin:$PATH
+  export PATH JAVA_HOME CLASSPATH
+  #+END_SRC
+
+  更新完环境变量检测：
+
+  #+BEGIN_SRC bash
+  java –version
+  #+END_SRC
+
+* hbase环境
+  hbase记得要用stable版本，否则会搭建失败。 当前的hbase版本： hbase-1.2.5-bin.tar.gz，还是解压更新文件夹名称，配合环境变量如下：
+
+  #+BEGIN_SRC bash
+  export HBASE_HOME=/usr/local/hbase
+  export HBASE_HOME
+  #+END_SRC
+
+  需要修改的文件： /usr/local/hbase/conf/hbase-site.xml. 内容如下：
+
+  #+BEGIN_SRC xml
+<configuration>
+<property>
+    <name>hbase.rootdir</name>
+    <value>file:///root/hbase</value>
+  </property>
+  <property>
+    <name>hbase.zookeeper.property.dataDir</name>
+    <value>/root/zookeeper</value>
+  </property>
+</configuration>
+  #+END_SRC
+
+  需要修改的文件： /usr/local/hbase/conf/hbase-env.sh 修改JAVA_HOME参数
+  #+BEGIN_SRC bash
+export JAVA_HOME=/usr/local/java
+  #+END_SRC
+
+  启动hbase
+#+BEGIN_SRC bash
+cd /usr/local/hbase/bin && ./start-hbase.sh
+#+END_SRC
+  检测
+
+  #+BEGIN_SRC bash
+  echo $?
+  jps
+  网页访问： http://localhost:16010
+  #+END_SRC
+
+* tsdb安装
+  tsdb通过github网站release页面下载： https://github.com/OpenTSDB/opentsdb/releases 。 当前的版本为：  opentsdb-2.3.0_all.deb。
+  #+BEGIN_SRC bash
+  Ubuntu：
+  dpkg –i ~/Downloads/ opentsdb-2.3.0_all.deb
+  Centos:
+  rpm –ivh opentsdb-2.3.0_all.rpm
+  #+END_SRC
+
+安装后的步骤：
+1. /etc/opentsdb/opentsdb.conf
+# 万达网络默认只开放10000 - 12000区间的端口
+tsd.network.port = 11242
+tsd.http.staticroot = /usr/share/opentsdb/static/
+tsd.http.cachedir = /tmp/opentsdb
+tsd.core.plugin_path = /usr/share/opentsdb/plugins
+
+2. 增加两个变量执行创建表的脚本，或者env传入或者写到脚本里面：
+HABASE_HOME=/usr/local/hbase
+
+COMPRESSION=NONE
+
+脚本文件： /usr/share/opentsdb/tools/create_table.sh
+
+带这两个变量执行脚本。
+#+BEGIN_SRC bash
+HABASE_HOME=/usr/local/hbase COMPRESSION=NONE /usr/share/opentsdb/tools/create_table.sh
+# 看$?返回值，看输出。
+#+END_SRC
+
+3. 启动
+   #+BEGIN_SRC bash
+cd /usr/share/opentsdb/bin/ && nohup ./tsdb tsd &
+   #+END_SRC
+4. 创建测试metric
+   #+BEGIN_SRC bash
+cd /usr/share/opentsdb/bin/
+./tsdb mkmetric  proc.loadavg.1m
+   #+END_SRC
+5. 写脚本put数据：
+   #+BEGIN_SRC bash
+#!/bin/bash
+set -e
+while true; do
+        awk -v now=`date +%s` -v host=`hostname` '{ print "put proc.loadavg.1m " now " " $1" host=" host;}' /proc/loadavg | nc -w 30 localhost 4242
+        #awk -v now=`date +%s` -v host=`hostname` '{ print "put proc.loadavg.1m " now " " $1" host=" host;}' /proc/loadavg
+        sleep 3
+        echo "put metric done"
+done
+   #+END_SRC
