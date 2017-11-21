@@ -1,0 +1,85 @@
+#+TITLE: ovs_userspace
+#+DATE: <2017-11-21 Tue>
+#+AUTHOR: dev
+#+EMAIL: ry@ubuntu
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:{} arch:headline
+#+OPTIONS: author:t c:nil creator:comment d:(not "LOGBOOK") date:t
+#+OPTIONS: e:t email:nil f:t inline:t num:t p:nil pri:nil stat:t
+#+OPTIONS: tags:t tasks:t tex:t timestamp:t toc:t todo:t |:t
+#+CREATOR: Emacs 25.3.1 (Org mode 8.2.10)
+#+DESCRIPTION:
+#+EXCLUDE_TAGS: noexport
+#+KEYWORDS:
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+* ovs command
+1. packet out
+#+BEGIN_SRC bash
+ovs-ofctl packet-out br0 None "output:92" +packet hex buffer
+#+END_SRC
+2. show ovs interface detail
+#+BEGIN_SRC bash
+ovs-vsctl list interface test
+#+END_SRC
+3. dump flows
+#+BEGIN_SRC bash
+ovs-ofctl dump-flows br0 -Oopenflow13
+#+END_SRC
+4. add gre port
+#+BEGIN_SRC bash
+ovs-vsctl --db=tcp:%s:6634 --timeout=3 --may-exist add-port br0 gre%s -- set interface gre%s type=gre options:remote_ip=%s options:local_ip=%s options:key=flow
+#+END_SRC
+5. find gre port list
+#+BEGIN_SRC bash
+ovs-vsctl --db=tcp:%s:6634 --timeout=3 --columns=ofport,name,options -f json --no-heading find interface type=gre
+#+END_SRC
+6. replace flow
+#+BEGIN_SRC bash
+ovs-ofctl replace-flows -Oopenflow13 br0 /tmp/synced-flow.txt
+#+END_SRC
+7. show flow overview
+#+BEGIN_SRC bash
+ovs-ofctl dump-tables br0 -Oopenflow13
+#+END_SRC
+8. set/change dpid
+#+BEGIN_SRC bash
+ovs-vsctl set bridge br0 other_config:datapath-id=0000001e08097302
+ovs-vsctl show br0
+#+END_SRC
+9. change ovs interface mac address
+#+BEGIN_SRC bash
+INTERFACE=ulb-lan
+ovs-vsctl --may-exist add-port br0 $INTERFACE -- set interface $INTERFACE type=internal
+ip link set $INTERFACE address 52:58:01:10:ff:01
+ip addr add dev $INTERFACE 10.9.252.1/16
+ip link set ulb-lan up
+#+END_SRC
+1. add gre tunnel with gre tunnel id
+#+BEGIN_SRC bash
+'ovs-vsctl add-port br0 gre%s -- set Interface gre%s type=gre ofport_request=%d options:key=flow options:remote_ip=%s options:local_ip=%s' % (one_ovs.remote_ip, one_ovs.remote_ip, one_ovs.ofport, one_ovs.remote_ip, one_ovs.local_ip)
+#+END_SRC
+1. add bridge/ del bridge/ list all bridge / check exist / show overview
+#+BEGIN_SRC bash
+ovs-vsctl add-br br0
+ovs-vsctl del-br br0
+ovs-vsctl list-br
+ovs-vsctl br-exists br0
+ovs-vsctl show
+#+END_SRC
+2. add interface to bridge/ del interface / list all interface
+#+BEGIN_SRC bash
+ovs-vsctl add-port br0 eth0
+ovs-vsctl del-port br0 eth0
+ovs-vsctl list-ports br0
+#+END_SRC
+3. set controller / get controller
+#+BEGIN_SRC bash
+ovs-vsctl set-controller ovs-br tcp:1.2.3.4:6633
+ovs-vsctl show # see the is_connected:true
+ovs-vsctl get-controller br0
+ovs-vsctl del-controller br0
+#+END_SRC
+* 查看mac表项
+#+BEGIN_SRC bash
+ovs-appctl fdb/show br-int
+#+END_SRC
