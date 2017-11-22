@@ -226,6 +226,8 @@ gin里还有一个 =c.ShouldBind(obj interface{})= 用于绑定参数到结构�
 * 一些sugar
 这个文件里一堆 =/home/ry/go/src/github.com/gin-gonic/gin/context.go:678= 这里就不列举了。有帮助返回的，有方便建立临时JSON对象的(gin.H)
 
+* 总结
+总体看Gin的代码质量很高，很具有学习价值，后面有空继续扩充吧，官方首页的README写的太详细基本后端API开发够了。
 
 * Footnotes
 
