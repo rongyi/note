@@ -1,0 +1,213 @@
+#+TITLE: gin源码分析
+#+DATE: <2017-11-21 Tue>
+#+AUTHOR: dev
+#+EMAIL: sqrongyi@163.com
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:{} arch:headline
+#+OPTIONS: author:t c:nil creator:comment d:(not "LOGBOOK") date:t
+#+OPTIONS: e:t email:nil f:t inline:t num:t p:nil pri:nil stat:t
+#+OPTIONS: tags:t tasks:t tex:t timestamp:t toc:t todo:t |:t
+#+CREATOR: Emacs 25.3.1 (Org mode 8.2.10)
+#+DESCRIPTION:
+#+EXCLUDE_TAGS: noexport
+#+KEYWORDS:
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+* 简介
+gin[fn:1]是一款优秀的http框架，看过的falcon[fn:2]后端API也是基于gin开发的，对此框架的熟悉对快速实现上层基于HTTP的服务很有帮助，所以本文对其内部实现进行简要的说明。
+
+* Hello Word
+#+BEGIN_SRC go
+package main
+
+import "github.com/gin-gonic/gin"
+
+func main() {
+  r := gin.Default()
+  r.GET("/ping", func(c *gin.Context) {
+    c.JSON(200, gin.H{
+      "message": "pong",
+    })
+  })
+  r.Run() // listen and serve on 0.0.0.0:8080
+}
+#+END_SRC
+这是官网首页上的一个Hello示例，服务启动时候的输出如下：
+#+BEGIN_SRC bash
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:   export GIN_MODE=release
+ - using code:  gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /ping                     --> main.main.func1 (3 handlers)
+[GIN-debug] Environment variable PORT is undefined. Using port :8080 by default
+[GIN-debug] Listening and serving HTTP on :8080
+#+END_SRC
+
+上面的debug信息是由这两个函数输出：
+1. debugPrintWARNINGDefault
+2. debugPrintWARNINGNew
+
+可以知道gin启动的时候会根据环境变量去设置在生产还是测试环境中。这在框架init时候就去做了，所以在main里没有看到。
+#+BEGIN_SRC go
+// /home/ry/go/src/github.com/gin-gonic/gin/mode.go:40
+func init() {
+  mode := os.Getenv(ENV_GIN_MODE)
+  SetMode(mode)
+}
+#+END_SRC
+这里会去设置package level的变量： =ginMode= 后面所有的debug print都会去判断这个变量的值，包括上面提到的两个debug函数。
+
+后面的输出是我们自己写的请求URL： =/ping= 后面却说有3个handlers，怎么回事？搞清楚怎么回事，先看这句话怎么输出的:
+#+BEGIN_SRC go
+// call chain top down
+func debugPrintRoute(httpMethod, absolutePath string, handlers HandlersChain)
+func (engine *Engine) addRoute(method, path string, handlers HandlersChain)
+func (group *RouterGroup) handle(httpMethod, relativePath string, handlers HandlersChain) IRoutes
+func (group *RouterGroup) GET(relativePath string, handlers ...HandlerFunc) IRoutes
+#+END_SRC
+最上面负责输出，最下面是我们例子中调用的函数， =gin.Default()= 创建的是一个Engine, Engine里有个 RouterGroup,每层RouterGroup往下“串”的时候都会有一个Engine指针指向对应Engine，可以跟着函数调用路径看下，这里用了Golang struct的method promote语言属性。
+
+我们解决了打印的疑问，但还没有解答这里的三个handlers问题，这里先放下，待阐述核心数据结构再说。
+
+最后的输出同样指出PORT环境变量没有设置，代码在:
+#+BEGIN_SRC go
+func resolveAddress(addr []string) string
+#+END_SRC
+
+至此一个简单HelloWorld的输出我们就全搞清楚了。
+* 核心数据结构
+在看核心数据结构之前，gin怎样attach到golang的http框架中的，
+#+BEGIN_SRC go
+func (engine *Engine) Run(addr ...string) (err error) {
+  defer func() { debugPrintError(err) }()
+
+  address := resolveAddress(addr)
+  debugPrint("Listening and serving HTTP on %s\n", address)
+  err = http.ListenAndServe(address, engine)
+  return
+}
+
+func (engine *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request)
+#+END_SRC
+在Run函数中调用http.ListenAndServe，把gin的核心结构当做router（第二个参数）给到golang http框架，而engine肯定实现了 ServeHTTP这个接口:
+#+BEGIN_SRC go
+// ServeHTTP conforms to the http.Handler interface.
+func (engine *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+  c := engine.pool.Get().(*Context)
+  c.writermem.reset(w)
+  c.Request = req
+  c.reset()
+
+  engine.handleHTTPRequest(c)
+
+  engine.pool.Put(c)
+}
+#+END_SRC
+这里的代码看起来非常的简介优雅，意图十分明了，这种代码就是不需要注释的典范。
+
+这里涉及的核心数据结构都用到了。Engine/Context，我们逐个说明解释。
+
+** Engine
+Engine通过Default或者New函数来获得，这里不会贴代码，简述一下大概的结构：
++ 分配请求/应答核心数据结构Context的一个pool
++ 请求URL的一个tree描述
+
+** Context
++ HTTP请求 http.Request
++ ResponseWriter
++ 指向Engine的指针
++ 相关参数
+
+* 中间件的实现
+解释之前的3个handler的疑问，答案在这里：
+#+BEGIN_SRC go
+func Default() *Engine {
+  debugPrintWARNINGDefault()
+  engine := New()
+  engine.Use(Logger(), Recovery())
+  return engine
+}
+#+END_SRC
+除了我们自己注册的一个回调，框架给我们加了两个， =Logger= =Recovery= 利用closure性质返回HandleFunc，一个负责打印请求，一个负责在异常时recover。 这里又涉及框架的中间件架构，我们从Use函数进入可以看到依赖 =RouterGroup= 这个实现。 RouterGroup对应的是应用层开发的那种REST感觉，比如 =/user= =/admin= 可以针对这样一个粒度来增加中间件，对应的内部的url写起来也轻松一点，一个很有说服力的例子如下：
+#+BEGIN_SRC go
+  u := r.Group("/api/v1/user")
+  u.GET("/auth_session", AuthSession)
+  u.POST("/login", Login)
+  u.GET("/logout", Logout)
+
+  //user modify
+  u.POST("/create", CreateUser)
+  authapi := r.Group("/api/v1/user")
+  authapi.Use(utils.AuthSessionMidd)
+  authapi.GET("/current", UserInfo)
+
+
+  alarmapi := r.Group("/api/v1/alarm")
+  alarmapi.Use(utils.AuthSessionMidd)
+  alarmapi.POST("/eventcases", AlarmLists)
+  alarmapi.GET("/eventcases", AlarmLists)
+  alarmapi.POST("/events", EventsGet)
+#+END_SRC
+
+这是falcon-plus中的源码，可以看到，各模块的URL都是相对这个group写的，这样看起来更清爽，创建的Engine中有一个默认的RouterGroup，也可以称为根RouterGroup。每创建一个RouterGroup时都会计算出当前的basePath，所以可以看出这里是可以嵌套的。那么这些callchain怎么串起来的？答案是：
+#+BEGIN_SRC go
+func (c *Context) Next() {
+  c.index++
+  for s := int8(len(c.handlers)); c.index < s; c.index++ {
+    c.handlers[c.index](c)
+  }
+}
+#+END_SRC
+中间件放在一个list中，每个中间件会call这个函数进行级联调用。那么第一个谁来call呢？当然是router咯，具体参见
+#+BEGIN_SRC go
+func (engine *Engine) handleHTTPRequest(c *Context) {
+...
+      handlers, params, tsr := root.getValue(path, c.Params, unescape)
+      if handlers != nil {
+        c.handlers = handlers
+        c.Params = params
+        c.Next()
+        c.writermem.WriteHeaderNow()
+        return
+      }
+
+...
+}
+#+END_SRC
+这里找到注册的handlers之后由框架开启第一个Next调用，然后开启整个调用chain。注意这里的顺序，自己注册回调是在list的最后一个，中间件在前，所以logger中间件的实现的closure是放在第一个（我们的helloworld示例），进去获取开始时间就调用Next，只到chain都处理完回到这里就可以计算出总共消耗多少时间，这也是中间件的一个使用技巧，即Next的调用不是在结尾，而是在某处。
+
+添加路由/获取路由这个模块是基于httproute高性能router，有兴趣可以继续深入下去。
+
+* 参数绑定
+** 请求URL绑定
+#+BEGIN_SRC go
+router.GET("/user/:name", func(c *gin.Context) {
+    name := c.Param("name")
+    c.String(http.StatusOK, "Hello %s", name)
+})
+#+END_SRC
+这样的URL在添加注册时由 =func (n *node) addRoute(path string, handlers HandlersChain)= 调用 =func (n *node) insertChild(numParams uint8, path string, fullPath string, handlers HandlersChain)= 来完成标记，
+#+BEGIN_SRC go
+// /home/ry/go/src/github.com/gin-gonic/gin/tree.go:289
+// 这里完成注册
+      child := &node{
+        nType:     param,
+        maxParams: numParams,
+      }
+
+// /home/ry/go/src/github.com/gin-gonic/gin/tree.go:401
+// 这里完成获取操作
+#+END_SRC
+
+需要注意 =c.Param= 这个函数的时间复杂度是O(N)的，即在所有参数里找到第一个，所以这里URL传参不宜过多，代码里规定上限255个。
+** form绑定
+
+* 一些sugar
+
+
+* Footnotes
+
+[fn:1] https://github.com/gin-gonic/gin
+
+[fn:2] https://github.com/open-falcon/falcon-plus
