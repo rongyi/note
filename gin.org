@@ -201,9 +201,30 @@ router.GET("/user/:name", func(c *gin.Context) {
 #+END_SRC
 
 需要注意 =c.Param= 这个函数的时间复杂度是O(N)的，即在所有参数里找到第一个，所以这里URL传参不宜过多，代码里规定上限255个。
-** form绑定
+** HTTP get参数
+#+BEGIN_SRC go
+// /welcome?firstname=Jane&lastname=Doe
+router.GET("/welcome", func(c *gin.Context) {
+    firstname := c.DefaultQuery("firstname", "Guest")
+    lastname := c.Query("lastname") // shortcut for c.Request.URL.Query().Get("lastname")
+
+    c.String(http.StatusOK, "Hello %s %s", firstname, lastname)
+})
+#+END_SRC
+和注释里的一样，这个只是顺着 =context= 找到http request然后调用标准库中的URL方法获取URL参数，没什么好说的。
+
+** HTTP post参数获取
+#+BEGIN_SRC go
+name := c.PostForm("name")
+#+END_SRC
+这里调用标准库的 =ParseForm= 实现，将结果绑定到请求的Form上。
+
+gin里还有一个 =c.ShouldBind(obj interface{})= 用于绑定参数到结构体，这个实现会根据请求方法和MIME来判断然后通过各自的方法来实现对应的绑定，这里的实现除了支持JSON对象绑定竟然还是Protobuf，所以这里的反序列化都可以由框架来做，不得不觉得框架设计者的用心。
+
+
 
 * 一些sugar
+这个文件里一堆 =/home/ry/go/src/github.com/gin-gonic/gin/context.go:678= 这里就不列举了。有帮助返回的，有方便建立临时JSON对象的(gin.H)
 
 
 * Footnotes
