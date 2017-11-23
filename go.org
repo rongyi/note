@@ -178,6 +178,8 @@ protoc --go_out=plugins=grpc:. helloworld.proto
 reflect.TypeOf(s)
 reflect.ValueOf(s).Kind()
 fmt.Printf("%T\n", s)
+* https://research.swtch.com/interfaces
+  interface internel
 
 * Footnotes
 
