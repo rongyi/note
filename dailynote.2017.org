@@ -172,3 +172,5 @@ I can't emphasize #3 enough. When I teach, I never say more than 2 sentences wit
 You should 100% invest your time to get better at teaching. Teaching is a skill that schools robs from our childhood growing up. It helps you sympathize with people better, understand people better, communicate with people better, etc., all pretty real skills to have.
 * https://news.ycombinator.com/item?id=15733745
 如何阅读科技类书籍
+* https://routley.io/tech/2017/11/23/logbook.html
+使用logbook的一个工作方法，这些年自己一直践行这样的方法
