@@ -129,6 +129,8 @@ You can’t use short declarations outside of functions including main function.
   如果是想知道CPU哪里慢了，用pprof
   看看goroutine情况的URL
   http://localhost:6060/debug/pprof/goroutine?debug=1
+  跟着pprof的一个golang命令行工具：
+  https://github.com/google/gops
 
 * create reader from string?
 #+BEGIN_SRC go
