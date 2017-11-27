@@ -174,3 +174,9 @@ You should 100% invest your time to get better at teaching. Teaching is a skill 
 如何阅读科技类书籍
 * https://routley.io/tech/2017/11/23/logbook.html
 使用logbook的一个工作方法，这些年自己一直践行这样的方法
+* https://news.ycombinator.com/item?id=15781883
+https://carld.github.io/2017/06/20/lisp-in-less-than-200-lines-of-c.html
+C写一个Lisp
+* https://blog.lizzie.io/linux-containers-in-500-loc.html
+https://news.ycombinator.com/item?id=15608435
+手写一个container
