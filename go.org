@@ -127,6 +127,8 @@ You can’t use short declarations outside of functions including main function.
   apt-get install graphviz
   go tool pprof -png http://localhost:6060/debug/pprof/heap > data.png
   如果是想知道CPU哪里慢了，用pprof
+  看看goroutine情况的URL
+  http://localhost:6060/debug/pprof/goroutine?debug=1
 
 * create reader from string?
 #+BEGIN_SRC go
