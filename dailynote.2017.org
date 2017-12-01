@@ -180,3 +180,5 @@ C写一个Lisp
 * https://blog.lizzie.io/linux-containers-in-500-loc.html
 https://news.ycombinator.com/item?id=15608435
 手写一个container
+* https://blog.sourcerer.io/writing-a-simple-linux-kernel-module-d9dc3762c234
+kernel module入门
