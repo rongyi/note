@@ -55,3 +55,9 @@
   return NF_HOOK(PF_INET, NF_IP_LOCAL_OUT, skb, NULL, rt->u.dst.dev,
            dst_output);
    #+END_SRC
+
+8. 中断BH处理softirq注册函数
+   #+BEGIN_SRC c
+  open_softirq(NET_TX_SOFTIRQ, net_tx_action, NULL);
+  open_softirq(NET_RX_SOFTIRQ, net_rx_action, NULL);
+   #+END_SRC

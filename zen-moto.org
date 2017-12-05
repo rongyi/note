@@ -1,7 +1,27 @@
+* 阅读笔记
+作者带着他的儿子和一些朋友骑摩托车穿越美国。从在高速公路和乡间小路上人们的差异讲起，走乡间路往往会和路人聊很久从哪里来到哪里去，而高速上看到的却是后座哭泣的孩子和一张张面无表情的脸，渐渐地作者想说在这美好的旅途当中去谈些事情点开本书的命题： what's good而不是what's new, 在思维的河流里把淤积在下面的已经不知道来历脉络的一些东西梳理清楚:
+
+#+BEGIN_QUOTE
+Now the stream of our common consciousness seems to be obliterating its own banks, losing its central direction and purpose, flooding the lowlands, disconnecting and isolating the highlands and to no particular purpose other than the wasteful fulfillment of its own internal momentum. Some channel deepening seems called for.
+#+END_QUOTE
+
+从身边一起游玩的一对夫妻说起，他们对技术很排斥，从两件小事：摩托车点不着时和家里水龙头滴水，作者说这背后一定隐藏着一些东西值得去深挖一下。最后提出世界观的冲突：
+#+BEGIN_QUOTE
+A classical understanding sees the world primarily as underlying form itself. A romantic understanding sees it primarily in terms of immediate appearance.
+#+END_QUOTE
+有一种人喜欢看表象，有一种人更喜欢背后的逻辑。
+
+两种划分没有谁对谁错，因为：
 
 #+BEGIN_QUOTE
 The Buddha, the Godhead, resides quite as comfortably in the circuits of a digital computer or the gears of a cycle transmission as he dose at the top of a mountain or in the petals of a flower. To think otherwise is to demean the Buddha -- which is to demean oneself.
 #+END_QUOTE
+
+
+而为了解决这个矛盾冲突就要理性分析，理性分析之前还要对分析手段--理性--进行抽丝剥茧的根本分析，所以后面基本上从亚里士多德到Home到康德都会讲一些。
+
+
+
 #+BEGIN_QUOTE
 When you want to hurry something, that means you no longer care about it and  want to get on to other things.
 #+END_QUOTE
