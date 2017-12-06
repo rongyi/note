@@ -182,3 +182,5 @@ https://news.ycombinator.com/item?id=15608435
 手写一个container
 * https://blog.sourcerer.io/writing-a-simple-linux-kernel-module-d9dc3762c234
 kernel module入门
+* https://news.ycombinator.com/item?id=15853308
+HN的一个讨论，下面有不少推荐的go repo，可以看看
