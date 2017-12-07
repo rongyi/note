@@ -184,6 +184,8 @@ reflect.ValueOf(s).Kind()
 fmt.Printf("%T\n", s)
 * https://research.swtch.com/interfaces
   interface internel
+* go help environment
+  环境变量都在这里了
 
 * Footnotes
 
