@@ -91,3 +91,13 @@ static inline int ip_local_deliver_finish(struct sk_buff *skb)
       #+BEGIN_SRC c
       struct list_head tasks;
       #+END_SRC
+9. 发送处理
+   #+BEGIN_SRC c
+int ip_queue_xmit(struct sk_buff *skb, int ipfragok)
+查找路由，找到然后增加3层头信息，最终经典的NF_HOOK
+  return NF_HOOK(PF_INET, NF_IP_LOCAL_OUT, skb, NULL, rt->u.dst.dev,
+           dst_output);
+int ip_route_output_flow(struct rtable **rp, struct flowi *flp, struct sock *sk, int flags)
+处理rawsocket情况
+static int raw_sendmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg, size_t len)
+   #+END_SRC
