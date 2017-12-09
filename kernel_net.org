@@ -42,12 +42,19 @@
 6. ip_rcv之后处理分本地投递和转发两个路径，对应函数为： ip_local_deliver ip_forward
 
    #+BEGIN_SRC c
-  rth->u.dst.input = ip_forward;
-  rth->u.dst.output = ip_output;
+   rth->u.dst.input = ip_forward;
+   rth->u.dst.output = ip_output;
    #+END_SRC
+
    还是挂接好函数指针，后面在 dst_output这样的函数中直接call。
 
    决定路由的函数: ip_route_input 就会得到对应的函数指针，并设置skb->dst字段。
+
+   还有本地投递的处理函数
+   #+BEGIN_SRC c
+int ip_local_deliver(struct sk_buff *skb)
+static inline int ip_local_deliver_finish(struct sk_buff *skb)
+   #+END_SRC
 
 7. egress路径： ip_queue_xmit tcp发送路径会调这个函数。
    函数的最后的Netfilter hook:
