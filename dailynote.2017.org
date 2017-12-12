@@ -186,3 +186,7 @@ kernel module入门
 HN的一个讨论，下面有不少推荐的go repo，可以看看
 * https://marcan.st/2017/12/debugging-an-evil-go-runtime-bug/
 偶像！
+* http://blog.breakthru.solutions/re-moving-from-php-to-go-and-back-again/
+Writing code has to be pleasant experience. Writing code is like painting or sculpting.
+You have to have a passion for it. You have to love it. Otherwise, what’s the point?
+You’d be better off working behind an assembly line for some car manufacturer.
