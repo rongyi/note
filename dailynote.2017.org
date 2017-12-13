@@ -184,3 +184,5 @@ https://news.ycombinator.com/item?id=15608435
 kernel module入门
 * https://news.ycombinator.com/item?id=15853308
 HN的一个讨论，下面有不少推荐的go repo，可以看看
+* https://marcan.st/2017/12/debugging-an-evil-go-runtime-bug/
+偶像！
