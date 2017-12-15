@@ -190,3 +190,5 @@ HN的一个讨论，下面有不少推荐的go repo，可以看看
 Writing code has to be pleasant experience. Writing code is like painting or sculpting.
 You have to have a passion for it. You have to love it. Otherwise, what’s the point?
 You’d be better off working behind an assembly line for some car manufacturer.
+* https://blog.goodaudience.com/a-beginners-guide-to-getting-started-in-the-cryptocurrency-world-69c50516be71
+去中心化的加密货币相关的入门
