@@ -192,3 +192,5 @@ You have to have a passion for it. You have to love it. Otherwise, what’s the 
 You’d be better off working behind an assembly line for some car manufacturer.
 * https://blog.goodaudience.com/a-beginners-guide-to-getting-started-in-the-cryptocurrency-world-69c50516be71
 去中心化的加密货币相关的入门
+* https://github.com/julienr/ipynb_playground/blob/master/bitcoin/dumbcoin/dumbcoin.ipynb
+比特币入门
