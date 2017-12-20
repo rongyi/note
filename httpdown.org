@@ -88,6 +88,54 @@ stopDone channel送进去之后就看manage函数中的"表演"，具体如下�
 明显看出facebook的dev对channel操作的纯熟。
 
 
+* 姊妹篇： grace[fn:2]
+重启进程，保证不丢请求的一种方法，简单讲分以下几个步骤：
+1. 注册SIGUSR2信号处理
+2. 信号回调中将监听的文件句柄传给子进程
+    #+BEGIN_SRC go
+    // files这里就是命令行传过来进行再开进程的参数
+    env = append(env, fmt.Sprintf("%s%d", envCountKeyPrefix, len(listeners)))
+
+    allFiles := append([]*os.File{os.Stdin, os.Stdout, os.Stderr}, files...)
+    process, err := os.StartProcess(argv0, os.Args, &os.ProcAttr{
+        Dir:   originalWD,
+        Env:   env,
+        Files: allFiles,
+    })
+    #+END_SRC
+3. 子进程监听
+
+   #+BEGIN_SRC go
+    // 这里从3开始创建新的文件句柄，之后复制,
+    for i := fdStart; i < fdStart+count; i++ {
+      file := os.NewFile(uintptr(i), "listener")
+// FileListener returns a copy of the network listener corresponding
+// to the open file f.
+// It is the caller's responsibility to close ln when finished.
+// Closing ln does not affect f, and closing f does not affect ln.
+// 这个API的官方文档，这里相当于复制了一份，把之前的关了
+      l, err := net.FileListener(file)
+      if err != nil {
+        file.Close()
+        retErr = fmt.Errorf("error inheriting socket fd %d: %s", i, err)
+        return
+      }
+      if err := file.Close(); err != nil {
+        retErr = fmt.Errorf("error closing inherited socket fd %d: %s", i, err)
+        return
+      }
+      n.inherited = append(n.inherited, l)
+    }
+   #+END_SRC
+4. 父进程退出，这里会用到之前httpdown的流程，这里细节就忽略了。
+   #+BEGIN_SRC go
+       if err := syscall.Kill(ppid, syscall.SIGTERM); err != nil {
+       return fmt.Errorf("failed to close parent: %s", err)
+       }
+   #+END_SRC
+socket由子进程继承
+
 * Footnotes
 
 [fn:1] https://github.com/facebookgo/httpdown
+[fn:2] https://github.com/facebookgo/grace
