@@ -61,3 +61,7 @@
   open_softirq(NET_TX_SOFTIRQ, net_tx_action, NULL);
   open_softirq(NET_RX_SOFTIRQ, net_rx_action, NULL);
    #+END_SRC
+
+9. 二层cache：
+   在dst_entry中会有指针最终指向二层headercache，因为二层比较死，很多场景不必一次次拼装，只需要拿cache过来用好了，比如一个场景：到网关
+   的二层信息基本上不变。
