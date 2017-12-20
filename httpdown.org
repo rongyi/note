@@ -1,0 +1,93 @@
+* 简介
+httpdown[fn:1]是在进程收到kill后尽可能让已有的服务完成再退出。本文分析其内部实现。
+
+* 信号挂接/回调
+挂接信号
+#+BEGIN_SRC go
+// /home/ry/go/src/github.com/facebookgo/httpdown/httpdown.go:370
+  signals := make(chan os.Signal, 10)
+  signal.Notify(signals, syscall.SIGTERM, syscall.SIGINT)
+#+END_SRC
+
+回调处理
+#+BEGIN_SRC go
+// /home/ry/go/src/github.com/facebookgo/httpdown/httpdown.go:379
+  case <-signals:
+    signal.Stop(signals)
+    if err := hs.Stop(); err != nil {
+      return err
+    }
+#+END_SRC
+
+流程顺序：
+1. 关掉socket，不接受新请求
+2. 等待socket关闭结束，等待的方式是通过channel： serverDone
+3. socket close之后开始进行所谓的“清理”操作，这里重载了一个连接状态的一个函数: ConnState，这个函数可以在
+   连接状态变化时载入自定义逻辑，httpdown的自定义逻辑实现在: connState中，简单讲就是通过channel讲这些信息
+   发送出来，这几个channel分别为： new, active, idle, closed, 在manage函数中分别去读这些channel
+
+这两行代码实现的作用是： 开启清理操作，往server的 chan chan struct{}塞了一个chan，然后开始等在这个channel上
+或者等超时了，再用同样的方式往另一个channel of channel: kill里塞一个channel： killDone，意思是后面的不管了，
+开始强退。
+#+BEGIN_SRC go
+    // then trigger the background goroutine to stop and wait for it
+    stopDone := make(chan struct{})
+    s.stop <- stopDone
+#+END_SRC
+
+stopDone channel送进去之后就看manage函数中的"表演"，具体如下：
+#+BEGIN_SRC go
+  // 定义一个变量用作接收stopDone channel
+  var stopDone chan struct{}
+
+
+  // 这里收到了这个channel，如果没有连接任务结束
+    case stopDone = <-s.stop:
+      if len(conns) == 0 {
+        close(stopDone)
+        return
+      }
+
+      // 把所有idle的连接立马关了
+      for c, cs := range conns {
+        if cs == http.StateIdle {
+          c.Close()
+        }
+      }
+      // 后面就是玩转连接状态状态机，在变成idle或者closed这个状态的时候对这个connection进行close/或者递减已有connection
+      if stopDone != nil {
+        c.Close()
+      }
+      // if we're waiting to stop and are all empty, we just closed the last
+      // connection and we're done.
+      if stopDone != nil && len(conns) == 0 {
+        close(stopDone)
+        return
+      }
+#+END_SRC
+至此比较nice的stopDone的处理结束。如果在处理这个过程中超时了，那就来硬的。这个代码说明在前面讲过了，
+#+BEGIN_SRC go
+      // stop timed out, wait for kill
+      killDone := make(chan struct{})
+      s.kill <- killDone
+    // 处理逻辑：暴力关闭所有连接
+    case killDone := <-s.kill:
+      for c := range conns {
+        c.Close()
+      }
+
+      // don't block the kill.
+      close(killDone)
+
+      // continue the loop and we wait for all the ConnState updates and will
+      // return from this goroutine when we're all done. otherwise we'll try to
+      // send those ConnState updates on closed channels.
+    }
+
+#+END_SRC
+明显看出facebook的dev对channel操作的纯熟。
+
+
+* Footnotes
+
+[fn:1] https://github.com/facebookgo/httpdown
