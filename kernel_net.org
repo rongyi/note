@@ -65,3 +65,22 @@
 9. 二层cache：
    在dst_entry中会有指针最终指向二层headercache，因为二层比较死，很多场景不必一次次拼装，只需要拿cache过来用好了，比如一个场景：到网关
    的二层信息基本上不变。
+
+10. task_struct
+    + 指向父进程的指针： parent
+      #+BEGIN_SRC c
+        struct task_struct *parent; /* parent process */
+      #+END_SRC
+    + chilren列表：
+      #+BEGIN_SRC c
+      struct list_head children;  /* list of my children */
+      struct list_head sibling; /* linkage in my parent's children list */
+      #+END_SRC
+    + 兄弟进程列表：
+      #+BEGIN_SRC c
+      struct list_head sibling; /* linkage in my parent's children list */
+      #+END_SRC
+    + 所有进程串呀串：
+      #+BEGIN_SRC c
+      struct list_head tasks;
+      #+END_SRC
