@@ -194,3 +194,5 @@ You’d be better off working behind an assembly line for some car manufacturer.
 去中心化的加密货币相关的入门
 * https://github.com/julienr/ipynb_playground/blob/master/bitcoin/dumbcoin/dumbcoin.ipynb
 比特币入门
+* http://thesecretlivesofdata.com/raft/
+  raft协议的图解，最后还有论文，可以看下
