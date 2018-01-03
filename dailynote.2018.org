@@ -1,2 +1,4 @@
-* http://tuprints.ulb.tu-darmstadt.de/6243/1/TR-18.pdf
-libpcap/libnet相关内容讲解
+* DONE http://tuprints.ulb.tu-darmstadt.de/6243/1/TR-18.pdf
+  libpcap/libnet相关内容讲解
+* TODO https://begriffs.com/posts/2017-04-13-longterm-computing-reading.html
+  deep hack： haskell/C/debug等
