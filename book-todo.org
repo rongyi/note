@@ -8,7 +8,7 @@
 ** DONE on lisp
 ** TODO commlisp recipes
 ** DONE let over lambda
-** DOING The go programming language
+** DONE DOING The go programming language
 ** DONE emacs lisp introduction
 ** DONE Patterns of software -- Richard P. Gabriel
 ** DONE [[https://github.com/astaxie/build-web-application-with-golang][Build Web Application with go]]
