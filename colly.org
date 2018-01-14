@@ -1,0 +1,56 @@
+* 简介
+  本文对colly框架[fn:1]进行简单描述。 colly是golang实现的网络爬虫，主要基于goquery进行HTML的选取操作，colly很方便的做了这一层包装。
+* 主要结构
+  主要结构名称： Collector, 放置回调的地方主要有：
+
+  #+BEGIN_SRC go
+  htmlCallbacks     []*htmlCallbackContainer // 放置HTML元素的回调
+  requestCallbacks  []RequestCallback // 放置请求时的回调
+  responseCallbacks []ResponseCallback // 放置应答时的回调
+  errorCallbacks    []ErrorCallback
+  scrapedCallbacks  []ScrapedCallback // 一个页面的最后一个回调
+  #+END_SRC
+
+  调用顺序？ request的回调肯定在最前面，scraped回调肯定在最后面，另外的顺序在scrape这个函数代码里可以看到，所以四个顺序如下所示：
+
+  #+BEGIN_SRC go
+  c.handleOnRequest(request)
+  c.handleOnResponse(response)
+  c.handleOnHTML(response)
+  c.handleOnScraped(response)
+  #+END_SRC
+
+  所以爬虫的绝大部分工作写OnHTML的回调。select想要的HTML数据然后处理，这里对于处理的数据可以采用print，或者放在Context中，类似一个随身口袋，Context的实现是一个加读写锁的map, 具体实现在context.go文件中，不赘述。
+
+  主要的几个select语法：
+  1. #id查询
+  2. .class查询
+  3. html元素查询: a[id="name"]
+
+
+  请求过程什么样子的？http请求和普通的http请求没什么不同，只不过里面加了cache，cache采用文件保存response，如果加载失败再去请求。所以这里如果页面有更新其实需要删除cache才能拉倒最新，否则不会去请求线上，cache在迭代开发是很有效，开发完毕可能需要调整对cache的策略。
+
+  限速怎么做的？围绕一个channel做的，名称： waitChan, 这个buffered channel初始化大小即为飞起goroutine的总数，每次请求之前会获取对应域名的限制规则，如果有就启动限速过程，具体代码如下：
+  #+BEGIN_SRC go
+  if r != nil {
+    // 这里如果超过buffer大小会阻塞在这里，从而达到限制飞起的goroutine总数
+    r.waitChan <- true
+    defer func(r *LimitRule) {
+      randomDelay := time.Duration(0)
+      if r.RandomDelay != 0 {
+        randomDelay = time.Duration(rand.Intn(int(r.RandomDelay)))
+      }
+      time.Sleep(r.Delay + randomDelay)
+      <-r.waitChan
+    }(r)
+  }
+  #+END_SRC
+
+  多goroutine爬取时最后需要Wait，采用的是WaitGroup模式。
+
+
+
+
+* Footnotes
+
+[fn:1] https://github.com/gocolly/colly
