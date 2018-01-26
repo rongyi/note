@@ -190,6 +190,8 @@ fmt.Printf("%T\n", s)
 To kill a hung Go process and print the current stacks of all goroutines, simply send it an ABRT signal:
 
 kill -ABRT <pid>[fn:4]
+* gitaly profile
+https://gitlab.com/gitlab-com/runbooks/blob/master/howto/gitaly-profiling.md
 
 * Footnotes
 
