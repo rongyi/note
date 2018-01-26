@@ -186,6 +186,10 @@ fmt.Printf("%T\n", s)
   interface internel
 * go help environment
   环境变量都在这里了
+* print stack trace of a hung process
+To kill a hung Go process and print the current stacks of all goroutines, simply send it an ABRT signal:
+
+kill -ABRT <pid>[fn:4]
 
 * Footnotes
 
@@ -194,3 +198,5 @@ fmt.Printf("%T\n", s)
 [fn:2] http://www.integralist.co.uk/posts/profiling-go/
 
 [fn:3] https://rakyll.org/coredumps/
+
+[fn:4] http://pro-tips-dot-com.tumblr.com/post/47677612115/kill-a-hung-go-process-and-print-stack-traces
