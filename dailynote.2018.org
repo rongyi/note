@@ -6,3 +6,5 @@
   lrucache参考实现
 * wrk， http压测工具， 不知道与hey比怎么样？ https://github.com/wg/wrk
 * 面向高中生的讲解，非常好 https://pudding.cool/2018/02/waveforms/
+* learn math: https://www.math.uh.edu/~dblecher/pf2.html
+   https://news.ycombinator.com/item?id=16392698  hn page
