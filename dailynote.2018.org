@@ -21,5 +21,18 @@
   9. the right goal is to allocate your year optimally, not your day.
   10. productivity in the wrong direction isn't worth anything at all.
 * http://muratbuffalo.blogspot.com/2018/03/master-your-tools.html
+* DONE http://muratbuffalo.blogspot.com/2018/03/master-your-tools.html
   善用工具的价值
 "Give me six hours to chop down a tree and I will spend the first four sharpening the axe." -- Abraham Lincoln
+* https://news.ycombinator.com/item?id=16883882
+  这个评论和自己的体会很接近：
+  #+BEGIN_QUOTE
+Some hard lesson's i've realized while working in "professional" environments:
+1. You must earn respect before you trash the system, no matter how shitty their code is or lack of tests. It's usually best to start by "doing your job"- whether that's issues assigned to you or bug fixes; you are at the bottom of the totem pole right now. Once you're "respected", implementing better solutions will be a lot easier.
+
+2. Excuses for why shitty code is in production are probably legitimate excuses; a company that makes profit on a SaaS product needs to launch and iterate quickly. Product managers/sales/marketing do not care about your unit tests. Your users also don't care about your unit tests. Unfortunately this is a dilemma that's hard to swallow, because when things break, it comes back around.
+
+You have to realize a team that's been there before you has done things in certain ways for certain reasons- whether that's good or bad, you must adapt to it before you go king kong on their shit.
+
+Or you can just start your own company and make your own rules.
+  #+END_QUOTE
