@@ -36,3 +36,7 @@ You have to realize a team that's been there before you has done things in certa
 
 Or you can just start your own company and make your own rules.
   #+END_QUOTE
+* https://www.gnu.org/software/emacs/manual/html_mono/eshell.html
+  #+BEGIN_QUOTE
+  Any tool you use often deserves the time spent learning to master it.
+  #+END_QUOTE
