@@ -35,6 +35,11 @@ Some hard lesson's i've realized while working in "professional" environments:
 You have to realize a team that's been there before you has done things in certain ways for certain reasons- whether that's good or bad, you must adapt to it before you go king kong on their shit.
 
 Or you can just start your own company and make your own rules.
+
+There's that saying: if you speak the truth, make them laugh. Otherwise they will kill you.
+
+If you encounter three jerks in one day, you're the jerk.
+
   #+END_QUOTE
 * https://www.gnu.org/software/emacs/manual/html_mono/eshell.html
   #+BEGIN_QUOTE
