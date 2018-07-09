@@ -48,3 +48,5 @@ If you encounter three jerks in one day, you're the jerk.
 * Go is designed for practicality
   https://news.ycombinator.com/item?id=17114308
   提到haskell为毛这么优秀却用的人那么少？
+* https://news.ycombinator.com/item?id=17470727
+  command line for kids
