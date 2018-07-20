@@ -50,3 +50,7 @@ If you encounter three jerks in one day, you're the jerk.
   提到haskell为毛这么优秀却用的人那么少？
 * https://news.ycombinator.com/item?id=17470727
   command line for kids
+* https://utcc.utoronto.ca/~cks/space/blog/linux/LinuxBootOverview?
+  kernel boot detail
+* https://github.com/s-matyukevich/raspberry-pi-os
+  kernel dev on raspberry
