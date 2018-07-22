@@ -196,3 +196,5 @@ You’d be better off working behind an assembly line for some car manufacturer.
 比特币入门
 * http://thesecretlivesofdata.com/raft/
   raft协议的图解，最后还有论文，可以看下
+* https://www.slideshare.net/AprilWensel/anxiety-tech-cultivating-compassionate-tech-communities-april-wensel
+  技术氛围的构建
