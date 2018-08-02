@@ -58,3 +58,5 @@ If you encounter three jerks in one day, you're the jerk.
   写的非常简洁的ping package
 * github.com/hashicorp/go-cleanhttp
   httpclient的一些示例
+* https://docs.google.com/presentation/d/1kSuQyW5DTnkVaZEjGYCkfOxvzCqGEFzWBy4e9Uedd9k/preview?imm_mid=0f9b7e&cmp=em-data-na-na-newsltr_20171213&slide=id.g168a3288f7_0_58
+  deeplearning 101
