@@ -70,3 +70,5 @@ If you encounter three jerks in one day, you're the jerk.
   #+END_QUOTE
 * https://csunplugged.org/en/  https://news.ycombinator.com/item?id=17661707
   cs专业教育，不用计算机讲解
+* http://www.flysnow.org/2018/01/20/golang-goquery-examples-selector.html
+  gocolly selector的一些示例
