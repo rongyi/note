@@ -85,3 +85,7 @@
 If they balk, suggest that they find another code monkey while you find another biz monkey and let the market decide who ends up with the bananas.
   -- From https://news.ycombinator.com/item?id=287767
   #+END_QUOTE
+  #+BEGIN_QUOTE
+  Reprentation is the essense of programming
+  -- The Mythical Man Month
+  #+END_QUOTE
