@@ -72,3 +72,12 @@ If you encounter three jerks in one day, you're the jerk.
   cs专业教育，不用计算机讲解
 * http://www.flysnow.org/2018/01/20/golang-goquery-examples-selector.html
   gocolly selector的一些示例
+* https://news.ycombinator.com/item?id=17238135
+  讲管理
+I always ask 3 questions in my discussions:
+
+What is the company's mission?
+
+How is your team contributing to the mission?
+
+How does the work you're doing today contribute to the mission?
