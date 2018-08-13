@@ -90,6 +90,6 @@ If they balk, suggest that they find another code monkey while you find another 
   -- The Mythical Man Month
   #+END_QUOTE
   #+BEGIN_SRC
-  “When I was young, I used to admire intelligent people; as I grow older, I admire kind people.”
+  When I was young, I used to admire intelligent people; as I grow older, I admire kind people.
   — Abraham Joshua Heschel
   #+END_SRC
