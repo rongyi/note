@@ -85,3 +85,5 @@ How does the work you're doing today contribute to the mission?
 + https://news.ycombinator.com/item?id=17745688
 + https://www.briangilham.com/be-kind
 + http://boz.com/articles/be-kind.html
+* https://nikhilm.github.io/uvbook/index.html
+  libuv讲解
