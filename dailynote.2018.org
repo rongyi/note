@@ -87,3 +87,5 @@ How does the work you're doing today contribute to the mission?
 + http://boz.com/articles/be-kind.html
 * https://nikhilm.github.io/uvbook/index.html
   libuv讲解
+* https://povilasv.me/go-memory-management/
+  比较有深度
