@@ -89,3 +89,5 @@ How does the work you're doing today contribute to the mission?
   libuv讲解
 * https://povilasv.me/go-memory-management/
   比较有深度
+* http://stevelosh.com/blog/2018/08/a-road-to-common-lisp/
+  common lisp学习经验之谈
