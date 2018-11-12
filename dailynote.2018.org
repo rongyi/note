@@ -94,3 +94,5 @@ How does the work you're doing today contribute to the mission?
 * https://bholley.net/blog/2017/stylo.html
   I am a firm proponent of incrementalism. I think the desire to throw everything away and start from scratch tends to be an emotional one, and generally indicates a lack of focus and clear thinking about what will actually move the needle.
   是的，持续优化才是解决问题的方法，一上来就想把所有都抛弃从头再来不是明智的做法。
+* https://multicians.org/andre.html
+  纸和笔始终是最重要的工具
