@@ -48,6 +48,7 @@ On Linux, it uses epoll, on the BSDs and Darwin, it uses kqueue and on Windows i
 * build option
   -gcflags='-N -l'
   否则local变量会被优化掉不好调试。
+  1.10以后需要调整为： -gcflags="all=-N -l"
 * package命令规则
 是单数，不是复数。
 * http gzip response write
@@ -88,6 +89,10 @@ res.Body.Close()
 
 * gorm memleak:
 gorm need rows.Close()
+
+ps: how to check gorouine leak?
+  https://github.com/fortytw2/leaktest
+  runtime.Stack然后选取感兴趣的即可
 
 * interface in struct
 https://stackoverflow.com/questions/24537443/meaning-of-a-struct-with-embedded-anonymous-interface
@@ -192,6 +197,47 @@ To kill a hung Go process and print the current stacks of all goroutines, simply
 kill -ABRT <pid>[fn:4]
 * gitaly profile
 https://gitlab.com/gitlab-com/runbooks/blob/master/howto/gitaly-profiling.md
+
+* to marshal arbitrary JSON you can marshal to map[string]interface{}{}
+
+* sql
+  + Statements that don’t return rows should not use Query functions; they should use Exec().
+  + Although it’s idiomatic to Close() the database when you’re finished with it, the sql.DB object is designed to be long-lived. Don’t Open() and Close() databases frequently. Instead, create one sql.DB object for each distinct datastore you need to access, and keep it until the program is done accessing that datastore.
+  + prepares, executes, and closes 三部曲
+  + This also means that prepared statements created inside a Tx can’t be used separately from it. Likewise, prepared statements created on a DB can’t be used within a transaction, because they will be bound to a different connection.
+    placeholder:
+  |-----------------+--------------------+-----------------------------|
+  | MySQL           | PostgreSQL         | Oracle                      |
+  | WHERE col = ?   | WHERE col = $1     | WHERE col = :col            |
+  | VALUES(?, ?, ?) | VALUES($1, $2, $3) | VALUES(:val1, :val2, :val3) |
+  #+BEGIN_SRC go
+    for rows.Next() {
+        // ...
+    }
+    // always check error
+    if err = rows.Err(); err != nil {
+        // handle the error here
+    }
+
+
+    // You should always explicitly close a sql.Rows if you exit the loop prematurely, as previously mentioned. It’s auto-closed if the loop exits normally or through an error, but you might mistakenly do this:
+    for rows.Next() {
+      // ...
+      break; // whoops, rows is not closed! memory leak...
+    }
+    // do the usual "if err = rows.Err()" [omitted here]...
+    // it's always safe to [re?]close here:
+    if err = rows.Close(); err != nil {
+      // but what should we do if there's an error?
+      log.Println(err)
+    }
+  #+END_SRC
+
+* 怎样看 p g m ？ go调度的抽象基本单元：
+把P看成是一个context，m必须获得p然后才能运行G。: https://news.ycombinator.com/item?id=12460807
+这个解释非常到位，一看作者是golang的maintaner，难怪
+* return and defer
+  A defer statement pushes a function call onto a list. The list of saved calls is executed after the surrounding function returns.
 
 * Footnotes
 
