@@ -110,10 +110,26 @@ func (engine *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 
 ** Engine
 Engine通过Default或者New函数来获得，这里不会贴代码，简述一下大概的结构：
-+ 分配请求/应答核心数据结构Context的一个pool
-+ 请求URL的一个tree描述
++ 分配请求/应答核心数据结构Context的一个pool，在上面的 =ServeHTTP= 中可以看到，请求来的时候从pool里拿一个context实例，用完再放回去。
++ 路由tree描述，其实gin用的时httprouter[fn:3]，采用经典的Trie结构来实现路由，不同的http method分别有独立的trie来跟进。gin的后端分配了一个大小为9的slice来存放不同的http method路由。查找路由时候遍历这个slice。
+#+BEGIN_SRC go
+  t := engine.trees
+  for i, tl := 0, len(t); i < tl; i++ {
+    if t[i].method != httpMethod {
+      continue
+    }
+    root := t[i].root
+    // Find route in tree
+    handlers, params, tsr := root.getValue(path, c.Params, unescape)
+#+END_SRC
+起初觉得这里为什么不用map而是要用slice，结果压测下来发现小size的slice查找竟然map的两倍多。所以这里看似O(n)的时间复杂度却要比map的O(1)要快，应该是map在算key时在小size时牺牲掉了。
 
+** bind
+   功能是怎么去读取body里面的内容，不同的类型有不同的操作方法。比如常见的json等。
+** render
+   功能时怎么去渲染结果，所以实现的都是怎么去write response，比如json等。
 ** Context
+   context就是gin封装的对应每一个请求时用到的上下文。这里就会去call请求绑定、结果渲染等。
 + HTTP请求 http.Request
 + ResponseWriter
 + 指向Engine的指针
@@ -179,7 +195,6 @@ func (engine *Engine) handleHTTPRequest(c *Context) {
 
 添加路由/获取路由这个模块是基于httproute高性能router，有兴趣可以继续深入下去。
 
-* 参数绑定
 ** 请求URL绑定
 #+BEGIN_SRC go
 router.GET("/user/:name", func(c *gin.Context) {
@@ -189,14 +204,14 @@ router.GET("/user/:name", func(c *gin.Context) {
 #+END_SRC
 这样的URL在添加注册时由 =func (n *node) addRoute(path string, handlers HandlersChain)= 调用 =func (n *node) insertChild(numParams uint8, path string, fullPath string, handlers HandlersChain)= 来完成标记，
 #+BEGIN_SRC go
-// /home/ry/go/src/github.com/gin-gonic/gin/tree.go:289
+// github.com/gin-gonic/gin/tree.go:289
 // 这里完成注册
       child := &node{
         nType:     param,
         maxParams: numParams,
       }
 
-// /home/ry/go/src/github.com/gin-gonic/gin/tree.go:401
+// github.com/gin-gonic/gin/tree.go:401
 // 这里完成获取操作
 #+END_SRC
 
@@ -222,9 +237,8 @@ name := c.PostForm("name")
 gin里还有一个 =c.ShouldBind(obj interface{})= 用于绑定参数到结构体，这个实现会根据请求方法和MIME来判断然后通过各自的方法来实现对应的绑定，这里的实现除了支持JSON对象绑定竟然还是Protobuf，所以这里的反序列化都可以由框架来做，不得不觉得框架设计者的用心。
 
 
-
 * 一些sugar
-这个文件里一堆 =/home/ry/go/src/github.com/gin-gonic/gin/context.go:678= 这里就不列举了。有帮助返回的，有方便建立临时JSON对象的(gin.H)
+这个文件里一堆 =github.com/gin-gonic/gin/context.go:678= 这里就不列举了。有帮助返回的，有方便建立临时JSON对象的(gin.H)
 
 * 总结
 总体看Gin的代码质量很高，很具有学习价值，后面有空继续扩充吧，官方首页的README写的太详细基本后端API开发够了。
@@ -234,3 +248,5 @@ gin里还有一个 =c.ShouldBind(obj interface{})= 用于绑定参数到结构�
 [fn:1] https://github.com/gin-gonic/gin
 
 [fn:2] https://github.com/open-falcon/falcon-plus
+
+[fn:3] https://github.com/julienschmidt/httprouter
