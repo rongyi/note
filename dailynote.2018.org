@@ -96,3 +96,5 @@ How does the work you're doing today contribute to the mission?
   是的，持续优化才是解决问题的方法，一上来就想把所有都抛弃从头再来不是明智的做法。
 * https://multicians.org/andre.html
   纸和笔始终是最重要的工具
+* https://www.cs.cmu.edu/~mblum/research/pdf/grad.html
+  怎么阅读
