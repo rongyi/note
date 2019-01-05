@@ -1,0 +1,5 @@
+* 时光飞逝
+* 关于compiler的
+https://bernsteinbear.com/blog/bytecode-interpreters/
+https://news.ycombinator.com/item?id=18821475
+这里也提到刚刚看完的 Writing a compiler in go这本书。
