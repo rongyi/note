@@ -96,3 +96,6 @@ If they balk, suggest that they find another code monkey while you find another 
   #+BEGIN_QUOTE
   “The most violent element in society is ignorance.” - Emma Goldman
   #+END_QUOTE
+  #+BEGIN_QUOTE
+  "Marry or do not marry, you will regret it either way. ...Laugh at the stupidities of the world or weep over them, you will regret it either way. ...Trust a girl or do not trust her, you will regret it either way. ...Hang yourself or do not hang yourself, you will regret it either way. ...This, gentlemen, is the quintessence of all the wisdom of life." - Kierkegaard, Either/Or
+  #+END_QUOTE
