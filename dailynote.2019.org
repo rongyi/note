@@ -5,4 +5,5 @@ https://news.ycombinator.com/item?id=18821475
 这里也提到刚刚看完的 Writing a compiler in go这本书。
 * https://en.d2l.ai/d2l-en.pdf
   http://karpathy.github.io/neuralnets/
+  https://hn.academy/
   机器学习相关
