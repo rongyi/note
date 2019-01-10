@@ -238,6 +238,22 @@ https://gitlab.com/gitlab-com/runbooks/blob/master/howto/gitaly-profiling.md
 这个解释非常到位，一看作者是golang的maintaner，难怪
 * return and defer
   A defer statement pushes a function call onto a list. The list of saved calls is executed after the surrounding function returns.
+* 关于内存
+It is not possible to create a Go program where two variables share the same storage location in memory. It is possible to create two variables whose contents point to the same storage location, but that is not the same thing as two variables who share the same storage location.
+
+  #+BEGIN_SRC go
+
+package main
+
+import "fmt"
+
+func main() {
+        var a int
+        var b, c = &a, &a
+        fmt.Println(b, c)   // 0x1040a124 0x1040a124
+        fmt.Println(&b, &c) // 0x1040c108 0x1040c110
+}
+  #+END_SRC
 
 * Footnotes
 
