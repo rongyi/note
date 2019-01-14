@@ -99,3 +99,19 @@ If they balk, suggest that they find another code monkey while you find another 
   #+BEGIN_QUOTE
   "Marry or do not marry, you will regret it either way. ...Laugh at the stupidities of the world or weep over them, you will regret it either way. ...Trust a girl or do not trust her, you will regret it either way. ...Hang yourself or do not hang yourself, you will regret it either way. ...This, gentlemen, is the quintessence of all the wisdom of life." - Kierkegaard, Either/Or
   #+END_QUOTE
+  #+BEGIN_QUOTE
+  "My job is to hold a mirror up to nature, which means I need to reflect true human nature — how we think, how act, and the great paradoxes in all our decisions.”
+  -- Tom Hanks
+  #+END_QUOTE
+  #+BEGIN_QUOTE
+  "When you understand that nobody wants to read your shit, your mind becomes powerfully concentrated.
+
+  You begin to understand that writing/reading is, above all, a transaction.
+
+  The reader donates his time and attention, which are supremely valuable commodities. In return, you the writer must give him something worthy of his gift to you.”
+
+  — Steven Pressfield
+  #+END_QUOTE
+  #+BEGIN_QUOTE
+  The best advice I ever got was Jim Watson, who co-discovered DNA. Jim is brilliant, and as many brilliant people are a little bit crazy, and Jim has this admonishment which is double meaning, three words: ‘Avoid boring people.’ I love it, because what he’s saying is, ‘Stay away from people who are not interesting,’ avoid boring people, and, ‘Avoid boring people. Don’t be boring to people. Be interesting.’”
+  #+END_QUOTE

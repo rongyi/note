@@ -254,6 +254,8 @@ func main() {
         fmt.Println(&b, &c) // 0x1040c108 0x1040c110
 }
   #+END_SRC
+* If a map isn’t a reference variable, what is it?
+==> A map value is a pointer to a runtime.hmap structure.[fn:5]
 
 * Footnotes
 
@@ -264,3 +266,5 @@ func main() {
 [fn:3] https://rakyll.org/coredumps/
 
 [fn:4] http://pro-tips-dot-com.tumblr.com/post/47677612115/kill-a-hung-go-process-and-print-stack-traces
+
+[fn:5] https://dave.cheney.net/2017/04/30/if-a-map-isnt-a-reference-variable-what-is-it

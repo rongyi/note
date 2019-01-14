@@ -7,3 +7,9 @@ https://news.ycombinator.com/item?id=18821475
   http://karpathy.github.io/neuralnets/
   https://hn.academy/
   机器学习相关
+* how to ask questions
+A good question is energizing. It’s an inviting challenge, it’s something that’s interesting and fun to pursue. It inspires a new way of seeing things, a new way of ordering information.
+
+A good question is an act of pointing. First you survey the ideascape in front of you – maybe it’s shared territory between the two of you, or maybe it’s you looking over your conversation-partner’s shoulder – and then you try and identify the most compelling, interesting thing, and point to that.
+
+“Funny” or “interesting” is a sort of compass or gyroscope that guides you away from stale questions.
