@@ -13,3 +13,47 @@ A good question is energizing. It’s an inviting challenge, it’s something th
 A good question is an act of pointing. First you survey the ideascape in front of you – maybe it’s shared territory between the two of you, or maybe it’s you looking over your conversation-partner’s shoulder – and then you try and identify the most compelling, interesting thing, and point to that.
 
 “Funny” or “interesting” is a sort of compass or gyroscope that guides you away from stale questions.
+
+* https://news.ycombinator.com/item?id=16126082
+  Like almost all problems in life you have only 4 options:
+#1 Change you (accept what you are unable to change)
+
+#2 Change the other (convince them to follow your vision)
+
+#3 Fly (divorce, quit)
+
+#4 Stay and suffer (include drinking, doing drugs, whining)
+
+It is amazing how many people chose number 4.
+
+* 如何做独立consult: https://news.ycombinator.com/item?id=4245960
+(1) Start a freelance practice.
+(2) Raise your rates.
+
+(3) As you work for clients, keep a sharp eye for opportunities to build "specialty practices". If you get to work on a project involving Mongodb, spend some extra time and effort to get Mongodb under your belt. If you get a project for a law firm, spend some extra time thinking about how to develop applications that deal with contracts or boilerplates or PDF generation or document management.
+
+(4) Raise your rates.
+
+(5) Start refusing hourly-rate projects. Your new minimum billable increment is a day.
+
+(6) Take end-to-end responsibility for the business objectives of whatever you build. This sounds fuzzy, like, "be able to talk in a board room", but it isn't! It's mechanically simple and you can do it immediately: Stop counting hours and days. Stop pushing back when your client changes scope. Your remedy for clients who abuse your flexibility with regards to scope is "stop working with that client". Some of your best clients will be abusive and you won't have that remedy. Oh well! Note: you are now a consultant.
+
+(7) Hire one person at a reasonable salary. You are now responsible for their payroll and benefits. If you don't book enough work to pay both your take-home and their salary, you don't eat. In return: they don't get an automatic percentage of all the revenue of the company, nor does their salary automatically scale with your bill rate.
+
+(8) You are now "senior" or "principal". Raise your rates.
+
+(9) Generalize out from your specialties: Mongodb -> NoSQL -> highly scalable backends. Document management -> secure contract management.
+
+(10) Raise your rates.
+
+(11) You are now a top-tier consulting group compared to most of the market. Market yourself as such. Also: your rates are too low by probably about 40-60%.
+
+Try to get it through your head: people who can simultaneously (a) crank out code (or arrange to have code cranked out) and (b) take responsibility for the business outcome of the problems that code is supposed to solve --- people who can speak both tech and biz --- are exceptionally rare. They shouldn't be; the language of business is mostly just elementary customer service, of the kind taught to entry level clerks at Nordstrom's. But they are, so if you can do that, raise your rates.
+
+
+To be a consultant, rather than an hourly-rate freelancer, you need two things:
+- insight
+
+- reputation
+
+Bane's rule, you don't understand a distributed computing problem until you can get it to fit on a single machine first.
