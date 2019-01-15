@@ -57,3 +57,6 @@ To be a consultant, rather than an hourly-rate freelancer, you need two things:
 - reputation
 
 Bane's rule, you don't understand a distributed computing problem until you can get it to fit on a single machine first.
+
+* 傅里叶变换
+http://www.jezzamon.com/fourier/index.html
