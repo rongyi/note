@@ -115,3 +115,7 @@ If they balk, suggest that they find another code monkey while you find another 
   #+BEGIN_QUOTE
   The best advice I ever got was Jim Watson, who co-discovered DNA. Jim is brilliant, and as many brilliant people are a little bit crazy, and Jim has this admonishment which is double meaning, three words: ‘Avoid boring people.’ I love it, because what he’s saying is, ‘Stay away from people who are not interesting,’ avoid boring people, and, ‘Avoid boring people. Don’t be boring to people. Be interesting.’”
   #+END_QUOTE
+  #+BEGIN_QUOTE
+  Bad programmers worry about the code. Good programmers worry about data structures and their relationships.
+  ---- Linus Torvalds
+  #+END_QUOTE
