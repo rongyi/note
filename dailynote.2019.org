@@ -61,3 +61,4 @@ Bane's rule, you don't understand a distributed computing problem until you can 
 * 傅里叶变换
 http://www.jezzamon.com/fourier/index.html
 * lisp书籍推荐 https://news.ycombinator.com/item?id=18911940
+* teach git https://rachelcarmena.github.io/2018/12/12/how-to-teach-git.html
