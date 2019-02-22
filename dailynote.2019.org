@@ -67,3 +67,11 @@ http://www.jezzamon.com/fourier/index.html
   2. 超级自信，自信到像疯子一样
   3. 学会独立思考
   4. 直接看这篇文章吧
+* go 规范
+https://dave.cheney.net/practical-go/presentations/qcon-china.html
+1. Write shy code - modules that don’t reveal anything unnecessary to other modules and that don’t rely on other modules' implementations.
+2. [A little] duplication is far cheaper than the wrong abstraction.
+3. Avoid package names like base, common, or util
+4. Keep package main small as small as possible
+5. Good code has lots of comments, bad code requires lots of comments.
+6. Don’t name your variables for their types ==> 这个自己倒是经常违反，后面注意一下
