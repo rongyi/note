@@ -75,3 +75,4 @@ https://dave.cheney.net/practical-go/presentations/qcon-china.html
 4. Keep package main small as small as possible
 5. Good code has lots of comments, bad code requires lots of comments.
 6. Don’t name your variables for their types ==> 这个自己倒是经常违反，后面注意一下
+* ebpf相关 https://sysdig.com/blog/the-art-of-writing-ebpf-programs-a-primer/
