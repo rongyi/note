@@ -76,7 +76,7 @@ https://dave.cheney.net/practical-go/presentations/qcon-china.html
 5. Good code has lots of comments, bad code requires lots of comments.
 6. Don’t name your variables for their types ==> 这个自己倒是经常违反，后面注意一下
 * ebpf相关 https://sysdig.com/blog/the-art-of-writing-ebpf-programs-a-primer/
-* 对已有代码的态度：
+* 对已有代码的态度：https://news.ycombinator.com/item?id=19254008
   My #1 rule for existing codebases: Just because you wouldn't have done it the way they did doesn't mean they did it wrong.
 I think it's developer nature to look at a huge pile of code that someone else wrote and immediately think: "This is a pile of crap. I can do better, so the first thing to do is rewrite all of this, my way (which just so happens to be _The Right Way_)."
 
