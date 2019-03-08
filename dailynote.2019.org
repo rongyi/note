@@ -82,3 +82,4 @@ I think it's developer nature to look at a huge pile of code that someone else w
 
 Figure out what you're trying to do, and what is keeping you from doing it. Take an iterative approach to get things done. Realize that after 3 years, they have hopefully fixed a lot of bugs and got to a solution that is somewhat mature and better than you can do in a week.
 说的太对了。不要觉得别人写的代码就是一坨屎。你没有比别人强多少。自信不要用在这里。
+* 神经网络从零开始写: https://news.ycombinator.com/item?id=19320217  https://victorzhou.com/blog/intro-to-neural-networks/
