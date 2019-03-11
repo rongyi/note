@@ -257,7 +257,26 @@ func main() {
 * If a map isn’t a reference variable, what is it?
 ==> A map value is a pointer to a runtime.hmap structure.[fn:5]
 
+
+* init执行放在哪里[fn:2]
+  知道是在main前面但是和变量初始化比呢？顺序如下：
+1. If a package imports other packages, the imported packages are initialised first.
+2. Current package's constant initialized then.
+3. Current package's variables are initialiszd then.
+4. Finally, init() function of current package is called.
+* 传参法则[fn:6]
+1. Methods using receiver pointers are common; the rule of thumb for receivers is, "If in doubt, use a pointer."
+2. Slices, maps, channels, strings, function values, and interface values are implemented with pointers internally, and a pointer to them is often redundant.
+3. Elsewhere, use pointers for big structs or structs you'll have to change, and otherwise pass values, because getting things changed by surprise via a pointer is confusing.
+* 获取当前执行目录
+   1.8以后用 =os.Executable= 来做。
+* function receiver
+The rule about pointers vs. values for receivers is that value methods can be invoked on pointers and values, but pointer methods can only be invoked on pointers.
+
+
 * Footnotes
+
+[fn:6] https://i.stack.imgur.com/6S35J.png
 
 [fn:1] http://mmcloughlin.com/posts/your-pprof-is-showing
 
