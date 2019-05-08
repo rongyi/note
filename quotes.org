@@ -72,17 +72,17 @@
   Building something by gradually refine a prototype is good for morale because It keeps you engaged. In software my rule is: always have working code. If you're writing something you'll be able to test in an hour, you have the prospect of an immediate reward to motivate you. The same is true in the arts, and particularly in oil painting. Most Painters start with a blurry sketch and gradually refine it.
   -- From P.G. Hakers and Painters
   #+END_QUOTE
-#+BEGIN_QUOTE
+  #+BEGIN_QUOTE
 
-  Just like an expensive guitar won’t make you a great guitar player and the best running shoes won’t get you out of the door every day, productivity techniques won’t finish your project. They might help, but you have to put the work in. You have to keep showing up and keep chipping away at it. No tool will ever do that for you.
+Just like an expensive guitar won’t make you a great guitar player and the best running shoes won’t get you out of the door every day, productivity techniques won’t finish your project. They might help, but you have to put the work in. You have to keep showing up and keep chipping away at it. No tool will ever do that for you.
 
-  -- https://thorstenball.com/blog/2017/01/16/what-i-didnt-do-to-write-a-book/
-#+END_QUOTE
+-- https://thorstenball.com/blog/2017/01/16/what-i-didnt-do-to-write-a-book/
+  #+END_QUOTE
 
   #+BEGIN_QUOTE
   If they don't have the money to pay you, you're not an employee, you're a founder and you get the same deal that they get.
 
-If they balk, suggest that they find another code monkey while you find another biz monkey and let the market decide who ends up with the bananas.
+  If they balk, suggest that they find another code monkey while you find another biz monkey and let the market decide who ends up with the bananas.
   -- From https://news.ycombinator.com/item?id=287767
   #+END_QUOTE
   #+BEGIN_QUOTE
@@ -123,3 +123,8 @@ If they balk, suggest that they find another code monkey while you find another 
   Thinking happens only when we have time to struggle
   https://www.youtube.com/watch?v=ytVneQUA5-c
   #+END_QUOTE
+
+  #+BEGIN_SRC
+  anything that can be measured can be optimized
+  -- https://github.com/dgryski/go-perfbook/blob/master/performance.md#writing-and-optimizing-go-code
+  #+END_SRC
