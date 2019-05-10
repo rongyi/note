@@ -119,3 +119,7 @@ If they balk, suggest that they find another code monkey while you find another 
   Bad programmers worry about the code. Good programmers worry about data structures and their relationships.
   ---- Linus Torvalds
   #+END_QUOTE
+  #+BEGIN_QUOTE
+  Thinking happens only when we have time to struggle
+  https://www.youtube.com/watch?v=ytVneQUA5-c
+  #+END_QUOTE
