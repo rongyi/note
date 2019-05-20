@@ -276,7 +276,12 @@ The rule about pointers vs. values for receivers is that value methods can be in
 * iota
   iota比较特殊，可以被认为是一个可被编译器修改的常量，在每一个const关键字出现时被重置为0，然后在下一个const出现之前，每出现一次iota，其所代表的数字会自动增1。
 
+* golang scheduler
+这里[fn:7]讲的不错。
+
 * Footnotes
+
+[fn:7] https://news.ycombinator.com/item?id=12460807
 
 [fn:6] https://i.stack.imgur.com/6S35J.png
 
