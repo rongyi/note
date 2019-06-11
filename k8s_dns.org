@@ -1,0 +1,116 @@
+* 简介
+  k8sDNS也经历一些变化，之前的架构是 kube-dns，现在换成了CoreDNS。本文先简单描述下kube-dns之后详细介绍CoreDNS。
+
+* kube-dns
+宏观上讲， kube-dns分两块，一块是与k8s强耦合的后端DNS服务用于解析Service地址等集群DNS的服务发现。一块是dnsmasq作为前端cache。总体上功能紧凑，但在定制开发方面很不友好。
+
+* CoreDNS
+基于caddy开发的DNS插件框架，并且内置了很多已有的DNS相关插件。具体的插件位置在 ./plugin 文件夹下。
+
+** 编译过程
+通过配置文件来实现plugin的静态编译。可以通过Makefile来看到
+#+BEGIN_SRC makefile
+core/plugin/zplugin.go core/dnsserver/zdirectives.go: plugin.cfg
+  GO111MODULE=on go generate coredns.go
+
+#+END_SRC
+plugin.cfg文件中放的即是CoreDNS支持的插件名称以及对应的package库。因为后面要去引用这个package从而调用他们的init函数。
+
+coredns.go中调用的gen指令的地方
+#+BEGIN_SRC go
+///home/ry/go/src/github.com/coredns/coredns/coredns.go:3
+//go:generate go run directives_generate.go
+//go:generate go run owners_generate.go
+
+#+END_SRC
+查看对应源码，会生成这两个文件： core/plugin/zplugin.go core/dnsserver/zdirectives.go 一个是引用全部的plugin，一个是生成一个string slice并赋值给一个变量： Directives。 import某个插件为的是调用其init函数。而init函数中的作用是让CoreDNS依赖的caddy系统认识这个插件。可以找一个插件比如log来看一下注册细节。
+
+#+BEGIN_SRC go
+genImports("core/plugin/zplugin.go", "plugin", mi)
+genDirectives("core/dnsserver/zdirectives.go", "dnsserver", md)
+#+END_SRC
+==> 调用 init方法，以log为例
+#+BEGIN_SRC go
+func init() {
+  caddy.RegisterPlugin("log", caddy.Plugin{
+    ServerType: "dns",
+    Action:     setup,
+  })
+}
+#+END_SRC
+
+caddy是一个http2框架而CoreDNS是一个DNS服务，这里要让http框架“切换”7层协议。这是怎么做到的？ 答案是caddy的框架很框架。怎么监听怎么处理请求都是有个interface来定义的。具体的定义如下：
+#+BEGIN_SRC go
+type Server interface {
+  TCPServer
+  UDPServer
+}
+
+type TCPServer interface {
+  // Listen starts listening by creating a new listener
+  // and returning it. It does not start accepting
+  // connections. For UDP-only servers, this method
+  // can be a no-op that returns (nil, nil).
+  Listen() (net.Listener, error)
+
+  // Serve starts serving using the provided listener.
+  // Serve must start the server loop nearly immediately,
+  // or at least not return any errors before the server
+  // loop begins. Serve blocks indefinitely, or in other
+  // words, until the server is stopped. For UDP-only
+  // servers, this method can be a no-op that returns nil.
+  Serve(net.Listener) error
+}
+#+END_SRC
+caddy定义的Server接口是交给具体的插件来实现的。翻译成人话大概就是： 告诉caddy怎么监听，怎么处理请求，caddy会帮我们监听，请求来了会自动调用我们给的处理函数。而这一切又通过caddy所谓的context来统一封装。具体如下：
+#+BEGIN_SRC go
+type Context interface {
+  // Called after the Caddyfile is parsed into server
+  // blocks but before the directives are executed,
+  // this method gives you an opportunity to inspect
+  // the server blocks and prepare for the execution
+  // of directives. Return the server blocks (which
+  // you may modify, if desired) and an error, if any.
+  // The first argument is the name or path to the
+  // configuration file (Caddyfile).
+  //
+  // This function can be a no-op and simply return its
+  // input if there is nothing to do here.
+  InspectServerBlocks(string, []caddyfile.ServerBlock) ([]caddyfile.ServerBlock, error)
+
+  // This is what Caddy calls to make server instances.
+  // By this time, all directives have been executed and,
+  // presumably, the context has enough state to produce
+  // server instances for Caddy to start.
+  MakeServers() ([]Server, error)
+}
+#+END_SRC
+给一个context，这个context用来创建Server，而这个Server要会怎么监听，怎么处理请求。就这样，caddy完美的把自己变成了一个框架，而不是gin这样的http框架。context怎么给过来？则要注册到caddy框架中。
+#+BEGIN_SRC go
+///home/ry/go/src/github.com/coredns/coredns/core/dnsserver/register.go:23
+func init() {
+  flag.StringVar(&Port, serverType+".port", DefaultPort, "Default port")
+
+  caddy.RegisterServerType(serverType, caddy.ServerType{
+    Directives: func() []string { return Directives },
+    DefaultInput: func() caddy.Input {
+      return caddy.CaddyfileInput{
+        Filepath:       "Corefile",
+        Contents:       []byte(".:" + Port + " {\nwhoami\n}\n"),
+        ServerTypeName: serverType,
+      }
+    },
+    NewContext: newContext,
+  })
+}
+#+END_SRC
+这样就实现了CoreDNS到caddy的打通。caddy中的这行代码标记着caddy到CoreDNS的完美切换：
+#+BEGIN_SRC go
+// /home/ry/go/src/github.com/coredns/coredns/vendor/github.com/mholt/caddy/caddy.go:604
+  inst.context = stype.NewContext(inst)
+#+END_SRC
+抓住这些核心则看细节就很顺了。细节不再展开。
+
+* notes:
+1. 优先用proxy: the proxy plugin supports more protocols than forward
+2. https://github.com/coredns/example https://coredns.io/2017/03/01/how-to-add-plugins-to-coredns/ plugin example
