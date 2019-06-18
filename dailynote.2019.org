@@ -85,9 +85,10 @@ Figure out what you're trying to do, and what is keeping you from doing it. Take
 * 神经网络从零开始写: https://news.ycombinator.com/item?id=19320217  https://victorzhou.com/blog/intro-to-neural-networks/
 * https://wyag.thb.lt/ 从零开始自己写git
 git 的core其实很简单
-* My hacks: https://news.ycombinator.com/item?id=18588727
+* brain hacks: https://news.ycombinator.com/item?id=18588727
 ** Productivity: every day do at least one measurable thing that puts forward your project, even if very small. <----非常重要
 ** Expectations: don't care about the outcome of your work, as long as you tried to put a lot of good efforts into it. Focus on trying to do the thing instead of focusing on the result it will have, or what people will think.
 ** Stress: instead of being preoccupied about things, try to take care of them. During stressful situations, enjoy the small things of life, like eating or drinking a glass of wine, or playing with your daughter.
 ** Socialization: let your inner person go out in every occasion in order to immediately push away people that don't like you. Never try to fake being different (compared to what you are). This way you don't have any filter, which is great, nor you have any doubt about people staying around having different expectations.
 ** Life: it's too short to hang out with people you don't like or doing activities you don't like. Focus on what you want.
+** ust by making stuff not ubiquitous, you add a little mental friction to using it that dissuades it usage. <--分心的东西做的难一点，所以手机上app尽量少一点
