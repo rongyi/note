@@ -278,6 +278,17 @@ The rule about pointers vs. values for receivers is that value methods can be in
 
 * golang scheduler
 这里[fn:7]讲的不错。
+* break in select
+  如下：
+#+BEGIN_SRC go
+for {
+  select {
+    case xxx:
+      break
+  }
+}
+#+END_SRC
+这里的break是select还是for？ 答案是select
 
 * Footnotes
 
