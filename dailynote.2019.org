@@ -92,3 +92,5 @@ git 的core其实很简单
 ** Socialization: let your inner person go out in every occasion in order to immediately push away people that don't like you. Never try to fake being different (compared to what you are). This way you don't have any filter, which is great, nor you have any doubt about people staying around having different expectations.
 ** Life: it's too short to hang out with people you don't like or doing activities you don't like. Focus on what you want.
 ** ust by making stuff not ubiquitous, you add a little mental friction to using it that dissuades it usage. <--分心的东西做的难一点，所以手机上app尽量少一点
+* https://blog.juliobiason.net/thoughts/things-i-learnt-the-hard-way/
+** 文档写作技巧： Functions should do one thing and one thing only. When you're writing the function documentation and find that you added an "and", it means the function is doing more than one thing. Break that function into two and remove the "and".
