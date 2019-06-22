@@ -94,3 +94,5 @@ git 的core其实很简单
 ** ust by making stuff not ubiquitous, you add a little mental friction to using it that dissuades it usage. <--分心的东西做的难一点，所以手机上app尽量少一点
 * https://blog.juliobiason.net/thoughts/things-i-learnt-the-hard-way/
 ** 文档写作技巧： Functions should do one thing and one thing only. When you're writing the function documentation and find that you added an "and", it means the function is doing more than one thing. Break that function into two and remove the "and".
+** (A dickish move you can do is to create the new functions, mark the current function as deprecated and add a sleep at the start of the function, in a way that people using the old function are forced to update.) 哈哈哈哈哈
+** For a long time, I kept a simple programming rule: The language I'm playing at home should not be the same language I'm using at work. This allowed me to learn new things that later I applied in the work codebase. 持续学习的节奏，因为语言不断变化，所以这个要求就保证了可以一直不断的学习新的语言
