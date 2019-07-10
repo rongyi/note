@@ -24,6 +24,14 @@
 yum install gnutls-devel.x86_64 ncurses-devel.x86_64 info.x86_64 texinfo.x86_64 libX11-devel.x86_64 libXaw-devel.x86_64 openjpeg-devel.x86_64 libpng-devel.x86_64 giflib-devel.x86_64 libtiff-devel.x86_64 turbojpeg-devel.x86_64 libjpeg-turbo-devel.x86_64
 #+END_SRC
 
+* recompile
+  #+BEGIN_SRC bash
+  #https://stackoverflow.com/questions/1217180/how-do-i-byte-compile-everything-in-my-emacs-d-directory
+  C-u 0 M-x byte-recompile-directory
+  # will compile all the .el files in the directory and in all subdirectories below.
+  # The C-u 0 part is to make it not ask about every .el file that does not have a .elc counterpart.
+  #+END_SRC
+
 * quote
 
 #+BEGIN_QUOTE
