@@ -1,65 +1,65 @@
 * 时光飞逝
 * 关于compiler的
-https://bernsteinbear.com/blog/bytecode-interpreters/
-https://news.ycombinator.com/item?id=18821475
-这里也提到刚刚看完的 Writing a compiler in go这本书。
+  https://bernsteinbear.com/blog/bytecode-interpreters/
+  https://news.ycombinator.com/item?id=18821475
+  这里也提到刚刚看完的 Writing a compiler in go这本书。
 * https://en.d2l.ai/d2l-en.pdf
   http://karpathy.github.io/neuralnets/
   https://hn.academy/
   机器学习相关
 * how to ask questions
-A good question is energizing. It’s an inviting challenge, it’s something that’s interesting and fun to pursue. It inspires a new way of seeing things, a new way of ordering information.
+  A good question is energizing. It’s an inviting challenge, it’s something that’s interesting and fun to pursue. It inspires a new way of seeing things, a new way of ordering information.
 
-A good question is an act of pointing. First you survey the ideascape in front of you – maybe it’s shared territory between the two of you, or maybe it’s you looking over your conversation-partner’s shoulder – and then you try and identify the most compelling, interesting thing, and point to that.
+  A good question is an act of pointing. First you survey the ideascape in front of you – maybe it’s shared territory between the two of you, or maybe it’s you looking over your conversation-partner’s shoulder – and then you try and identify the most compelling, interesting thing, and point to that.
 
-“Funny” or “interesting” is a sort of compass or gyroscope that guides you away from stale questions.
+  “Funny” or “interesting” is a sort of compass or gyroscope that guides you away from stale questions.
 
 * https://news.ycombinator.com/item?id=16126082
   Like almost all problems in life you have only 4 options:
-#1 Change you (accept what you are unable to change)
+  #1 Change you (accept what you are unable to change)
 
-#2 Change the other (convince them to follow your vision)
+  #2 Change the other (convince them to follow your vision)
 
-#3 Fly (divorce, quit)
+  #3 Fly (divorce, quit)
 
-#4 Stay and suffer (include drinking, doing drugs, whining)
+  #4 Stay and suffer (include drinking, doing drugs, whining)
 
-It is amazing how many people chose number 4.
+  It is amazing how many people chose number 4.
 
 * 如何做独立consult: https://news.ycombinator.com/item?id=4245960
-(1) Start a freelance practice.
-(2) Raise your rates.
+  (1) Start a freelance practice.
+  (2) Raise your rates.
 
-(3) As you work for clients, keep a sharp eye for opportunities to build "specialty practices". If you get to work on a project involving Mongodb, spend some extra time and effort to get Mongodb under your belt. If you get a project for a law firm, spend some extra time thinking about how to develop applications that deal with contracts or boilerplates or PDF generation or document management.
+  (3) As you work for clients, keep a sharp eye for opportunities to build "specialty practices". If you get to work on a project involving Mongodb, spend some extra time and effort to get Mongodb under your belt. If you get a project for a law firm, spend some extra time thinking about how to develop applications that deal with contracts or boilerplates or PDF generation or document management.
 
-(4) Raise your rates.
+  (4) Raise your rates.
 
-(5) Start refusing hourly-rate projects. Your new minimum billable increment is a day.
+  (5) Start refusing hourly-rate projects. Your new minimum billable increment is a day.
 
-(6) Take end-to-end responsibility for the business objectives of whatever you build. This sounds fuzzy, like, "be able to talk in a board room", but it isn't! It's mechanically simple and you can do it immediately: Stop counting hours and days. Stop pushing back when your client changes scope. Your remedy for clients who abuse your flexibility with regards to scope is "stop working with that client". Some of your best clients will be abusive and you won't have that remedy. Oh well! Note: you are now a consultant.
+  (6) Take end-to-end responsibility for the business objectives of whatever you build. This sounds fuzzy, like, "be able to talk in a board room", but it isn't! It's mechanically simple and you can do it immediately: Stop counting hours and days. Stop pushing back when your client changes scope. Your remedy for clients who abuse your flexibility with regards to scope is "stop working with that client". Some of your best clients will be abusive and you won't have that remedy. Oh well! Note: you are now a consultant.
 
-(7) Hire one person at a reasonable salary. You are now responsible for their payroll and benefits. If you don't book enough work to pay both your take-home and their salary, you don't eat. In return: they don't get an automatic percentage of all the revenue of the company, nor does their salary automatically scale with your bill rate.
+  (7) Hire one person at a reasonable salary. You are now responsible for their payroll and benefits. If you don't book enough work to pay both your take-home and their salary, you don't eat. In return: they don't get an automatic percentage of all the revenue of the company, nor does their salary automatically scale with your bill rate.
 
-(8) You are now "senior" or "principal". Raise your rates.
+  (8) You are now "senior" or "principal". Raise your rates.
 
-(9) Generalize out from your specialties: Mongodb -> NoSQL -> highly scalable backends. Document management -> secure contract management.
+  (9) Generalize out from your specialties: Mongodb -> NoSQL -> highly scalable backends. Document management -> secure contract management.
 
-(10) Raise your rates.
+  (10) Raise your rates.
 
-(11) You are now a top-tier consulting group compared to most of the market. Market yourself as such. Also: your rates are too low by probably about 40-60%.
+  (11) You are now a top-tier consulting group compared to most of the market. Market yourself as such. Also: your rates are too low by probably about 40-60%.
 
-Try to get it through your head: people who can simultaneously (a) crank out code (or arrange to have code cranked out) and (b) take responsibility for the business outcome of the problems that code is supposed to solve --- people who can speak both tech and biz --- are exceptionally rare. They shouldn't be; the language of business is mostly just elementary customer service, of the kind taught to entry level clerks at Nordstrom's. But they are, so if you can do that, raise your rates.
+  Try to get it through your head: people who can simultaneously (a) crank out code (or arrange to have code cranked out) and (b) take responsibility for the business outcome of the problems that code is supposed to solve --- people who can speak both tech and biz --- are exceptionally rare. They shouldn't be; the language of business is mostly just elementary customer service, of the kind taught to entry level clerks at Nordstrom's. But they are, so if you can do that, raise your rates.
 
 
-To be a consultant, rather than an hourly-rate freelancer, you need two things:
-- insight
+  To be a consultant, rather than an hourly-rate freelancer, you need two things:
+  - insight
 
-- reputation
+  - reputation
 
-Bane's rule, you don't understand a distributed computing problem until you can get it to fit on a single machine first.
+  Bane's rule, you don't understand a distributed computing problem until you can get it to fit on a single machine first.
 
 * 傅里叶变换
-http://www.jezzamon.com/fourier/index.html
+  http://www.jezzamon.com/fourier/index.html
 * lisp书籍推荐 https://news.ycombinator.com/item?id=18911940
 * teach git https://rachelcarmena.github.io/2018/12/12/how-to-teach-git.html
 * 怎么成功？ http://blog.samaltman.com/how-to-be-successful
@@ -68,23 +68,23 @@ http://www.jezzamon.com/fourier/index.html
   3. 学会独立思考
   4. 直接看这篇文章吧
 * go 规范
-https://dave.cheney.net/practical-go/presentations/qcon-china.html
-1. Write shy code - modules that don’t reveal anything unnecessary to other modules and that don’t rely on other modules' implementations.
-2. [A little] duplication is far cheaper than the wrong abstraction.
-3. Avoid package names like base, common, or util
-4. Keep package main small as small as possible
-5. Good code has lots of comments, bad code requires lots of comments.
-6. Don’t name your variables for their types ==> 这个自己倒是经常违反，后面注意一下
+  https://dave.cheney.net/practical-go/presentations/qcon-china.html
+  1. Write shy code - modules that don’t reveal anything unnecessary to other modules and that don’t rely on other modules' implementations.
+  2. [A little] duplication is far cheaper than the wrong abstraction.
+  3. Avoid package names like base, common, or util
+  4. Keep package main small as small as possible
+  5. Good code has lots of comments, bad code requires lots of comments.
+  6. Don’t name your variables for their types ==> 这个自己倒是经常违反，后面注意一下
 * ebpf相关 https://sysdig.com/blog/the-art-of-writing-ebpf-programs-a-primer/
 * 对已有代码的态度：https://news.ycombinator.com/item?id=19254008
   My #1 rule for existing codebases: Just because you wouldn't have done it the way they did doesn't mean they did it wrong.
-I think it's developer nature to look at a huge pile of code that someone else wrote and immediately think: "This is a pile of crap. I can do better, so the first thing to do is rewrite all of this, my way (which just so happens to be _The Right Way_)."
+  I think it's developer nature to look at a huge pile of code that someone else wrote and immediately think: "This is a pile of crap. I can do better, so the first thing to do is rewrite all of this, my way (which just so happens to be _The Right Way_)."
 
-Figure out what you're trying to do, and what is keeping you from doing it. Take an iterative approach to get things done. Realize that after 3 years, they have hopefully fixed a lot of bugs and got to a solution that is somewhat mature and better than you can do in a week.
-说的太对了。不要觉得别人写的代码就是一坨屎。你没有比别人强多少。自信不要用在这里。
+  Figure out what you're trying to do, and what is keeping you from doing it. Take an iterative approach to get things done. Realize that after 3 years, they have hopefully fixed a lot of bugs and got to a solution that is somewhat mature and better than you can do in a week.
+  说的太对了。不要觉得别人写的代码就是一坨屎。你没有比别人强多少。自信不要用在这里。
 * 神经网络从零开始写: https://news.ycombinator.com/item?id=19320217  https://victorzhou.com/blog/intro-to-neural-networks/
 * https://wyag.thb.lt/ 从零开始自己写git
-git 的core其实很简单
+  git 的core其实很简单
 * brain hacks: https://news.ycombinator.com/item?id=18588727
 ** Productivity: every day do at least one measurable thing that puts forward your project, even if very small. <----非常重要
 ** Expectations: don't care about the outcome of your work, as long as you tried to put a lot of good efforts into it. Focus on trying to do the thing instead of focusing on the result it will have, or what people will think.
@@ -101,6 +101,6 @@ git 的core其实很简单
   docker打包的一些技巧
   1. Use more specific tags
 * https://blog.stephsmith.io/how-to-be-great/ 鸡汤
- + So even in the least quantifiable situations, reflect back on what could’ve made a previous loss a future win.
- + Remember, there is no “magic moment” when you become great
- + great is just good, but repeatable.
+  + So even in the least quantifiable situations, reflect back on what could’ve made a previous loss a future win.
+  + Remember, there is no “magic moment” when you become great
+  + great is just good, but repeatable.
