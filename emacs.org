@@ -37,3 +37,4 @@ yum install gnutls-devel.x86_64 ncurses-devel.x86_64 info.x86_64 texinfo.x86_64 
 #+BEGIN_QUOTE
 Emacs is like a brain, at maximum you can only utilize about 10% of its real power :)
 #+END_QUOTE
+* 更多emacs介绍，请参考 https://github.com/rongyi/emacs-book
