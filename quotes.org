@@ -146,3 +146,11 @@
   #+BEGIN_QUOTE
   Until you work as hard as those you admire, don’t explain away their success as luck. - James Clear, Atomic Habits
   #+END_QUOTE
+
+  #+BEGIN_QUOTE
+  “The only way to become excellent is to be endlessly fascinated by doing the same thing over and over. You have to fall in love with boredom.” - Atomic Habits, James Clear
+  #+END_QUOTE
+
+  #+BEGIN_QUOTE
+  “To exist is to change, to change is to mature, to mature is to go on creating oneself endlessly.” - Henri Bergson
+  #+END_QUOTE

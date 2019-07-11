@@ -101,3 +101,6 @@ git 的core其实很简单
   docker打包的一些技巧
   1. Use more specific tags
 * https://blog.stephsmith.io/how-to-be-great/ 鸡汤
+ + So even in the least quantifiable situations, reflect back on what could’ve made a previous loss a future win.
+ + Remember, there is no “magic moment” when you become great
+ + great is just good, but repeatable.
