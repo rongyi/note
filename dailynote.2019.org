@@ -97,3 +97,7 @@ git 的core其实很简单
 ** (A dickish move you can do is to create the new functions, mark the current function as deprecated and add a sleep at the start of the function, in a way that people using the old function are forced to update.) 哈哈哈哈哈
 ** For a long time, I kept a simple programming rule: The language I'm playing at home should not be the same language I'm using at work. This allowed me to learn new things that later I applied in the work codebase. 持续学习的节奏，因为语言不断变化，所以这个要求就保证了可以一直不断的学习新的语言
 ** Keep a record of "stupid errors that took me more than 1 hour to solve" 被bug伤到的要好好记录，下一次的时间就缩短一些
+* https://blog.docker.com/2019/07/intro-guide-to-dockerfile-best-practices/
+  docker打包的一些技巧
+  1. Use more specific tags
+* https://blog.stephsmith.io/how-to-be-great/ 鸡汤

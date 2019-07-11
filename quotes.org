@@ -29,6 +29,7 @@
 
   -- Bob Dylan
   #+END_QUOTE
+
   #+BEGIN_QUOTE
   Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish.
   -Neal Stephenson, “In the Beginning was the Command Line”
@@ -38,14 +39,17 @@
   Most people just make the mistake that is should be simple to design simple things. In reality, the effort required to design something is inversely proportional to the simplicity of the result.
   -- Roy Fileding
   #+END_QUOTE
+
   #+BEGIN_QUOTE
   If a problem is not completely understood, it is probably best to provide no solution at all.
   -- principles of X
   #+END_QUOTE
+
   #+BEGIN_QUOTE
   I hate code, and I want as little of it as possible in out product
   -- Jack Diederich
   #+END_QUOTE
+
   #+BEGIN_QUOTE
   The old adage "don't reinvent the wheel" doesn't apply when the wheel comes attached to locomotive engin. Inventing your own wheels give you a deep appreciation and understanding of how wheels work and what makes a good one.
   #+END_QUOTE
@@ -68,15 +72,16 @@
   #+BEGIN_QUOTE
   "If people knew how hard I worked to get my mastery, it wouldn't seem so wonderful at all." - Michelangelo
   #+END_QUOTE
+
   #+BEGIN_QUOTE
   Building something by gradually refine a prototype is good for morale because It keeps you engaged. In software my rule is: always have working code. If you're writing something you'll be able to test in an hour, you have the prospect of an immediate reward to motivate you. The same is true in the arts, and particularly in oil painting. Most Painters start with a blurry sketch and gradually refine it.
   -- From P.G. Hakers and Painters
   #+END_QUOTE
+
   #+BEGIN_QUOTE
+  Just like an expensive guitar won’t make you a great guitar player and the best running shoes won’t get you out of the door every day, productivity techniques won’t finish your project. They might help, but you have to put the work in. You have to keep showing up and keep chipping away at it. No tool will ever do that for you.
 
-Just like an expensive guitar won’t make you a great guitar player and the best running shoes won’t get you out of the door every day, productivity techniques won’t finish your project. They might help, but you have to put the work in. You have to keep showing up and keep chipping away at it. No tool will ever do that for you.
-
--- https://thorstenball.com/blog/2017/01/16/what-i-didnt-do-to-write-a-book/
+  -- https://thorstenball.com/blog/2017/01/16/what-i-didnt-do-to-write-a-book/
   #+END_QUOTE
 
   #+BEGIN_QUOTE
@@ -85,24 +90,30 @@ Just like an expensive guitar won’t make you a great guitar player and the bes
   If they balk, suggest that they find another code monkey while you find another biz monkey and let the market decide who ends up with the bananas.
   -- From https://news.ycombinator.com/item?id=287767
   #+END_QUOTE
+
   #+BEGIN_QUOTE
   Reprentation is the essense of programming
   -- The Mythical Man Month
   #+END_QUOTE
-  #+BEGIN_SRC
+
+  #+BEGIN_QUOTE
   When I was young, I used to admire intelligent people; as I grow older, I admire kind people.
   — Abraham Joshua Heschel
-  #+END_SRC
+  #+END_QUOTE
+
   #+BEGIN_QUOTE
   “The most violent element in society is ignorance.” - Emma Goldman
   #+END_QUOTE
+
   #+BEGIN_QUOTE
   "Marry or do not marry, you will regret it either way. ...Laugh at the stupidities of the world or weep over them, you will regret it either way. ...Trust a girl or do not trust her, you will regret it either way. ...Hang yourself or do not hang yourself, you will regret it either way. ...This, gentlemen, is the quintessence of all the wisdom of life." - Kierkegaard, Either/Or
   #+END_QUOTE
+
   #+BEGIN_QUOTE
   "My job is to hold a mirror up to nature, which means I need to reflect true human nature — how we think, how act, and the great paradoxes in all our decisions.”
   -- Tom Hanks
   #+END_QUOTE
+
   #+BEGIN_QUOTE
   "When you understand that nobody wants to read your shit, your mind becomes powerfully concentrated.
 
@@ -112,19 +123,26 @@ Just like an expensive guitar won’t make you a great guitar player and the bes
 
   — Steven Pressfield
   #+END_QUOTE
+
   #+BEGIN_QUOTE
   The best advice I ever got was Jim Watson, who co-discovered DNA. Jim is brilliant, and as many brilliant people are a little bit crazy, and Jim has this admonishment which is double meaning, three words: ‘Avoid boring people.’ I love it, because what he’s saying is, ‘Stay away from people who are not interesting,’ avoid boring people, and, ‘Avoid boring people. Don’t be boring to people. Be interesting.’”
   #+END_QUOTE
+
   #+BEGIN_QUOTE
   Bad programmers worry about the code. Good programmers worry about data structures and their relationships.
   ---- Linus Torvalds
   #+END_QUOTE
+
   #+BEGIN_QUOTE
   Thinking happens only when we have time to struggle
   https://www.youtube.com/watch?v=ytVneQUA5-c
   #+END_QUOTE
 
-  #+BEGIN_SRC
+  #+BEGIN_QUOTE
   anything that can be measured can be optimized
   -- https://github.com/dgryski/go-perfbook/blob/master/performance.md#writing-and-optimizing-go-code
-  #+END_SRC
+  #+END_QUOTE
+
+  #+BEGIN_QUOTE
+  Until you work as hard as those you admire, don’t explain away their success as luck. - James Clear, Atomic Habits
+  #+END_QUOTE
