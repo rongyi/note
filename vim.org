@@ -178,8 +178,34 @@
 | 用Vim-surround去插入删除括号（增加函数调用）   | 仔细阅读Vim-surround doc |
 | 上/下一个空格行                                | '{' '}'                          |
 
+
+
+前面有提到在一个单词任一位置删除这个单词`diw`或者`daw`。后面的motion单位就是文本对象。主要有以下一些对象。
+
++ =iw= inner word
++ =aw= a word (a打头和i大头的区别就是a包括“边界”而i不包括)
++ =iW= inner WORD
++ =aW= a WORD
++ =is= inner sentence
++ =as= a sentence
++ =ip= inner paragraph
++ =ap= a paragraph
++ =i(= or =i)= inner block
++ =a(= or =a)= a block
++ =i<= or =i>= inner block
++ =a<= or =a>= a block
++ =i{= or =i}= inner block
++ =a{= or =a}= a block
++ =i"= inner block
++ =a"= a block
++ =i= inner block
++ =a= a block
+
+
 * 结语
   十年Vim的使用总结，就这么几张表，可是当所有命令组合起来时确实有时候有一种行云流水般的感觉，当然自己也不是什么Vim控，比如这篇文章就是在Emacs下编辑，编码之外的文档写作基本都是在Emacs下，因为Vim的模式恰恰是中文输入的硬伤。
+
+  这是我14年左右写的关于Vim的一些使用总结，现在是2019-07-11 星期四，而我现在已经全部用emacs开发了，或者换言之live in emacs。
 
 * 推荐读物
   [[http://statico.github.io/vim.html][Vim After 11 Years]]
