@@ -1,4 +1,4 @@
-* 计算机方面的名言警句
+* 自己摘录的一些名言警句（原来是关于CS的，后面逐渐宽泛了）
   #+BEGIN_QUOTE
   Any fool can write code that a computer can u nderstand. Good programmer write code that humans can understand.
   -- Martin Fowler
