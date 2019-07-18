@@ -104,3 +104,5 @@
   + So even in the least quantifiable situations, reflect back on what could’ve made a previous loss a future win.
   + Remember, there is no “magic moment” when you become great
   + great is just good, but repeatable.
+* http://www-math.mit.edu/~djk/calculus_beginners/  http://calculusmadeeasy.org/
+  微积分入门
