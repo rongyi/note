@@ -291,7 +291,9 @@ for {
 这里的break是select还是for？ 答案是select
 * atomic vs mutex
   如果支持atomic的读写就用这个，因为这个更快一点
-
+* 发现shadow变量
+go install golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow
+go vet -vettool=$(which shadow)
 * Footnotes
 
 [fn:7] https://news.ycombinator.com/item?id=12460807
