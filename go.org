@@ -294,11 +294,29 @@ for {
 * 发现shadow变量
 go install golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow
 go vet -vettool=$(which shadow)
+* repo[fn:8]的一些记录
+golang gc 测试
+go tool pprof -alloc_objects
+
+go tool pprof -inuse_objects
+
+go tool pprof bin/dupsdc
+
+consistant hash Ketema algorithm
+
+goreplay: https://github.com/buger/goreplay 用线上流量去压测
+begeta: https://github.com/tsenart/vegeta http压测
+gogo/protobuf: use in docker/etcd/k8s/tidb 压测数据 https://github.com/alecthomas/go_serialization_benchmarks
+runtime.MemoProfile() memory profile
+golang 的价值观： orthogonal composition of simple concepts with preference in concurrency
+go-kit/gokit: 微服务的基础框架
+go tool compile -m 辅助分析对象的分配情况
+"The go tool will ignore a directory named "testdata", making it available to hold ancillary data
+needed by the tests."
+go test -v -run='^TestContainsAny$' strings_test.go 之前许多时候对prefix相同的testcase没有办法，其实可以用正则。
+云架构的核心就是解耦： 业务/运维解耦 系统/软件解耦 服务与服务之间解耦
+
 * Footnotes
-
-[fn:7] https://news.ycombinator.com/item?id=12460807
-
-[fn:6] https://i.stack.imgur.com/6S35J.png
 
 [fn:1] http://mmcloughlin.com/posts/your-pprof-is-showing
 
@@ -309,3 +327,9 @@ go vet -vettool=$(which shadow)
 [fn:4] http://pro-tips-dot-com.tumblr.com/post/47677612115/kill-a-hung-go-process-and-print-stack-traces
 
 [fn:5] https://dave.cheney.net/2017/04/30/if-a-map-isnt-a-reference-variable-what-is-it
+
+[fn:6] https://i.stack.imgur.com/6S35J.png
+
+[fn:7] https://news.ycombinator.com/item?id=12460807
+
+[fn:8] https://github.com/0voice/from_coder_to_expert
