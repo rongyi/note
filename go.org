@@ -315,7 +315,15 @@ go tool compile -m 辅助分析对象的分配情况
 needed by the tests."
 go test -v -run='^TestContainsAny$' strings_test.go 之前许多时候对prefix相同的testcase没有办法，其实可以用正则。
 云架构的核心就是解耦： 业务/运维解耦 系统/软件解耦 服务与服务之间解耦
-
+* copy
+  #+BEGIN_SRC go
+  // The number of elements copied by the copy function is the minimum of len(dst) and len(src). To make a full copy, you must allocate a big enough destination slice.
+  var src, dst []int
+  src = []int{1, 2, 3}
+  dst = make([]int, len(src))
+  n := copy(dst, src)
+  fmt.Println("dst:", dst, "(copied", n, "numbers)")
+  #+END_SRC
 * Footnotes
 
 [fn:1] http://mmcloughlin.com/posts/your-pprof-is-showing
