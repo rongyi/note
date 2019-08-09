@@ -1,3 +1,4 @@
 * 简介
   golang libs
 ** https://github.com/awnumar/fastrand 快速生成随机数
+** https://github.com/cloudflare/tableflip graceful restart
