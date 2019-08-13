@@ -2,3 +2,4 @@
   golang libs
 ** https://github.com/awnumar/fastrand 快速生成随机数
 ** https://github.com/cloudflare/tableflip graceful restart
+** https://github.com/ankur-anand/simple-go-rpc 实现一个rpc的简单过程，里面有一些refect的使用demo
