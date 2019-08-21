@@ -149,12 +149,26 @@ github.com/rapidloop/rtop 这个repo里有相关方法，可以参考
 还是用dlv工具[fn:3]
 
 * go tool的一些参数
-go build -x
-看看过程都干了啥
-go test -race
-死锁检测
-go get -d
-只是clone不去安装
+1. go build -x
+   看看过程都干了啥
+2. go test -race
+   死锁检测
+3. go get -d
+   只是clone不去安装
+4. 重置test时间[fn:4]
+   b.ResetTimer()
+   or:
+   b.StopTimer() at some point then
+   b.StartTimer() just brefore the bench you want
+5. 显示分配内存情况
+   b.ReportAllocs()
+6. gen profile
+   -cpuprofile=$FILE writes a CPU profile to $FILE.
+   -memprofile=$FILE, writes a memory profile to $FILE, -memprofilerate=N adjusts the profile rate to 1/N.
+   -blockprofile=$FILE, writes a block profile to $FILE.
+   Using any of these flags also preserves the binary.
+   % go test -run=XXX -bench=. -cpuprofile=c.p bytes
+   % go tool pprof c.p
 * grpc
 编译proto：
 protoc --go_out=plugins=grpc:. helloworld.proto
@@ -194,7 +208,7 @@ fmt.Printf("%T\n", s)
 * print stack trace of a hung process
 To kill a hung Go process and print the current stacks of all goroutines, simply send it an ABRT signal:
 
-kill -ABRT <pid>[fn:4]
+kill -ABRT <pid>[fn:5]
 * gitaly profile
 https://gitlab.com/gitlab-com/runbooks/blob/master/howto/gitaly-profiling.md
 
@@ -255,7 +269,7 @@ func main() {
 }
   #+END_SRC
 * If a map isn’t a reference variable, what is it?
-==> A map value is a pointer to a runtime.hmap structure.[fn:5]
+==> A map value is a pointer to a runtime.hmap structure.[fn:6]
 
 
 * init执行放在哪里[fn:2]
@@ -264,7 +278,7 @@ func main() {
 2. Current package's constant initialized then.
 3. Current package's variables are initialiszd then.
 4. Finally, init() function of current package is called.
-* 传参法则[fn:6]
+* 传参法则[fn:7]
 1. Methods using receiver pointers are common; the rule of thumb for receivers is, "If in doubt, use a pointer."
 2. Slices, maps, channels, strings, function values, and interface values are implemented with pointers internally, and a pointer to them is often redundant.
 3. Elsewhere, use pointers for big structs or structs you'll have to change, and otherwise pass values, because getting things changed by surprise via a pointer is confusing.
@@ -277,7 +291,7 @@ The rule about pointers vs. values for receivers is that value methods can be in
   iota比较特殊，可以被认为是一个可被编译器修改的常量，在每一个const关键字出现时被重置为0，然后在下一个const出现之前，每出现一次iota，其所代表的数字会自动增1。
 
 * golang scheduler
-这里[fn:7]讲的不错。
+这里[fn:8]讲的不错。
 * break in select
   如下：
 #+BEGIN_SRC go
@@ -294,7 +308,7 @@ for {
 * 发现shadow变量
 go install golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow
 go vet -vettool=$(which shadow)
-* repo[fn:8]的一些记录
+* repo[fn:9]的一些记录
 golang gc 测试
 go tool pprof -alloc_objects
 
@@ -324,6 +338,7 @@ go test -v -run='^TestContainsAny$' strings_test.go 之前许多时候对prefix�
   n := copy(dst, src)
   fmt.Println("dst:", dst, "(copied", n, "numbers)")
   #+END_SRC
+
 * Footnotes
 
 [fn:1] http://mmcloughlin.com/posts/your-pprof-is-showing
@@ -332,12 +347,14 @@ go test -v -run='^TestContainsAny$' strings_test.go 之前许多时候对prefix�
 
 [fn:3] https://rakyll.org/coredumps/
 
-[fn:4] http://pro-tips-dot-com.tumblr.com/post/47677612115/kill-a-hung-go-process-and-print-stack-traces
+[fn:4] https://dave.cheney.net/high-performance-go-workshop/gophercon-2019.html
 
-[fn:5] https://dave.cheney.net/2017/04/30/if-a-map-isnt-a-reference-variable-what-is-it
+[fn:5] http://pro-tips-dot-com.tumblr.com/post/47677612115/kill-a-hung-go-process-and-print-stack-traces
 
-[fn:6] https://i.stack.imgur.com/6S35J.png
+[fn:6] https://dave.cheney.net/2017/04/30/if-a-map-isnt-a-reference-variable-what-is-it
 
-[fn:7] https://news.ycombinator.com/item?id=12460807
+[fn:7] https://i.stack.imgur.com/6S35J.png
 
-[fn:8] https://github.com/0voice/from_coder_to_expert
+[fn:8] https://news.ycombinator.com/item?id=12460807
+
+[fn:9] https://github.com/0voice/from_coder_to_expert
