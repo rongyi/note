@@ -164,3 +164,8 @@
   Design is the art of arranging code to work today, and be changeable  forever.
   –Sandi Metz
   #+END_QUOTE
+
+  #+BEGIN_QUOTE
+  The main value in software is not the code produced, but the knowledge accumulated by the people who produced it.
+  - Li https://www.csc.gov.sg/articles/how-to-build-good-software
+  #+END_QUOTE
