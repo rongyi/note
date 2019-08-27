@@ -169,6 +169,7 @@ github.com/rapidloop/rtop 这个repo里有相关方法，可以参考
    Using any of these flags also preserves the binary.
    % go test -run=XXX -bench=. -cpuprofile=c.p bytes
    % go tool pprof c.p
+   % go test -gcflags=-N -bench=. #禁止编译器优化
 * grpc
 编译proto：
 protoc --go_out=plugins=grpc:. helloworld.proto
