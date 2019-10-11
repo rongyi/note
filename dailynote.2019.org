@@ -108,3 +108,5 @@
   微积分入门
 * https://lisp-univ-etc.blogspot.com/2019/07/programming-algorithms-book.html https://news.ycombinator.com/item?id=20505378
   common lisp的数据结构
+* https://hackernoon.com/think-big-start-small-act-fast-6fdab1f771ea
+  think big, start small, act fast
