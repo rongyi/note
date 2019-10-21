@@ -112,3 +112,5 @@
   think big, start small, act fast
   (quote from this: https://broadcast.listennotes.com/the-boring-technology-behind-listen-notes-56697c2e347b)
   Most of time, the biggest obstacle of building & shipping things is over thinking. What if this, what if that. Boy, you are not important at all. Everyone is busy in their own life. No one cares about you and the things you build, until you prove that you are worth other people’s attention. Even you screw up the initial product launch, few people will notice. Think big, start small, act fast. It’s absolutely okay to use the boring technology and start something simple (even ugly), as long as you actually solve problems.
+
+* https://app.programmingfonts.org/#cutive 字体网站
