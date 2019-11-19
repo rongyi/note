@@ -116,3 +116,6 @@
 * https://mirtitles.org/ https://news.ycombinator.com/item?id=21346272 有哪些好的数学书籍推荐
   http://gen.lib.rus.ec/search.php?&req=Mathematics&phrase=1&view=detailed&column=title&sort=def&sortmode=ASC&page=3 倒是一个找书的网站
   https://mirtitles.org/2018/05/24/problems-in-elementary-mathematics-for-home-study-antonov-vygodsky-nikitin-sankin/
+* https://www.calnewport.com/blog/2011/11/11/if-youre-busy-youre-doing-something-wrong-the-surprisingly-relaxed-lives-of-elite-achievers/
+  if your goal is to build a remarkable life, then busyness and exhaustion should be your enemy. If you’re chronically stressed and up late working, you’re doing something wrong.
+  Just working hard is a recipe for failure for most people.
