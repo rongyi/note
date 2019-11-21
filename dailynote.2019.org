@@ -119,3 +119,4 @@
 * https://www.calnewport.com/blog/2011/11/11/if-youre-busy-youre-doing-something-wrong-the-surprisingly-relaxed-lives-of-elite-achievers/
   if your goal is to build a remarkable life, then busyness and exhaustion should be your enemy. If you’re chronically stressed and up late working, you’re doing something wrong.
   Just working hard is a recipe for failure for most people.
+* https://tls.ulfheim.net/ tls 交互
