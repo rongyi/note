@@ -121,3 +121,36 @@
   Just working hard is a recipe for failure for most people.
 * https://tls.ulfheim.net/ tls 交互
 * https://www.improveyoursocialskills.com/basic-social-skills-guide 提高一下情商
+* https://news.ycombinator.com/item?id=21712194 about leadership
+
+  #+BEGIN_QUOTE
+  I don’t have a reference available but the concept of ‘Mission Command’ used by the UK Army amongst others contains the best and most succinct description I’ve seen of how to delegate a task to a subordinate. And is perfectly suited to many civilian situations as well. From memory, and paraphrasing, it boils down to
+State what you, as the leader, are trying to achieve, and why ('the big picture')
+
+State what you want the subordinate to achieve
+
+Define the resources available to the subordinate, and any constraints
+
+Say how you want progress / issues to be reported
+
+You don’t define how the subordinate should carry out the task – if they are competent and you trust them, they should be able to figure this out themselves.
+
+[Edit] - the military distinction between command and control is also relevant to the civilian distinction between leadership and management. Paraphrasing slightly: Command is getting people to do something. Control is stopping them from doing something else.
+  #+END_QUOTE
+* some books
+Principles - Ray Dalio
+The Power of Now - Eckhart Tolle
+The Effective Executive - Peter F. Drucker
+Think and Grow Rich - Napoleon Hill
+Extreme Ownership - Jocko Willink, Leif Babin
+Influence - Robert B. Cialdini
+The Startup Way - Eric Ries
+The Lean Startup - Eric Ries
+12 Rules for Life - Jordan B. Peterson
+Measure What Matters - John Doerr, Larry Page
+The Fish That Ate the Whale - Rich Cohen
+The E-Myth Revisited - Michael E. Gerber
+The Score Takes Care of Itself - Bill Walsh, Steve Jamison, Craig Walsh
+Management - Peter F. Drucker
+Thinking in Systems - Donella H. Meadows
+Blue Ocean Strategy - W. Chan Kim, Renee Mauborgne
