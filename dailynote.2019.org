@@ -137,7 +137,7 @@ You don’t define how the subordinate should carry out the task – if they are
 
 [Edit] - the military distinction between command and control is also relevant to the civilian distinction between leadership and management. Paraphrasing slightly: Command is getting people to do something. Control is stopping them from doing something else.
   #+END_QUOTE
-* some books
+* some books: https://news.ycombinator.com/item?id=21802452
 Principles - Ray Dalio
 The Power of Now - Eckhart Tolle
 The Effective Executive - Peter F. Drucker
