@@ -154,3 +154,4 @@ The Score Takes Care of Itself - Bill Walsh, Steve Jamison, Craig Walsh
 Management - Peter F. Drucker
 Thinking in Systems - Donella H. Meadows
 Blue Ocean Strategy - W. Chan Kim, Renee Mauborgne
+* fast: https://news.ycombinator.com/item?id=21848860
