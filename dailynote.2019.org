@@ -155,3 +155,11 @@ Management - Peter F. Drucker
 Thinking in Systems - Donella H. Meadows
 Blue Ocean Strategy - W. Chan Kim, Renee Mauborgne
 * fast: https://news.ycombinator.com/item?id=21848860
+* c处理参数
+http://www.usrsb.in/How-Old-School-C-Programmers-Process-Arguments.html
+* 怎么处理TODO： https://news.ycombinator.com/item?id=18891069
+>It is about executing. It is about having the discipline to do the things you don't want to do, but know they have to get done.
+- todo-year.txt : all goals for the year
+- todo-month.txt : track subset of annual goals to finish this month
+- todo-week.txt : track all monthly high-level tasks to finish this week
+- todo.txt : daily task plan based on weekly plan. Switch tasks every 1 hour. In a day, I plan for about 4 tasks, so each task ends up getting about 2 hours.
