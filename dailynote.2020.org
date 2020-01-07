@@ -1,0 +1,2 @@
+* https://news.ycombinator.com/item?id=21958359
+  torrent golang实现,里面有dht的讨论
