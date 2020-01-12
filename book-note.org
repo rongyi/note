@@ -1,0 +1,6 @@
+#+TODO: TODO READING | DONE
+* living by the code
+  #+BEGIN_QUOTE
+  more empathy? ==>
+  One proactive way would be calling out bad behavior. Be argumentative but not confrantional with the people that are not being empathic, in a way that is empathic itself. Don't return aggression with aggression. Kill them with kindness.
+  #+END_QUOTE
