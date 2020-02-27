@@ -11,3 +11,4 @@ If you are having a hard time getting started, or keep reading a book to the fin
 * 想偷懒的时候看看: screw it, let's do this
   https://news.ycombinator.com/item?id=22105229
 * 数学书籍相关 https://www.neilwithdata.com/mathematics-self-learner
+* rust学习 https://rust-unofficial.github.io/too-many-lists/index.html
