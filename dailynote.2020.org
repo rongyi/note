@@ -14,3 +14,5 @@ If you are having a hard time getting started, or keep reading a book to the fin
 * rust学习
 + https://rust-unofficial.github.io/too-many-lists/index.html
 + https://news.ycombinator.com/item?id=22390662
++ https://fasterthanli.me/blog/2020/a-half-hour-to-learn-rust/ https://news.ycombinator.com/item?id=22448933
++ https://www.geekabyte.io/2020/02/rust-ownership-rules.html
