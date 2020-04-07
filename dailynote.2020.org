@@ -12,7 +12,7 @@ If you are having a hard time getting started, or keep reading a book to the fin
   https://news.ycombinator.com/item?id=22105229
 * 数学书籍相关
 https://www.neilwithdata.com/mathematics-self-learner
-书籍推荐： http://www.cargalmathbooks.com/#Principles%20of%20Learning%20Calculus
+书籍推荐： http://www.cargalmathbooks.com/
 * rust学习
 + https://rust-unofficial.github.io/too-many-lists/index.html
 + https://news.ycombinator.com/item?id=22390662
