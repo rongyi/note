@@ -18,6 +18,7 @@ https://www.neilwithdata.com/mathematics-self-learner
 + https://news.ycombinator.com/item?id=22390662
 + https://fasterthanli.me/blog/2020/a-half-hour-to-learn-rust/ https://news.ycombinator.com/item?id=22448933
 + https://www.geekabyte.io/2020/02/rust-ownership-rules.html
++ https://doc.rust-lang.org/rust-by-example/hello.html
 * interpreter开发
 https://news.ycombinator.com/item?id=22788738
 http://journal.stuffwithstuff.com/2020/04/05/crafting-crafting-interpreters/
