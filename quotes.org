@@ -169,3 +169,8 @@
   The main value in software is not the code produced, but the knowledge accumulated by the people who produced it.
   - Li https://www.csc.gov.sg/articles/how-to-build-good-software
   #+END_QUOTE
+
+  #+begin_quote
+  To acquire the habit of reading is to construct for yourself a refuge from almost all the miseries of life.
+  —W. Somerset Maugham
+  #+end_quote
