@@ -23,3 +23,5 @@ https://www.neilwithdata.com/mathematics-self-learner
 https://news.ycombinator.com/item?id=22788738
 http://journal.stuffwithstuff.com/2020/04/05/crafting-crafting-interpreters/
 http://craftinginterpreters.com/
+* lisp algorithm
+  https://leanpub.com/progalgs/read
