@@ -27,3 +27,4 @@ http://craftinginterpreters.com/
   https://leanpub.com/progalgs/read
 * 关于orgmode https://news.ycombinator.com/item?id=23299993
 What some are missing is the fact that low barriers to entry sometimes turn into barriers to growth at a later stage.
+* 效率 https://jeffhuang.com/productivity_text_file/
