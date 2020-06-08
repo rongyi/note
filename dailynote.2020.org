@@ -29,3 +29,4 @@ http://craftinginterpreters.com/
 What some are missing is the fact that low barriers to entry sometimes turn into barriers to growth at a later stage.
 * 效率 https://jeffhuang.com/productivity_text_file/
   https://untools.co/
+* 编译器集合： https://github.com/melling/ComputerLanguages/blob/master/compilers.md
