@@ -30,3 +30,4 @@ What some are missing is the fact that low barriers to entry sometimes turn into
 * 效率 https://jeffhuang.com/productivity_text_file/
   https://untools.co/
 * 编译器集合： https://github.com/melling/ComputerLanguages/blob/master/compilers.md
+* orgmode达人： http://stormrider.io/ninety-pct.html
