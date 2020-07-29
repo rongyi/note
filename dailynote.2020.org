@@ -31,3 +31,12 @@ What some are missing is the fact that low barriers to entry sometimes turn into
   https://untools.co/
 * 编译器集合： https://github.com/melling/ComputerLanguages/blob/master/compilers.md
 * orgmode达人： http://stormrider.io/ninety-pct.html
+* programmer advice:
++ Add value. Train yourself to only do things that add value. Value is loosely defined. It can be going the extra mile smashing that bug that everybody is complaining about. It can be whipping up a mind blowing demo to pull in that big customer. Nobody cares if you work 80 hours a week, but it's not adding any value. Get in the habit of working on things that bring value to others.
++ More communicating, less coding. This is extremely important in teams and large organisations. Communicate to make sure nobody does double work. Communicate to have your ideas and opinions heard. Communicate to avoid doing pointless work. The list goes on. Communicate with your peers, your boss, your customers.
++ Have healthy habits. Eat well, sleep well, exercise. When you're young you can pull off all nighters and eating pizza's all week. As you get older, you cannot.
++ Be reliable. When you say you're going to do something, do it. Write reliable, well-tested code that works.
++ Fail. Make mistakes. And learn from them. Don't be afraid to take on a challenge. You cannot expect to be great without having made mistakes. You'll make them once and hopefully never again.
++ Follow up. When people send you e-mails and messages. Answer as fast as you can. Things move a whole lot more quickly when people don't wait on each other.
++ Be on time. Nobody likes people who are late.
++ Always learn. Try new things. If you don't like them, then at least you tried and learned something new. Keep exploring and reading.
