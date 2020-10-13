@@ -49,3 +49,4 @@ What some are missing is the fact that low barriers to entry sometimes turn into
 
 -- https://news.ycombinator.com/item?id=14708350
 * https://github.com/LzyRapx/Competitive-Programming-Docs competitive programming
+* https://vasilishynkarenka.com/learning/ 打造一个好的学习环境和习惯
