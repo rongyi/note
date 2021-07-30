@@ -1,0 +1,104 @@
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+OPTIONS: author:t broken-links:nil c:nil creator:nil
+#+OPTIONS: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
+#+OPTIONS: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+OPTIONS: timestamp:t title:t toc:t todo:t |:t
+#+TITLE: gvisor-tcpip
+#+DATE: <2021-07-30 五>
+#+AUTHOR: ry
+#+EMAIL: hiarongyi@gmail.com
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 26.3 (Org mode 9.1.9)
+* 简介
+  yes! gvisor里竟然包含了tcpip的golang实现。本文来撸一撸。
+
+* PacketBuffer
+  PacketBuffer是一个报文的结构封装贯穿于整个流程中。所以先把 PacketBuffer 了解一下。
+** gvisor/pkg/buffer
+   这个package抽象了内存表示。其中buffer.View是离散的内存封装，内存最小的单位是buffer：
+   #+BEGIN_SRC go
+///home/coder/go/src/github.com/google/gvisor/pkg/buffer/buffer.go:24
+type buffer struct {
+  data  []byte
+  read  int
+  write int
+  bufferEntry
+}
+   #+END_SRC
+   两个指针read/write表示读取的长度和写的长度。函数 Full/ReadSize/WriteSize 可以看出来用意。 bufferEntry用于把buffer串起来。
+
+   封装了个函数可以去抠掉一部分data的接口： Remove，其他的都很简洁，这个Remove说一下。
+
+   为了表示区间增加了个Range的表示
+   #+BEGIN_SRC go
+// A Range specifies a range of buffer.
+type Range struct {
+  begin int
+  end   int
+}
+//应该还是这种范围[begin, end)
+   #+END_SRC
+   Range的Intersect方法实在是骚。
+   #+BEGIN_SRC go
+///home/coder/go/src/github.com/google/gvisor/pkg/buffer/buffer.go:51
+// Remove removes r from the unread portion. It returns false if r does not
+// fully reside in b.
+func (b *buffer) Remove(r Range) bool {
+  sz := b.ReadSize()
+  switch {
+  case r.Len() != r.Intersect(Range{end: sz}).Len():// 确保可读的区间要 >= range
+    return false
+  case r.Len() == 0: // 抠掉的区间长度为空啥也不干
+    // Noop
+  case r.begin == 0: // 从read的开始的地方抠，假装抠掉的数据被读走了
+    b.read += r.end
+  case r.end == sz: // 从write地方往前抠，假装写的少了
+    b.write -= r.Len()
+  default:
+    // Remove from the middle of b.data.
+    // 从中间抠掉，读不改变，假装写的少了
+    // |--------|
+    // b.r |---|
+    //     r.b r.e
+    copy(b.data[b.read+r.begin:], b.data[b.read+r.end:b.write])
+    b.write -= r.Len()
+  }
+  return true
+}
+   #+END_SRC
+   好，buffer清楚之后就是bufferList了。 bufferList是个有头尾指针的双链表，用于串buffer，buffer里面的bufferEntry属性就是被它调用设置next/prev。作为数据结构的内容这里不描述了。
+   接下来是pool
+   #+BEGIN_SRC go
+///home/coder/go/src/github.com/google/gvisor/pkg/buffer/pool.go:37
+type pool struct {
+  bufferSize      int
+  avail           []buffer              `state:"nosave"`
+  embeddedStorage [embeddedCount]buffer `state:"wait"`
+}
+   #+END_SRC
+   avail指向 embeddedStorage的某个index，buffer在pool这个结构中仅关心位置，里面的buffer里面的data另外初始化。
+   #+BEGIN_SRC go
+///home/coder/go/src/github.com/google/gvisor/pkg/buffer/pool.go:51
+// get gets a new buffer from p without initializing it.
+func (p *pool) getNoInit() *buffer {
+  //最一开始的情况， avail没有初始化，先绑定
+  if p.avail == nil {
+    p.avail = p.embeddedStorage[:]
+  }
+  // 这个case是avail已经被切片用完了，此时avail不为nil，但是len为0
+  // 需要重新开辟空间
+  if len(p.avail) == 0 {
+    p.avail = make([]buffer, embeddedCount)
+  }
+  if p.bufferSize <= 0 {
+    p.bufferSize = defaultBufferSize
+  }
+  buf := &p.avail[0]
+  // 配合的是上面第二个判断
+  p.avail = p.avail[1:]
+  return buf
+}
+
+   #+END_SRC
