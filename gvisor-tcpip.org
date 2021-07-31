@@ -142,3 +142,12 @@ type View struct {
                               ^
                              length
         #+END_SRC
+   5. Grow(length int64, zero bool) ==> 设置View的大小至length，zero表示是否用0填充
+      + 判断最后一个是否为空或者还有空间可写？满足的话就从pool里拿个新的buffer。
+      + 对这个可写的buf（最后一个或者是新拿的）进行写操作(更新buf.write指针)，稍微判断一下写空间是否绰绰有余，多的话就按照left要求来
+   6. Prepend(data []byte) ==> 将data塞到前面去
+      + 第一个还有空间吗？有就塞一点，动的是buf.read指针，读过的就不要了，放在这些位置上，还分情况：
+        + 第一个空间足够如下图：
+          [[./include/images/buf-has-space.png]]
+        + 第一个空间不够，data写一点，buf写满
+          [[./include/images/buf-not-enough.png]]
