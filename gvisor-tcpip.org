@@ -109,7 +109,7 @@ func (p *pool) getNoInit() *buffer {
    #+BEGIN_SRC go
 // /home/coder/go/src/github.com/google/gvisor/pkg/buffer/view.go:31
 type View struct {
-  data bufferList
+  data bufferLis=t
   size int64 // size表示的所有buffer加起来的长度，而不是分片buffer的个数
   pool pool
 }
