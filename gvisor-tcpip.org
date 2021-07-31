@@ -14,6 +14,9 @@
 * 简介
   yes! gvisor里竟然包含了tcpip的golang实现。本文来撸一撸。
 
+  本人读的版本commit： 28291a5a5d25633c8bdf45ed5affe90f779c74b4
+
+
 * PacketBuffer
   PacketBuffer是一个报文的结构封装贯穿于整个流程中。所以先把 PacketBuffer 了解一下。
 ** gvisor/pkg/buffer
@@ -78,7 +81,7 @@ type pool struct {
   embeddedStorage [embeddedCount]buffer `state:"wait"`
 }
    #+END_SRC
-   avail指向 embeddedStorage的某个index，buffer在pool这个结构中仅关心位置，里面的buffer里面的data另外初始化。
+   avail最先指向embeddedStorage的某个index，后面用满了之后指向新make的slice。buffer在pool这个结构中仅关心位置，里面的buffer里面的data另外初始化。
    #+BEGIN_SRC go
 ///home/coder/go/src/github.com/google/gvisor/pkg/buffer/pool.go:51
 // get gets a new buffer from p without initializing it.
@@ -102,3 +105,40 @@ func (p *pool) getNoInit() *buffer {
 }
 
    #+END_SRC
+   接下来就是View了。
+   #+BEGIN_SRC go
+// /home/coder/go/src/github.com/google/gvisor/pkg/buffer/view.go:31
+type View struct {
+  data bufferList
+  size int64 // size表示的所有buffer加起来的长度，而不是分片buffer的个数
+  pool pool
+}
+   #+END_SRC
+   方法就不贴代码了，要贴得贴满了。
+
+   构造函数： 静态创建即可，没有New...的pattern。
+
+   以下函数介绍按出场顺序介绍：
+
+   1. TrimFront(count int64) ==> 从前面砍掉多少个字节，核心实现在 advanceRead 里面。实现方法就是从双链表的头开始一个一个的切。 当前的这个buf还分两种case，够砍的和不够砍的，够砍的砍完结束(break)，不够砍的这个buf直接砍掉(从链表里Remove)，相应更新下一轮数据和全局的data长度size。 最后还判断一下进来的场景是不是砍掉的字节比总长度小，如果不满足就panic。这里也发现整个框架在不可能出现的case地方都是直接panic的。k8s里面的代码panic的数量远小于这里的。
+   2. Remove(offset, length int) bool ==> 从某个位置开始抠掉一些数据显然就比上面直接从头砍要细节很多了。 offset,length基于全局的。
+      + 首先确保区间的正确： 待抠的range要在整个数据区间之内
+      + 抠的时候还要考虑区间跨buf的case。甚至是跨多个buf的情况。用的方法是一个curr区间，每次遍历bufferList的时候先更新curr.end为当前end,当然表示还是全局的表示，当和input比较时，有交集就清理这个交集，没有交集继续跳。curr.begin在当前buf比较结束时更新。区间更新的时机巧妙。删除的时候要把全局位移转变成当前buff的位移，所以有个设置Offset的行为。
+   3. ReadAt(p []byte, offset int64) (int, error) ==> 从offset位置开始read，并且read满。
+      + 要判断offset是否在当前区间上。用的方法是offset减去前面的偏移是否大于当前buf的长度，如果大于等于则说明开始位置不在当前这个区间上。忽略
+        #+BEGIN_SRC go
+        |--------|------|-------|
+             ^       ^
+           offset
+        #+END_SRC
+      + 注意一旦追上，只要开始copy，那么offset - skipped 就为0了，后面的buffer就是一直cp到p满为止或者EOF
+   4. Truncate(length int64) ==> 强制缩到这个大小，不会长的，要求length必须 < size
+      + 从后面开始往前遍历
+      + 看看删除后的效果是否满足 < length，满足了, 这是最后一个了，干完收工，怎么干？ 假装写少了，更新write指针到满足条件处。不满足继续删，注意这里的判断条件不包括等于，等于的case删整个当前buffer留在下面做了。
+        #+BEGIN_SRC bash
+                            after size
+                           |--|
+        |--------|---------|--------|
+                              ^
+                             length
+        #+END_SRC
