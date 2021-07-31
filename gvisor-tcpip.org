@@ -162,3 +162,32 @@ type View struct {
         不跨buf的情况就是在单buf之内，那么直接return就好了。如果交集为空跳过此buf即可。
       + 跨buf处理： 开始的buf已经记下了，然后统计下总共横跨多少个buf，然后要merge这些buf放到一个buf上。待merge的buf除了第一个不删除之外其余的都删掉。第一个的buf要用新产生的汇总data去替换。
       + 减去当前begin的偏移在当前data中返回对应需要的slice。
+   10. Flatten() []byte ==> 就是打平所有的buf到一个上面并返回
+   11. Size() int64 ==> 返回size属性，好轻松, phew~
+   12. Copy() (other View) ==> 将当前view插入other后面
+   13. Apply(fn func([]byte)) ==> 对每一个buf的data apply fn
+   14. SubApply(offset, length int, fn func([]byte)) ==> 取offset处length长度的byte来apply fn
+
+       [[./include/images/buf-subapply.png]]
+
+       需要判断offset是否是当前起始位置以及length是否超出当前buf，注意两个条件判断即可。
+   15. Merge(other *View) ==> 把other吸溜过来放到最后
+   16. WriteFromReader(r io.Reader, count int64) (int64, error) ==> 从r里读count过来，然后写到后面去
+       + 小细节： buf还剩空间不到一个指针大小时，读一个指针大小的data然后调用Append来写，怎么扩容由Append搞定。
+       + 操作如下图：
+
+         [[./include/images/buf-writ-from-reader.png]]
+   17. ReadToWriter(w io.Writer, count int64) (int64, error) ==> View中从头开始读count字节写到w中。
+       + offset什么意思很重要，理解了就理解了实现。offset是指上一此的读在当前buf中造成的偏移，下一次读要减去这个偏移。
+
+         [[./include/images/buf-read-to-write.png]]
+
+         上图说明一下：
+         1. offset是当前的buf的偏移，为了方便理解故意画的不为0的场景，造成这样的场景是上一轮按照最小批次的读也吸溜到了这个buf。
+         2. sz - offset为当前可读的空间
+         3. 方便理解故意画出了if条件中的case： 当前读又是按照最小批次来读，注意offset的更新: n - sz就是下一个buf的offset了。
+         4. 还有一种情况是当前buf整个被前面吸溜完了，此时offset >= sz，直接continue，并且更新offset
+
+
+
+   于是乎，View的结构我们看完了，这根桩我们打完了，看后面的。
