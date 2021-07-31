@@ -126,18 +126,25 @@ type View struct {
       + 抠的时候还要考虑区间跨buf的case。甚至是跨多个buf的情况。用的方法是一个curr区间，每次遍历bufferList的时候先更新curr.end为当前end,当然表示还是全局的表示，当和input比较时，有交集就清理这个交集，没有交集继续跳。curr.begin在当前buf比较结束时更新。区间更新的时机巧妙。删除的时候要把全局位移转变成当前buff的位移，所以有个设置Offset的行为。
    3. ReadAt(p []byte, offset int64) (int, error) ==> 从offset位置开始read，并且read满。
       + 要判断offset是否在当前区间上。用的方法是offset减去前面的偏移是否大于当前buf的长度，如果大于等于则说明开始位置不在当前这个区间上。忽略
+
         [[./include/images/buf-read-at.png]]
+
       + 注意一旦追上，只要开始copy，那么offset - skipped 就为0了，后面的buffer就是一直cp到p满为止或者EOF
    4. Truncate(length int64) ==> 强制缩到这个大小，不会长的，要求length必须 < size
       + 从后面开始往前遍历
       + 看看删除后的效果是否满足 < length，满足了, 这是最后一个了，干完收工，怎么干？ 假装写少了，更新write指针到满足条件处。不满足继续删，注意这里的判断条件不包括等于，等于的case删整个当前buffer留在下面做了。
+
         [[./include/images/buf-truncat.png]]
+
    5. Grow(length int64, zero bool) ==> 设置View的大小至length，zero表示是否用0填充
       + 判断最后一个是否为空或者还有空间可写？满足的话就从pool里拿个新的buffer。
       + 对这个可写的buf（最后一个或者是新拿的）进行写操作(更新buf.write指针)，稍微判断一下写空间是否绰绰有余，多的话就按照left要求来
    6. Prepend(data []byte) ==> 将data塞到前面去
       + 第一个还有空间吗？有就塞一点，动的是buf.read指针，读过的就不要了，放在这些位置上，还分情况：
         + 第一个空间足够如下图：
+
           [[./include/images/buf-has-space.png]]
+
         + 第一个空间不够，data写一点，buf写满
+
           [[./include/images/buf-not-enough.png]]
