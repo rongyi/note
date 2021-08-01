@@ -17,8 +17,8 @@
   本人读的版本commit： 28291a5a5d25633c8bdf45ed5affe90f779c74b4
 
 
-* PacketBuffer
-  PacketBuffer是一个报文的结构封装贯穿于整个流程中。所以先把 PacketBuffer 了解一下。
+* PacketBuffer之buf介绍
+  PacketBuffer是一个报文的结构封装贯穿于整个流程中。所以先把 PacketBuffer 了解一下。这里先了解一下 PacketBuffer 的底层buf细节。因为整个流程都用到这个结构，所以每一个field都可谓别有洞天，需要一个一个来消化，比如网卡、路由、conntrack等。
 ** gvisor/pkg/buffer
    这个package抽象了内存表示。其中buffer.View是离散的内存封装，内存最小的单位是buffer：
    #+BEGIN_SRC go
@@ -191,3 +191,48 @@ type View struct {
 
 
    于是乎，View的结构我们看完了，这根桩我们打完了，看后面的。
+** tcpip/buffer
+   除了顶级的buffer之外tcpip package里面还有一个buffer package。这里就相对简单一点了，主要是两个结构：
+   1. View ==> []byte
+   2. VectorisedView ==> [][]byte，不涉及到诸多指针操作，相对简单，不赘述API
+      + 也有个PullUp 意思相近，返回连续空间的byte，不过是从头开始，没有offset。
+   3. Prependable ==> 倒着长的buf，方便协议栈的前插，从data往前插tcp/network/link层的头
+      + 里面有个属性： usedIdx表示从最后到 usedIdx 都被占了。所以初始化一个空的 Prependable 这个指针应该停在buf的len(buf)上，注意看 UsedLength 以及 AvailableLength 就好理解了。
+** 一些全局属性
+   /home/coder/go/src/github.com/google/gvisor/pkg/tcpip/stack/registration.go 以及 /home/coder/go/src/github.com/google/gvisor/pkg/tcpip/tcpip.go 存放了一些全局属性，用到的时候再切过来
+** PacketBuffer之buf介绍
+   铺垫差不多，现在看关键结构里面的buf实现。
+
+   按照代码中的文档描述，buf结构配备了三个指针来分别在inbound和outbound中都可以方便的使用这个buf。
+#+BEGIN_SRC go
+  ///home/coder/go/src/github.com/google/gvisor/pkg/tcpip/stack/packet_buffer.go:97
+  // buf is the underlying buffer for the packet. See struct level docs for
+  // details.
+  buf      *buffer.Buffer
+  reserved int
+  pushed   int
+  consumed int
+#+END_SRC
+
+    + 出向时要构造报文，所以会有reserve字段。入向时 reserved 字段为0，整个生命周期 reserved 字段值保持不变。
+    + pushed用于标记push header，下文会结合代码进行描述
+    + consumed用于parse header，同上。
+
+
+    下文对相关的代码进行说明：
+    1. NewPacketBuffer(opts PacketBufferOptions) *PacketBuffer ==> 构造函数：传入的option会指出是保留reserve字段，有就创建指定的头部长度。
+    2. 两个位移函数： push/consume
+
+       [[./include/images/packet-buf.png]]
+
+       需要注意push标记的是与 reserved 之间的距离。往左， 而consume则往右。理解了这个方向一些API的操作才会更清楚。另外还有头的push并不一定是按照link/network/transport这样的顺序来的，可以是任何顺序，而怎么访问则定义了一个 headerInfo 每一个头信息在 PacketBuffer这个结构里都缓存着。字段名称叫： headers [numHeaderType]headerInfo ，但是从 PayloadSince 函数又看出，其实头还是按顺序排放的。(link/network/transport)
+    3. HeaderSize() int ==> header长度
+       + pushed + consumed ？ 一个方向中总有一个值为0， 出入向复用 PacketBuffer 的体现之一。
+
+    4. dataOffset() int ==> data的起始位置
+       + reserved + consumed 也是一样的操作，一个方向中总有一个值为0
+
+    5. PacketHeader/PacketData ==> 外围封装，提供对应的API，侧重点分别在header以及data部分的处理
+
+
+    其实夯下buf的基础看这些就比较接近api的调用了。比较简单，这里就不展开了。
