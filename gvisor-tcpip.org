@@ -236,3 +236,13 @@ type View struct {
 
 
     其实夯下buf的基础看这些就比较接近api的调用了。比较简单，这里就不展开了。
+* tcp 伪首部：
+  12 字节 = 源IP + 目的IP + tcpprotocol + tcptotal length
+            4      4         2                2
+  checksum 计算方式：
+  #+BEGIN_QUOTE
+1. checksum的初始值自动被设置为0
+2. 然后，以16bit为单位，两两相加，对于该例子，即为：E34F + 2396 + 4427 + 99F3 = 1E4FF
+3. 若计算结果大于0xFFFF，则将，高16位加到低16位上，对于该例子，即为，0xE4FF + 0x0001 = E500
+4. 然后，将该值取反，即为~(E500)=1AFF
+  #+END_QUOTE

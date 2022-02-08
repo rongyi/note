@@ -2,3 +2,4 @@
 1. http 调优 https://talawah.io/blog/extreme-http-performance-tuning-one-point-two-million/
 2. https://news.ycombinator.com/item?id=28049254 里面的评论第一条评论真的是说到心坎里了。
 3. https://news.ycombinator.com/item?id=28131737 Poly被hack了6亿都上HN了 Never play a game where you don’t know what the patsy is. Because you’re the patsy.
+4. https://news.ycombinator.com/item?id=28138161
