@@ -36,3 +36,21 @@ Hang out with healthy & interesting old people - do what they do, ask their advi
 
 I asked my grandmother of 95 years - still healthy of mind - "What get's you up in the morning each day?". Without missing a beat, she said "Music." She plays piano, sings, dances (wiggles these days). It makes her soul alive, and brings joy to the people around her.
 #+end_quote
+
+
+- Biggs: Discrete Maths
+- Stroud: Engineering Mathematics
+- Solkolnikoff: Mathematics of Physics and Modern Engineering
+- Sommerville: Software Engineering
+- Aho: Compilers
+- Kernighan and Ritchie: The C Programming Language
+- Kernighan and Pike: The UNIX Programming Environment
+- Ben Ari: Principles of Concurrent Programming
+- Clements: Microprocessor Systems Design
+- Tannenbaum: Distributed Operating Systems
+- Dean, Allen, Aloimonos: Articficial Intelligence
+- Knuth: The Art of Computer Programming
+- Yourdon: Object Oriented Systems Design
+- Abelson and Sussman: Structure and Interpretation
+Maybe the one that ones that changed me most:
+- Polya: How to Solve it
