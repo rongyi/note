@@ -1,0 +1,52 @@
+* intro
+学一下redis，源码版本： bedecec786767b84215f4002a02d18110585915a
+
+* 基础数据结构
+** sds string底层表示
+   + 为了兼容printf，返回出去的指针不是sds的头而是str部分的地址，有点类似kernel的list header那味，通过偏移来获得sds的header地址，进而得到其field。redis/src/sds.c:103 函数： _sdsnewlen可以体现，偏移怎么算在header里面有宏
+   + flag标记就在返回指针的前一个字节，所以会看到很多[-1]这样的骚操作。说人话就是返回前面那个flag地址，低三位是类型标记信息
+   + 分配空间包括string + header + 1 也就是最后那个'\0'来封堵一下。同时也是flat的，头+string+1是连续空间，也是为什么sds[-1]拿到flag可以成立的前提
+   + 为什么要定义好几个sds类型？ 从定义来看还是通过string本身的长度来决定让sdsheader更小一点，体现在len/alloc的数据类型上。从uint8->uint16->uint32->uint64，能省就省，能抠一点是一点。
+   + argc/argv已经忘光了，里面这些函数基本忽略了
+** adlist 双链表
+#+begin_src c
+typedef struct list {
+    listNode *head;
+    listNode *tail;
+    void *(*dup)(void *ptr);
+    void (*free)(void *ptr);
+    int (*match)(void *ptr, void *key);
+    unsigned long len;
+} list;
+#+end_src
+  两头指针加函数指针用来操作，通过函数名称已经知道各个函数什么意思。
+  + 不打环，首尾两个指针不互相串，一个元素时prev/next都为nullptr,头的prev，尾的next都为nullptr;
+#+begin_src c
+  // 插入node时的体现
+  if (node->prev != NULL) {
+      node->prev->next = node;
+  }
+  if (node->next != NULL) {
+      node->next->prev = node;
+  }
+#+end_src
+#+begin_src c
+  void listLinkNodeTail(list *list, listNode *node) {
+    if (list->len == 0) {
+      list->head = list->tail = node;
+      // 单节点的体现
+      node->prev = node->next = NULL;
+    } else {
+      node->prev = list->tail;
+      node->next = NULL;
+      list->tail->next = node;
+      list->tail = node;
+    }
+    list->len++;
+  }
+#+end_src
+  + 这个骚操作想干嘛？
+#+begin_src c
+void listRotateTailToHead(list *list) {
+void listRotateHeadToTail(list *list) {
+#+end_src
