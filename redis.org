@@ -50,3 +50,10 @@ typedef struct list {
 void listRotateTailToHead(list *list) {
 void listRotateHeadToTail(list *list) {
 #+end_src
+** dict
+*** dictType
+    函数指针指着dict的具体操作，比如hash，cmp函数等。
+    + unsigned int keys_are_odd:1; 这个字段用处？
+    + void *dictFindPositionForInsert(dict *d, const void *key, dictEntry **existing) key存在吗？ yes， 那就返回nullptr, 否则返回bucket给插入的位置。
+    + 总体上两个指针分别指向连续开辟的size * sizeof(dictEntry)的地方，然后hash(key) % len --> 得到存储的index，挂指针串起来来解决冲突。
+      一个[0] 用来

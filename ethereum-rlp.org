@@ -1,0 +1,138 @@
+* Recursive Length Prefix理解
+
+1000_0000
+一个u8的最高位拿来作标记
+0000_0000 -> 0111_1111 这些没有所谓的prefix length标记，编码就是其本身
+
+
+1000_0000 -> 用来作为empty string 以及 bool的false value。(叶子节点)
+1100_0000 -> 用来作为empty list的标记
+
+记住这个前缀 10 以及 11
+
+
+好花活开始，有前缀的情况又分为可以和标记为挤在一起的长度以及需要单开字节然后里面内容放长度标记这两种情况
+RLP把单开字节最大放到了8个字节，所以倒数第四位又成为标记位：
+
+
+1000_0000 -> 1011_0111 是单个字节string表示的区间长度,你也没必要知道是绝大部分文档告诉你的56,56怎么来的远比你记住56要重要。
+                       最高位 10 已经是固定死了的标记位，因为要和后面的11区分
+
+1011_1000 -> 1011_1111 是单开prefix length字节的前缀，后面的字节里面的大端内容表示payload有多长。举个例子：
+                       1011_1111 表示后面有八个字节（相当大了，因为RLP不允许前缀有0case，会进行剥处理（trim_leading_zero）。）然后
+                       我们再去读这八个字节里面放了相当大的一个数字，表示后面的payload这么大（可以说是巨无霸了）
+
+
+1100_0000 -> 1111_0111 你能理解上面两个case，下面这两个case也就好理解了。
+1111_1000 -> 1111_1111 list带单开字节表示prefix length的
+
+
+
+
+贴一些核心函数，方便理解:
+#+begin_src rust
+/// RLP prefix byte for 0-length string.
+pub const EMPTY_STRING_CODE: u8 = 0x80;
+
+/// RLP prefix byte for a 0-length array.
+pub const EMPTY_LIST_CODE: u8 = 0xC0;
+
+#[inline]
+pub fn decode(buf: &mut &[u8]) -> Result<Self> {
+    let payload_length;
+    let mut list = false;
+    match get_next_byte(buf)? {
+        0..=0x7F => payload_length = 1,
+
+        b @ EMPTY_STRING_CODE..=0xB7 => {
+            buf.advance(1);
+            payload_length = (b - EMPTY_STRING_CODE) as usize;
+            if payload_length == 1 && get_next_byte(buf)? < EMPTY_STRING_CODE {
+                return Err(Error::NonCanonicalSingleByte);
+            }
+        }
+
+        b @ (0xB8..=0xBF | 0xF8..=0xFF) => {
+            buf.advance(1);
+
+            list = b >= 0xF8; // second range
+            let code = if list { 0xF7 } else { 0xB7 };
+
+            // SAFETY: `b - code` is always in the range `1..=8` in the current match arm.
+            // The compiler/LLVM apparently cannot prove this because of the `|` pattern +
+            // the above `if`, since it can do it in the other arms with only 1 range.
+            let len_of_len = unsafe { b.checked_sub(code).unwrap_unchecked() } as usize;
+            if len_of_len == 0 || len_of_len > 8 {
+                unsafe { unreachable_unchecked() }
+            }
+
+            if buf.len() < len_of_len {
+                return Err(Error::InputTooShort);
+            }
+            // SAFETY: length checked above
+            let len = unsafe { buf.get_unchecked(..len_of_len) };
+            buf.advance(len_of_len);
+
+            let len = u64::from_be_bytes(static_left_pad(len)?);
+            payload_length =
+                usize::try_from(len).map_err(|_| Error::Custom("Input too big"))?;
+            if payload_length < 56 {
+                return Err(Error::NonCanonicalSize);
+            }
+        }
+
+        b @ EMPTY_LIST_CODE..=0xF7 => {
+            buf.advance(1);
+            list = true;
+            payload_length = (b - EMPTY_LIST_CODE) as usize;
+        }
+    }
+
+    if buf.remaining() < payload_length {
+        return Err(Error::InputTooShort);
+    }
+
+    Ok(Self { list, payload_length })
+}
+
+
+#+end_src
+
+
+
+单开字节放进去会进行剥前缀0操作。用的这个函数
+#+begin_src bash
+macro_rules! to_be_bytes_trimmed {
+    ($be:ident, $x:expr) => {{
+        $be = $x.to_be_bytes();
+        &$be[($x.leading_zeros() / 8) as usize..]
+    }};
+}
+#+end_src
+
+配合的padding操作：
+#+begin_src rust
+#[inline]
+pub(crate) fn static_left_pad<const N: usize>(data: &[u8]) -> Result<[u8; N]> {
+    if data.len() > N {
+        return Err(Error::Overflow);
+    }
+
+    let mut v = [0; N];
+
+    // yes, data may empty, e.g. we decode a bool false value
+    if data.is_empty() {
+        return Ok(v);
+    }
+
+    if data[0] == 0 {
+        return Err(Error::LeadingZero);
+    }
+
+    // SAFETY: length checked above
+    unsafe { v.get_unchecked_mut(N - data.len()..) }.copy_from_slice(data);
+    Ok(v)
+}
+#+end_src
+
+以上是我的理解。
