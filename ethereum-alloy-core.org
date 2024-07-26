@@ -1,0 +1,14 @@
+* alloy core学习笔记
+
+
+* 依赖
+uint library
+
+Uint<256, 4> 4个 LIMBS 组成256位，为什么要两个参数，因为这个库还可以实现一些奇葩 Uint，比如233, 会把最后一个 LIMBS 不需要的高位给mask掉。
+
+拼接模组是u64
+#+begin_src rust
+pub struct Uint<const BITS: usize, const LIMBS: usize> {
+    limbs: [u64; LIMBS],
+}
+#+end_src
